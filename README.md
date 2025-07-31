@@ -1,16 +1,14 @@
-# marine_checklist_app
+# Marine Checklist Pro ⚓
 
-A new Flutter project.
+This project is a powerful tool for seafarers, superintendents, and inspectors, turning a mobile phone into a comprehensive assistant for preparing for and passing vessel inspections.
 
-## Getting Started
+The application is designed to systematize checks before crucial audits such as **PSC (Port State Control), ISN, DNV,** and others. Forget paperwork — create checklists, document non-conformities, attach photo evidence, and generate professional PDF reports right from your device.
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **🗂️ Dynamic Checklists:** Create and manage detailed checklists tailored for various types of inspections.
+* **📸 Photo Evidence:** Attach photos directly to checklist items or non-conformity reports for clear, visual proof.
+* **📄 PDF Report Generation:** Automatically create professional PDF reports based on inspection results, ready to be shared.
+* **❗ Non-Conformity Reports:** Specialized functionality to quickly document, describe, and report any deviations from standards.
+* **📧 Export & Share:** Easily send generated reports via email or other applications directly from your phone.
+* **📱 Offline First:** Conduct inspections and fill out checklists even without an internet connection in the middle of the ocean. All data is saved locally.
