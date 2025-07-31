@@ -11,21 +11,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  intl: ^0.19.0
   
-  # --- СТАНДАРТНЫЕ ПАКЕТЫ ---
+  # --- Standart packages ---
   hive: ^2.2.3           
   hive_flutter: ^1.1.0   
   permission_handler: ^12.0.0 
   cupertino_icons: ^1.0.8
   # ------------------------------
 
-  # --- НОВЫЕ ПАКЕТЫ ДЛЯ ФОТО ---
+  # --- New packages for fotos ---
   image_picker: ^1.1.2            
   path_provider: ^2.1.5          
   flutter_image_compress: ^2.4.0  
   # ------------------------------
 
-  # --- НОВЫЕ ПАКЕТЫ ДЛЯ PDF ---
+  # --- New packages for PDF ---
   pdf: ^3.11.3 
   printing: ^5.14.2 
   share_plus: ^11.0.0
@@ -38,14 +40,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive_generator: ^2.0.1 # Добавляем Hive Generator
-  build_runner: ^2.4.6   # Оставляем эту версию
+  hive_generator: ^2.0.1 
+  build_runner: ^2.4.6   
   flutter_lints: ^5.0.0 
   flutter_launcher_icons: ^0.14.3
 
   
 
 flutter:
+
+  generate: true
 
   uses-material-design: true
 
