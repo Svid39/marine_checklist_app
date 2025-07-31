@@ -2,7 +2,7 @@
 
 This project is a powerful tool for seafarers, superintendents, and inspectors, turning a mobile phone into a comprehensive assistant for preparing for and passing vessel inspections.
 
-The application is designed to systematize checks before crucial audits such as **PSC (Port State Control), ISN, DNV,** and others. Forget paperwork — create checklists, document non-conformities, attach photo evidence, and generate professional PDF reports right from your device.
+The application is designed to systematize checks before crucial audits such as **PSC (Port State Control), ISM, DNV,** and others. Forget paperwork — create checklists, document non-conformities, attach photo evidence, and generate professional PDF reports right from your device.
 
 ## ✨ Features
 
