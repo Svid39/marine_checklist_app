@@ -14,15 +14,18 @@ import 'models/deficiency.dart';
 import 'services/database_seeder.dart';
 // Импорт нашего главного экрана
 import 'screens/dashboard_screen.dart';
-import 'screens/app_settings_screen.dart'; // Для AppSettingsScreen
+import 'screens/app_settings_screen.dart';
 
+// import flutter_localizations
+import 'package:marine_checklist_app/generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+// Примечание: 'marine_checklist_app' - это имя вашего проекта из pubspec.yaml
 
 // Константы для имен ящиков
 const String userProfileBoxName = 'userProfileBox';
 const String templatesBoxName = 'templatesBox';
 const String instancesBoxName = 'instancesBox';
 const String deficienciesBoxName = 'deficienciesBox';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,17 +57,20 @@ Future<void> main() async {
   final seeder = DatabaseSeeder();
   await seeder.seedInitialTemplates();
 
-   // --- НОВЫЙ КОД: Проверка профиля и определение стартового экрана ---
+  // --- НОВЫЙ КОД: Проверка профиля и определение стартового экрана ---
   final profileBox = Hive.box<UserProfile>(userProfileBoxName);
   UserProfile? userProfile = profileBox.get(1); // Профиль хранится под ключом 1
 
   Widget initialScreen;
-  bool profileNeedsSetup = userProfile == null ||
-                           (userProfile.name == null || userProfile.name!.trim().isEmpty) ||
-                           (userProfile.position == null || userProfile.position!.trim().isEmpty);
+  bool profileNeedsSetup =
+      userProfile == null ||
+      (userProfile.name == null || userProfile.name!.trim().isEmpty) ||
+      (userProfile.position == null || userProfile.position!.trim().isEmpty);
 
   if (profileNeedsSetup) {
-    debugPrint("Профиль не найден или не заполнен. Открываем AppSettingsScreen.");
+    debugPrint(
+      "Профиль не найден или не заполнен. Открываем AppSettingsScreen.",
+    );
     initialScreen = const AppSettingsScreen(isFirstRun: true);
   } else {
     debugPrint("Профиль найден. Открываем DashboardScreen.");
@@ -87,14 +93,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Вставьте этот блок
+      localizationsDelegates: [
+        S.delegate, // S - это новый класс от расширения
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+
       title: 'Marine Checklist App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
+
       home: homeScreen, // Используем переданный экран как домашний
     );
   }
 }
-// -----------------------------------------------------
 
+// -----------------------------------------------------

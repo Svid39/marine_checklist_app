@@ -1,0 +1,9 @@
+{
+    "appTitle": "Marine Checklist App",
+    "settingSaved": "Settings saved successfully",
+    "@settingSaved": {
+        "description": "Snackbar message shown after settings are saved"
+    },
+    "initials": "Initials",
+    "warningInitials": "Initials is required"
+}

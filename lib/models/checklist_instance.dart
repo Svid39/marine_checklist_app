@@ -1,12 +1,12 @@
 // Файл: lib/models/checklist_instance.dart
 
 import 'package:hive/hive.dart';
-import 'checklist_item_response.dart'; // Убедитесь, что этот файл существует и модель ChecklistItemResponse определена корректно
-import 'enums.dart'; // Убедитесь, что этот файл существует и Enum'ы определены корректно
+import 'checklist_item_response.dart'; 
+import 'enums.dart'; 
 
-part 'checklist_instance.g.dart'; // Для генерации Hive
+part 'checklist_instance.g.dart'; 
 
-@HiveType(typeId: 3) // Убедитесь, что typeId = 3 уникален среди всех @HiveType
+@HiveType(typeId: 3) 
 class ChecklistInstance extends HiveObject {
 
   @HiveField(0)
@@ -16,32 +16,32 @@ class ChecklistInstance extends HiveObject {
   String? shipName;
 
   @HiveField(2)
-  late DateTime date; // Дата начала
+  late DateTime date; 
 
   @HiveField(3)
   late ChecklistInstanceStatus status;
 
   @HiveField(4)
-  late List<ChecklistItemResponse> responses; // Список ответов на пункты
+  late List<ChecklistItemResponse> responses; 
 
   @HiveField(5)
-  DateTime? completionDate; // Дата завершения (необязательное)
+  DateTime? completionDate; 
 
   @HiveField(6)
-  String? port; // Порт проведения проверки
+  String? port; 
 
   @HiveField(7)
-  String? captainNameOnCheck; // Имя капитана на момент проверки
+  String? captainNameOnCheck; 
 
   @HiveField(8)
-  String? inspectorName; // Имя проверяющего
+  String? inspectorName; 
 
   ChecklistInstance({
     required this.templateId,
     this.shipName,
     required this.date,
     this.status = ChecklistInstanceStatus.inProgress,
-    this.responses = const [], // Инициализируем пустым списком
+    this.responses = const [], 
     this.completionDate,
     this.port,
     this.captainNameOnCheck,

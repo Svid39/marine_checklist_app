@@ -2,18 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../main.dart'; // Для userProfileBoxName
+import '../main.dart';
 import '../models/user_profile.dart';
-import 'dashboard_screen.dart'; // Импортируем DashboardScreen
+import 'dashboard_screen.dart';
+import 'package:marine_checklist_app/generated/l10n.dart';
 
 class AppSettingsScreen extends StatefulWidget {
-  // Флаг, указывающий, это первый запуск/настройка или обычный вызов настроек
+  // A flag indicating whether this is the first launch/setup or a regular call to the settings
   final bool isFirstRun;
 
-  const AppSettingsScreen({
-    super.key,
-    this.isFirstRun = false, // По умолчанию это не первый запуск
-  });
+  const AppSettingsScreen({super.key, this.isFirstRun = false});
 
   @override
   State<AppSettingsScreen> createState() => _AppSettingsScreenState();
@@ -21,13 +19,11 @@ class AppSettingsScreen extends StatefulWidget {
 
 class _AppSettingsScreenState extends State<AppSettingsScreen> {
   late Box<UserProfile> _profileBox;
-  UserProfile _userProfile =
-      UserProfile(); // Инициализируем пустым профилем по умолчанию
+  UserProfile _userProfile = UserProfile();
   bool _isLoading = true;
 
-  final _formKey = GlobalKey<FormState>(); // Ключ для валидации формы
+  final _formKey = GlobalKey<FormState>();
 
-  // Контроллеры для текстовых полей
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _positionController = TextEditingController();
   final TextEditingController _shipNameController = TextEditingController();
@@ -46,17 +42,12 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
       _isLoading = true;
     });
 
-    final existingProfile = _profileBox.get(
-      1,
-    ); // Профиль всегда хранится под ключом 1
+    final existingProfile = _profileBox.get(1);
 
     if (existingProfile != null) {
-      _userProfile = existingProfile; // Используем существующий профиль
+      _userProfile = existingProfile;
     }
-    // Если existingProfile == null, _userProfile остается новым пустым объектом,
-    // созданным при объявлении переменной.
 
-    // Заполняем контроллеры данными из _userProfile
     _nameController.text = _userProfile.name ?? '';
     _positionController.text = _userProfile.position ?? '';
     _shipNameController.text = _userProfile.shipName ?? '';
@@ -71,7 +62,6 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
 
   @override
   void dispose() {
-    // Освобождаем все контроллеры
     _nameController.dispose();
     _positionController.dispose();
     _shipNameController.dispose();
@@ -82,24 +72,21 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
   Future<void> _saveSettings() async {
     if (!mounted) return;
 
-    // Проверяем валидность формы (если есть валидаторы)
     if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save(); // Вызываем onSaved у полей формы
+      _formKey.currentState!.save();
 
-      // Обновляем объект _userProfile данными из контроллеров
       _userProfile.name = _nameController.text.trim();
       _userProfile.position = _positionController.text.trim();
       _userProfile.shipName = _shipNameController.text.trim();
       _userProfile.captainName = _captainNameController.text.trim();
 
       try {
-        // Сохраняем профиль в Hive под ключом 1
         await _profileBox.put(1, _userProfile);
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Настройки сохранены!'),
+            SnackBar(
+              content: Text(S.of(context).settingSaved),
               backgroundColor: Colors.green,
             ),
           );
@@ -174,13 +161,13 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             TextFormField(
               controller: _nameController,
               textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                hintText: 'Например, Иван Иванов',
+              decoration: InputDecoration(
+                hintText: S.of(context).initials,
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Имя не может быть пустым';
+                  return S.of(context).warningInitials;
                 }
                 return null;
               },
