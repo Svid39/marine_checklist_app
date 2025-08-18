@@ -1,3 +1,5 @@
+// checklist_item_response.dart
+// marine_checklist_app/lib/models/checklist_item_response.dart
 import 'package:hive/hive.dart'; // Импорт Hive
 import 'enums.dart';
 

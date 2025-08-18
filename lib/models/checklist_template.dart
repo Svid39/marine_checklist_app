@@ -1,3 +1,5 @@
+// checklist_template.dart
+// marine_checklist_app/lib/models/checklist_template.dart
 import 'package:hive/hive.dart'; // Импорт Hive
 import 'checklist_item.dart'; // Импортируем адаптированный ChecklistItem
 
