@@ -1,4 +1,5 @@
-{ "dashboard": "Дашборд",
+{
+    "dashboard": "Дашборд",
     "user": "Пользователь",
     "profileSettings": "Настройки профиля",
     "startNewCheck": "Начать Новую Проверку",
@@ -109,5 +110,49 @@
             }
         }
     },
-    "pdfError": "Ошибка PDF"
+    "pdfError": "Ошибка PDF",
+    "errorLoadingTemplates": "Ошибка загрузки шаблонов: {error}",
+    "@errorLoadingTemplates": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "checkDetailsFor": "Детали проверки для \"{templateName}\"",
+    "@checkDetailsFor": {
+        "placeholders": {
+            "templateName": {
+                "type": "Object"
+            }
+        }
+    },
+    "vesselName": "Название Судна",
+    "enterOrConfirmVesselName": "Введите или подтвердите название судна",
+    "vesselNameCannotBeEmpty": "Название судна не может быть пустым",
+    "portOfCheck": "Порт Проверки",
+    "enterPort": "Введите порт",
+    "portCannotBeEmpty": "Порт не может быть пустым",
+    "captainNameForCheck": "Имя Капитана (на эту проверку)",
+    "enterOrConfirmCaptainName": "Введите или подтвердите имя капитана",
+    "captainNameCannotBeEmpty": "Имя капитана не может быть пустым",
+    "startCheck": "Начать Проверку",
+    "criticalErrorCreatingCheck": "Критическая ошибка при создании проверки: {error}",
+    "@criticalErrorCreatingCheck": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "selectCheckTemplate": "Выбор шаблона проверки",
+    "templatesNotFound": "Шаблоны не найдены. Заполните базу данных.",
+    "version": "Версия: {version}",
+    "@version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
     }
+}

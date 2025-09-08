@@ -33,5 +33,21 @@
     "instanceNotFound": "Check instance not found",
     "templateNotFound": "Template not found",
     "checkReportSubject": "Check Report: {name}",
-    "pdfError": "PDF Error"
+    "pdfError": "PDF Error",
+    "errorLoadingTemplates": "Error loading templates: {error}",
+    "checkDetailsFor": "Check details for \"{templateName}\"",
+    "vesselName": "Vessel Name",
+    "enterOrConfirmVesselName": "Enter or confirm vessel name",
+    "vesselNameCannotBeEmpty": "Vessel name cannot be empty",
+    "portOfCheck": "Port of Check",
+    "enterPort": "Enter port",
+    "portCannotBeEmpty": "Port cannot be empty",
+    "captainNameForCheck": "Captain's Name (for this check)",
+    "enterOrConfirmCaptainName": "Enter or confirm captain's name",
+    "captainNameCannotBeEmpty": "Captain's name cannot be empty",
+    "startCheck": "Start Check",
+    "criticalErrorCreatingCheck": "Critical error creating check: {error}",
+    "selectCheckTemplate": "Select Check Template",
+    "templatesNotFound": "Templates not found. Please seed the database.",
+    "version": "Version: {version}"
 }

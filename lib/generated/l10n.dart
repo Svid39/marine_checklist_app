@@ -399,6 +399,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Ошибка загрузки шаблонов: {error}`
+  String errorLoadingTemplates(Object error) {
+    return Intl.message(
+      'Ошибка загрузки шаблонов: $error',
+      name: 'errorLoadingTemplates',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Детали проверки для "{templateName}"`
+  String checkDetailsFor(Object templateName) {
+    return Intl.message(
+      'Детали проверки для "$templateName"',
+      name: 'checkDetailsFor',
+      desc: '',
+      args: [templateName],
+    );
+  }
+
+  /// `Название Судна`
+  String get vesselName {
+    return Intl.message(
+      'Название Судна',
+      name: 'vesselName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите или подтвердите название судна`
+  String get enterOrConfirmVesselName {
+    return Intl.message(
+      'Введите или подтвердите название судна',
+      name: 'enterOrConfirmVesselName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название судна не может быть пустым`
+  String get vesselNameCannotBeEmpty {
+    return Intl.message(
+      'Название судна не может быть пустым',
+      name: 'vesselNameCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Порт Проверки`
+  String get portOfCheck {
+    return Intl.message(
+      'Порт Проверки',
+      name: 'portOfCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите порт`
+  String get enterPort {
+    return Intl.message(
+      'Введите порт',
+      name: 'enterPort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Порт не может быть пустым`
+  String get portCannotBeEmpty {
+    return Intl.message(
+      'Порт не может быть пустым',
+      name: 'portCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя Капитана (на эту проверку)`
+  String get captainNameForCheck {
+    return Intl.message(
+      'Имя Капитана (на эту проверку)',
+      name: 'captainNameForCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите или подтвердите имя капитана`
+  String get enterOrConfirmCaptainName {
+    return Intl.message(
+      'Введите или подтвердите имя капитана',
+      name: 'enterOrConfirmCaptainName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя капитана не может быть пустым`
+  String get captainNameCannotBeEmpty {
+    return Intl.message(
+      'Имя капитана не может быть пустым',
+      name: 'captainNameCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Начать Проверку`
+  String get startCheck {
+    return Intl.message(
+      'Начать Проверку',
+      name: 'startCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Критическая ошибка при создании проверки: {error}`
+  String criticalErrorCreatingCheck(Object error) {
+    return Intl.message(
+      'Критическая ошибка при создании проверки: $error',
+      name: 'criticalErrorCreatingCheck',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Выбор шаблона проверки`
+  String get selectCheckTemplate {
+    return Intl.message(
+      'Выбор шаблона проверки',
+      name: 'selectCheckTemplate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Шаблоны не найдены. Заполните базу данных.`
+  String get templatesNotFound {
+    return Intl.message(
+      'Шаблоны не найдены. Заполните базу данных.',
+      name: 'templatesNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Версия: {version}`
+  String version(Object version) {
+    return Intl.message(
+      'Версия: $version',
+      name: 'version',
+      desc: '',
+      args: [version],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
