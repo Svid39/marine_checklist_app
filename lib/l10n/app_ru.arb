@@ -1,0 +1,119 @@
+{
+    "dashboard": "Дашборд",
+    "user": "Пользователь",
+    "profileSettings": "Настройки профиля",
+    "startNewCheck": "Начать Новую Проверку",
+    "openDeficiencies": "Открытые Несоответствия",
+    "checksInProgress": "Проверки в Процессе ({count})",
+    "@checksInProgress": {
+        "placeholders": {
+            "count": {
+                "type": "Object"
+            }
+        }
+    },
+    "completedChecks": "Завершенные Проверки ({count})",
+    "@completedChecks": {
+        "placeholders": {
+            "count": {
+                "type": "Object"
+            }
+        }
+    },
+    "noActiveChecks": "Нет активных проверок",
+    "noCompletedChecks": "Нет завершенных проверок",
+    "unknownTemplate": "Неизвестный шаблон",
+    "startedOn": "Начато: {date}",
+    "@startedOn": {
+        "placeholders": {
+            "date": {
+                "type": "Object"
+            }
+        }
+    },
+    "completedOn": "Завершено: {date}",
+    "@completedOn": {
+        "placeholders": {
+            "date": {
+                "type": "Object"
+            }
+        }
+    },
+    "completedOnUnknownDate": "Завершено: Дата не указана",
+    "vessel": "Судно: {name}",
+    "@vessel": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "port": "Порт: {name}",
+    "@port": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "captain": "Капитан: {name}",
+    "@captain": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "inspector": "Проверяющий: {name}",
+    "@inspector": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "deleteCheck": "Удалить проверку",
+    "createPdfReport": "Создать PDF отчет",
+    "errorLoadingData": "Ошибка загрузки данных",
+    "confirmDeletion": "Подтвердите Удаление",
+    "unnamedCheck": "Без имени",
+    "deleteChecklistConfirmation": "Вы уверены, что хотите удалить проверку:\n\"{checklistName}\"?",
+    "@deleteChecklistConfirmation": {
+        "placeholders": {
+            "checklistName": {
+                "type": "Object"
+            }
+        }
+    },
+    "enterDeleteToConfirm": "Пожалуйста, введите слово 'Delete' для подтверждения:",
+    "deleteWord": "Delete",
+    "cancel": "Отмена",
+    "deleteButton": "УДАЛИТЬ",
+    "checkDeleted": "Проверка удалена",
+    "errorDeleting": "Ошибка удаления",
+    "generatingPdfFor": "Генерация PDF для \"{name}\"...",
+    "@generatingPdfFor": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "report": "Отчет",
+    "instanceNotFound": "Экземпляр проверки не найден",
+    "templateNotFound": "Шаблон не найден",
+    "checkReportSubject": "Отчет о проверке: {name}",
+    "@checkReportSubject": {
+        "placeholders": {
+            "name": {
+                "type": "Object"
+            }
+        }
+    },
+    "pdfError": "Ошибка PDF"
+
+    
+  
+}
+
+

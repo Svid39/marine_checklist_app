@@ -12,24 +12,20 @@ dependencies:
   flutter:
     sdk: flutter
   
-  # --- СТАНДАРТНЫЕ ПАКЕТЫ ---
+  
   hive: ^2.2.3           
   hive_flutter: ^1.1.0   
   permission_handler: ^12.0.0 
   cupertino_icons: ^1.0.8
-  # ------------------------------
-
-  # --- НОВЫЕ ПАКЕТЫ ДЛЯ ФОТО ---
+  
   image_picker: ^1.1.2            
   path_provider: ^2.1.5          
   flutter_image_compress: ^2.4.0  
-  # ------------------------------
-
-  # --- НОВЫЕ ПАКЕТЫ ДЛЯ PDF ---
+  
   pdf: ^3.11.3 
   printing: ^5.14.2 
   share_plus: ^11.0.0
-  # ------------------------------
+ 
 
   
   flutter_native_splash: ^2.4.6
@@ -38,40 +34,31 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive_generator: ^2.0.1 # Добавляем Hive Generator
-  build_runner: ^2.4.6   # Оставляем эту версию
+  hive_generator: ^2.0.1 
+  build_runner: ^2.4.6   
   flutter_lints: ^5.0.0 
   flutter_launcher_icons: ^0.14.3
 
   
 
 flutter:
+  generate: true
 
   uses-material-design: true
 
   fonts:
-  - family: DejaVuSans # Вы можете выбрать любое имя для семейства шрифтов
+  - family: DejaVuSans 
     fonts:
-      - asset: assets/fonts/DejaVuSans.ttf # Путь к вашему файлу шрифта
-      # Если у вас есть отдельные файлы для жирного/курсива, их можно добавить так:
-      # - asset: assets/fonts/DejaVuSans-Bold.ttf
-      #   weight: 700
+      - asset: assets/fonts/DejaVuSans.ttf 
 flutter_launcher_icons:
-  android: true # Генерировать для Android
-  ios: true # Генерировать для iOS
-  image_path: "assets/images/app_logo.png" # <-- УКАЖИТЕ ПРАВИЛЬНЫЙ ПУТЬ К ВАШЕМУ ЛОГОТИПУ
-  # Опционально: если у вас есть адаптивная иконка для Android
-  # adaptive_icon_background: "#FFFFFF" # Цвет фона для адаптивной иконки
-  # adaptive_icon_foreground: "assets/images/app_logo_foreground.png" # Путь к переднему плану адаптивной иконки
+  android: true 
+  ios: true 
+  image_path: "assets/images/app_logo.png" 
 
 flutter_native_splash:
-  # Цвет фона заставки (HEX-код или 'white', 'black')
-  color: "#FFFFFF" # Пример: белый фон
+  color: "#FFFFFF" 
+  image: assets/images/app_logo.png 
 
-  # Путь к вашему основному логотипу для заставки
-  image: assets/images/app_logo.png # Тот же логотип, что и для иконки
-
-  # Опции для Android
   android: true
-  # Опции для iOS
+  
   ios: true
