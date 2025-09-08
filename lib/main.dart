@@ -16,6 +16,9 @@ import 'services/database_seeder.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/app_settings_screen.dart'; // Для AppSettingsScreen
 
+import 'package:marine_checklist_app/generated/l10n.dart'; // Make sure this import is correct
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 // Константы для имен ящиков
 const String userProfileBoxName = 'userProfileBox';
@@ -86,7 +89,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return MaterialApp(
+
+      // ADD THESE LINES
+      // =================================================
+      localizationsDelegates: const [
+        S.delegate, // Your generated delegate
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      // =================================================
       title: 'Marine Checklist App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
