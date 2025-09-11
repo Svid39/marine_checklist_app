@@ -559,6 +559,946 @@ class S {
       args: [version],
     );
   }
+
+  /// `Экземпляр с ключом {key} не найден!`
+  String instanceNotFoundForKey(Object key) {
+    return Intl.message(
+      'Экземпляр с ключом $key не найден!',
+      name: 'instanceNotFoundForKey',
+      desc: '',
+      args: [key],
+    );
+  }
+
+  /// `Шаблон с ключом {key} не найден!`
+  String templateNotFoundForKey(Object key) {
+    return Intl.message(
+      'Шаблон с ключом $key не найден!',
+      name: 'templateNotFoundForKey',
+      desc: '',
+      args: [key],
+    );
+  }
+
+  /// `Ошибка загрузки данных проверки: {error}`
+  String errorLoadingCheckData(Object error) {
+    return Intl.message(
+      'Ошибка загрузки данных проверки: $error',
+      name: 'errorLoadingCheckData',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Прочие пункты`
+  String get otherItems {
+    return Intl.message(
+      'Прочие пункты',
+      name: 'otherItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Редактировать комментарий`
+  String get editComment {
+    return Intl.message(
+      'Редактировать комментарий',
+      name: 'editComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить комментарий`
+  String get addComment {
+    return Intl.message(
+      'Добавить комментарий',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Фото: Управление`
+  String get managePhoto {
+    return Intl.message(
+      'Фото: Управление',
+      name: 'managePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить фото`
+  String get addPhoto {
+    return Intl.message(
+      'Добавить фото',
+      name: 'addPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка удаления старого файла пункта`
+  String get errorDeletingPhoto {
+    return Intl.message(
+      'Ошибка удаления старого файла пункта',
+      name: 'errorDeletingPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Камера`
+  String get camera {
+    return Intl.message(
+      'Камера',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Галерея`
+  String get gallery {
+    return Intl.message(
+      'Галерея',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Для добавления фото требуется разрешение на доступ к "{permissionName}".`
+  String permissionRequiredFor(Object permissionName) {
+    return Intl.message(
+      'Для добавления фото требуется разрешение на доступ к "$permissionName".',
+      name: 'permissionRequiredFor',
+      desc: '',
+      args: [permissionName],
+    );
+  }
+
+  /// ` Пожалуйста, включите разрешение в настройках приложения.`
+  String get permissionPermanentlyDenied {
+    return Intl.message(
+      ' Пожалуйста, включите разрешение в настройках приложения.',
+      name: 'permissionPermanentlyDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Обработка фото...`
+  String get processingPhoto {
+    return Intl.message(
+      'Обработка фото...',
+      name: 'processingPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Фото добавлено/обновлено`
+  String get photoAddedOrUpdated {
+    return Intl.message(
+      'Фото добавлено/обновлено',
+      name: 'photoAddedOrUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось обработать фото`
+  String get failedToProcessPhoto {
+    return Intl.message(
+      'Не удалось обработать фото',
+      name: 'failedToProcessPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка фото: {error}`
+  String photoError(Object error) {
+    return Intl.message(
+      'Ошибка фото: $error',
+      name: 'photoError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Комментарий к п. {itemOrder}`
+  String commentToItem(Object itemOrder) {
+    return Intl.message(
+      'Комментарий к п. $itemOrder',
+      name: 'commentToItem',
+      desc: '',
+      args: [itemOrder],
+    );
+  }
+
+  /// `Введите комментарий...`
+  String get enterComment {
+    return Intl.message(
+      'Введите комментарий...',
+      name: 'enterComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сохранить`
+  String get save {
+    return Intl.message(
+      'Сохранить',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения!`
+  String get errorSaving {
+    return Intl.message(
+      'Ошибка сохранения!',
+      name: 'errorSaving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Проверка завершена`
+  String get checkCompleted {
+    return Intl.message(
+      'Проверка завершена',
+      name: 'checkCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Завершить проверку`
+  String get completeCheck {
+    return Intl.message(
+      'Завершить проверку',
+      name: 'completeCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось загрузить данные проверки.`
+  String get failedToLoadCheckData {
+    return Intl.message(
+      'Не удалось загрузить данные проверки.',
+      name: 'failedToLoadCheckData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ОК`
+  String get ok {
+    return Intl.message(
+      'ОК',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не ОК`
+  String get notOk {
+    return Intl.message(
+      'Не ОК',
+      name: 'notOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `N/A`
+  String get na {
+    return Intl.message(
+      'N/A',
+      name: 'na',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать Несоответствие?`
+  String get createDeficiency {
+    return Intl.message(
+      'Создать Несоответствие?',
+      name: 'createDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Пункт {itemOrder}: {itemText} отмечен как "Не ОК".`
+  String itemMarkedAsNotOk(Object itemOrder, Object itemText) {
+    return Intl.message(
+      'Пункт $itemOrder: $itemText отмечен как "Не ОК".',
+      name: 'itemMarkedAsNotOk',
+      desc: '',
+      args: [itemOrder, itemText],
+    );
+  }
+
+  /// `Позже`
+  String get later {
+    return Intl.message(
+      'Позже',
+      name: 'later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать`
+  String get create {
+    return Intl.message(
+      'Создать',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Закрыть`
+  String get close {
+    return Intl.message(
+      'Закрыть',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Удалить`
+  String get delete {
+    return Intl.message(
+      'Удалить',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заменить фото`
+  String get replacePhoto {
+    return Intl.message(
+      'Заменить фото',
+      name: 'replacePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Список Несоответствий`
+  String get deficiencyList {
+    return Intl.message(
+      'Список Несоответствий',
+      name: 'deficiencyList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PDF отчет по несоответствиям текущего судна`
+  String get pdfReportForDeficienciesTooltip {
+    return Intl.message(
+      'PDF отчет по несоответствиям текущего судна',
+      name: 'pdfReportForDeficienciesTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Несоответствие удалено`
+  String get deficiencyDeleted {
+    return Intl.message(
+      'Несоответствие удалено',
+      name: 'deficiencyDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка удаления несоответствия`
+  String get errorDeletingDeficiency {
+    return Intl.message(
+      'Ошибка удаления несоответствия',
+      name: 'errorDeletingDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка: Не все ящики Hive открыты.`
+  String get errorHiveBoxesNotOpen {
+    return Intl.message(
+      'Ошибка: Не все ящики Hive открыты.',
+      name: 'errorHiveBoxesNotOpen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название судна не указано в профиле!`
+  String get vesselNameNotInProfile {
+    return Intl.message(
+      'Название судна не указано в профиле!',
+      name: 'vesselNameNotInProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Генерация PDF отчета для судна "{vesselName}"...`
+  String generatingPdfReportForVessel(Object vesselName) {
+    return Intl.message(
+      'Генерация PDF отчета для судна "$vesselName"...',
+      name: 'generatingPdfReportForVessel',
+      desc: '',
+      args: [vesselName],
+    );
+  }
+
+  /// `Не найдено несоответствий для судна "{vesselName}"`
+  String noDeficienciesFoundForVessel(Object vesselName) {
+    return Intl.message(
+      'Не найдено несоответствий для судна "$vesselName"',
+      name: 'noDeficienciesFoundForVessel',
+      desc: '',
+      args: [vesselName],
+    );
+  }
+
+  /// `Отчет о несоответствиях для судна: {vesselName}`
+  String deficiencyReportForVessel(Object vesselName) {
+    return Intl.message(
+      'Отчет о несоответствиях для судна: $vesselName',
+      name: 'deficiencyReportForVessel',
+      desc: '',
+      args: [vesselName],
+    );
+  }
+
+  /// `Открыто`
+  String get statusOpen {
+    return Intl.message(
+      'Открыто',
+      name: 'statusOpen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `В работе`
+  String get statusInProgress {
+    return Intl.message(
+      'В работе',
+      name: 'statusInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Закрыто`
+  String get statusClosed {
+    return Intl.message(
+      'Закрыто',
+      name: 'statusClosed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Все`
+  String get filterAll {
+    return Intl.message(
+      'Все',
+      name: 'filterAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет зарегистрированных несоответствий.`
+  String get noDeficienciesRegistered {
+    return Intl.message(
+      'Нет зарегистрированных несоответствий.',
+      name: 'noDeficienciesRegistered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Статус: {status}`
+  String statusLabel(Object status) {
+    return Intl.message(
+      'Статус: $status',
+      name: 'statusLabel',
+      desc: '',
+      args: [status],
+    );
+  }
+
+  /// ` - Срок: {date}`
+  String dueDateLabel(Object date) {
+    return Intl.message(
+      ' - Срок: $date',
+      name: 'dueDateLabel',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Удалить несоответствие`
+  String get deleteDeficiency {
+    return Intl.message(
+      'Удалить несоответствие',
+      name: 'deleteDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить Несоответствие`
+  String get addDeficiency {
+    return Intl.message(
+      'Добавить Несоответствие',
+      name: 'addDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Без описания`
+  String get noDescription {
+    return Intl.message(
+      'Без описания',
+      name: 'noDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы уверены, что хотите удалить несоответствие:\n"{description}"?\n\nЭто действие необратимо!`
+  String deleteDeficiencyConfirmation(Object description) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить несоответствие:\n"$description"?\n\nЭто действие необратимо!',
+      name: 'deleteDeficiencyConfirmation',
+      desc: '',
+      args: [description],
+    );
+  }
+
+  /// `Несоответствие с ключом {key} не найдено!`
+  String deficiencyNotFound(Object key) {
+    return Intl.message(
+      'Несоответствие с ключом $key не найдено!',
+      name: 'deficiencyNotFound',
+      desc: '',
+      args: [key],
+    );
+  }
+
+  /// `Ошибка загрузки данных несоответствия`
+  String get errorLoadingDeficiency {
+    return Intl.message(
+      'Ошибка загрузки данных несоответствия',
+      name: 'errorLoadingDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Несоответствие сохранено`
+  String get deficiencySaved {
+    return Intl.message(
+      'Несоответствие сохранено',
+      name: 'deficiencySaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения несоответствия`
+  String get errorSavingDeficiency {
+    return Intl.message(
+      'Ошибка сохранения несоответствия',
+      name: 'errorSavingDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Пожалуйста, исправьте ошибки в форме.`
+  String get pleaseFixErrorsInForm {
+    return Intl.message(
+      'Пожалуйста, исправьте ошибки в форме.',
+      name: 'pleaseFixErrorsInForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Новое Несоответствие`
+  String get newDeficiency {
+    return Intl.message(
+      'Новое Несоответствие',
+      name: 'newDeficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Детали Несоответствия`
+  String get deficiencyDetails {
+    return Intl.message(
+      'Детали Несоответствия',
+      name: 'deficiencyDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Описание Несоответствия:`
+  String get deficiencyDescription {
+    return Intl.message(
+      'Описание Несоответствия:',
+      name: 'deficiencyDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Опишите проблему...`
+  String get describeTheProblem {
+    return Intl.message(
+      'Опишите проблему...',
+      name: 'describeTheProblem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Статус:`
+  String get status {
+    return Intl.message(
+      'Статус:',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Кому Поручено:`
+  String get assignedTo {
+    return Intl.message(
+      'Кому Поручено:',
+      name: 'assignedTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя или должность...`
+  String get nameOrPosition {
+    return Intl.message(
+      'Имя или должность...',
+      name: 'nameOrPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Срок Устранения:`
+  String get dueDate {
+    return Intl.message(
+      'Срок Устранения:',
+      name: 'dueDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не установлен`
+  String get notSet {
+    return Intl.message(
+      'Не установлен',
+      name: 'notSet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выбрать дату срока`
+  String get selectDueDate {
+    return Intl.message(
+      'Выбрать дату срока',
+      name: 'selectDueDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Корректирующие Действия:`
+  String get correctiveActions {
+    return Intl.message(
+      'Корректирующие Действия:',
+      name: 'correctiveActions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Опишите, что было сделано...`
+  String get describeWhatWasDone {
+    return Intl.message(
+      'Опишите, что было сделано...',
+      name: 'describeWhatWasDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дата Устранения:`
+  String get resolutionDate {
+    return Intl.message(
+      'Дата Устранения:',
+      name: 'resolutionDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не установлена`
+  String get notSetFeminine {
+    return Intl.message(
+      'Не установлена',
+      name: 'notSetFeminine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выбрать дату устранения`
+  String get selectResolutionDate {
+    return Intl.message(
+      'Выбрать дату устранения',
+      name: 'selectResolutionDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Фото Несоответствия:`
+  String get deficiencyPhoto {
+    return Intl.message(
+      'Фото Несоответствия:',
+      name: 'deficiencyPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Просмотреть/Заменить Фото`
+  String get viewOrReplacePhoto {
+    return Intl.message(
+      'Просмотреть/Заменить Фото',
+      name: 'viewOrReplacePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить Фото`
+  String get addDeficiencyPhoto {
+    return Intl.message(
+      'Добавить Фото',
+      name: 'addDeficiencyPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Фото удалено`
+  String get photoDeleted {
+    return Intl.message(
+      'Фото удалено',
+      name: 'photoDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка удаления файла`
+  String get errorDeletingFile {
+    return Intl.message(
+      'Ошибка удаления файла',
+      name: 'errorDeletingFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Требуется разрешение для доступа к {permissionName}`
+  String permissionRequired(Object permissionName) {
+    return Intl.message(
+      'Требуется разрешение для доступа к $permissionName',
+      name: 'permissionRequired',
+      desc: '',
+      args: [permissionName],
+    );
+  }
+
+  /// `Настройки сохранены!`
+  String get settingsSaved {
+    return Intl.message(
+      'Настройки сохранены!',
+      name: 'settingsSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения профиля: {error}`
+  String errorSavingProfile(Object error) {
+    return Intl.message(
+      'Ошибка сохранения профиля: $error',
+      name: 'errorSavingProfile',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Настройка Профиля`
+  String get profileSetup {
+    return Intl.message(
+      'Настройка Профиля',
+      name: 'profileSetup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки Приложения`
+  String get appSettings {
+    return Intl.message(
+      'Настройки Приложения',
+      name: 'appSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ваше Имя:`
+  String get yourName {
+    return Intl.message(
+      'Ваше Имя:',
+      name: 'yourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Например, Иван Иванов`
+  String get yourNameHint {
+    return Intl.message(
+      'Например, Иван Иванов',
+      name: 'yourNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя не может быть пустым`
+  String get nameCannotBeEmpty {
+    return Intl.message(
+      'Имя не может быть пустым',
+      name: 'nameCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ваша Должность:`
+  String get yourPosition {
+    return Intl.message(
+      'Ваша Должность:',
+      name: 'yourPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Например, 2й Механик`
+  String get yourPositionHint {
+    return Intl.message(
+      'Например, 2й Механик',
+      name: 'yourPositionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Должность не может быть пустой`
+  String get positionCannotBeEmpty {
+    return Intl.message(
+      'Должность не может быть пустой',
+      name: 'positionCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название Судна (по умолчанию):`
+  String get defaultVesselName {
+    return Intl.message(
+      'Название Судна (по умолчанию):',
+      name: 'defaultVesselName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Например, MV Example`
+  String get defaultVesselNameHint {
+    return Intl.message(
+      'Например, MV Example',
+      name: 'defaultVesselNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя Капитана (для отчетов):`
+  String get captainNameForReports {
+    return Intl.message(
+      'Имя Капитана (для отчетов):',
+      name: 'captainNameForReports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Например, Петр Петров`
+  String get captainNameHint {
+    return Intl.message(
+      'Например, Петр Петров',
+      name: 'captainNameHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

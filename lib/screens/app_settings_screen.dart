@@ -2,6 +2,209 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:marine_checklist_app/generated/l10n.dart'; // <-- ИМПОРТ
+
+import '../main.dart';
+import '../models/user_profile.dart';
+import 'dashboard_screen.dart';
+
+class AppSettingsScreen extends StatefulWidget {
+  final bool isFirstRun;
+
+  const AppSettingsScreen({
+    super.key,
+    this.isFirstRun = false,
+  });
+
+  @override
+  State<AppSettingsScreen> createState() => _AppSettingsScreenState();
+}
+
+class _AppSettingsScreenState extends State<AppSettingsScreen> {
+  late Box<UserProfile> _profileBox;
+  UserProfile _userProfile = UserProfile();
+  bool _isLoading = true;
+
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _positionController = TextEditingController();
+  final TextEditingController _shipNameController = TextEditingController();
+  final TextEditingController _captainNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _profileBox = Hive.box<UserProfile>(userProfileBoxName);
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    if (!mounted) return;
+    setState(() => _isLoading = true);
+
+    final existingProfile = _profileBox.get(1);
+    if (existingProfile != null) {
+      _userProfile = existingProfile;
+    }
+
+    _nameController.text = _userProfile.name ?? '';
+    _positionController.text = _userProfile.position ?? '';
+    _shipNameController.text = _userProfile.shipName ?? '';
+    _captainNameController.text = _userProfile.captainName ?? '';
+
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _positionController.dispose();
+    _shipNameController.dispose();
+    _captainNameController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _saveSettings() async {
+    if (!mounted) return;
+
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      _userProfile.name = _nameController.text.trim();
+      _userProfile.position = _positionController.text.trim();
+      _userProfile.shipName = _shipNameController.text.trim();
+      _userProfile.captainName = _captainNameController.text.trim();
+
+      try {
+        await _profileBox.put(1, _userProfile);
+
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(S.of(context).settingsSaved),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        if (widget.isFirstRun) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DashboardScreen()),
+          );
+        } else {
+          if (Navigator.canPop(context)) Navigator.pop(context);
+        }
+      } catch (e) {
+        debugPrint("Ошибка сохранения профиля: $e");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(S.of(context).errorSavingProfile(e.toString())),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.isFirstRun ? S.of(context).profileSetup : S.of(context).appSettings,
+        ),
+        automaticallyImplyLeading: !widget.isFirstRun,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.save),
+            tooltip: S.of(context).save,
+            onPressed: _isLoading ? null : _saveSettings,
+          ),
+        ],
+      ),
+      body: _isLoading ? const Center(child: CircularProgressIndicator()) : _buildForm(),
+    );
+  }
+
+  Widget _buildForm() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(S.of(context).yourName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            TextFormField(
+              controller: _nameController,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(
+                hintText: S.of(context).yourNameHint,
+                border: const OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return S.of(context).nameCannotBeEmpty;
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            Text(S.of(context).yourPosition, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            TextFormField(
+              controller: _positionController,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                hintText: S.of(context).yourPositionHint,
+                border: const OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return S.of(context).positionCannotBeEmpty;
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            Text(S.of(context).defaultVesselName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            TextFormField(
+              controller: _shipNameController,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(
+                hintText: S.of(context).defaultVesselNameHint,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(S.of(context).captainNameForReports, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            TextFormField(
+              controller: _captainNameController,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(
+                hintText: S.of(context).captainNameHint,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/* // Файл: lib/screens/app_settings_screen.dart
+
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../main.dart'; // Для userProfileBoxName
 import '../models/user_profile.dart';
 import 'dashboard_screen.dart'; // Импортируем DashboardScreen
@@ -256,4 +459,4 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
       ),
     );
   }
-}
+} */

@@ -1,5 +1,441 @@
 // Файл: lib/screens/deficiency_list_screen.dart
 
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'dart:io';
+import 'package:marine_checklist_app/generated/l10n.dart'; // <-- ИМПОРТ
+
+import '../services/pdf_generator_service.dart';
+import '../models/user_profile.dart';
+import '../models/checklist_instance.dart';
+import '../models/checklist_template.dart';
+import '../main.dart';
+import '../models/deficiency.dart';
+import 'deficiency_detail_screen.dart';
+import '../models/enums.dart';
+
+class DeficiencyListScreen extends StatefulWidget {
+  const DeficiencyListScreen({super.key});
+
+  @override
+  State<DeficiencyListScreen> createState() => _DeficiencyListScreenState();
+}
+
+class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
+  DeficiencyStatus? _selectedFilterStatus;
+
+  Future<void> _showDeleteConfirmationDialog(
+    BuildContext context,
+    dynamic deficiencyKey,
+    String? deficiencyDescription,
+  ) async {
+    final TextEditingController confirmController = TextEditingController();
+    final ValueNotifier<bool> deleteEnabled = ValueNotifier<bool>(false);
+
+    void confirmationListener() {
+      deleteEnabled.value =
+          confirmController.text.trim() == S.of(context).deleteWord;
+    }
+
+    confirmController.addListener(confirmationListener);
+
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(S.of(context).confirmDeletion),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(S.of(context).deleteDeficiencyConfirmation(
+                  deficiencyDescription ?? S.of(context).noDescription)),
+              const SizedBox(height: 15),
+              Text(
+                S.of(context).enterDeleteToConfirm,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 5),
+              ValueListenableBuilder<bool>(
+                valueListenable: deleteEnabled,
+                builder: (context, isEnabled, child) {
+                  return TextField(
+                    controller: confirmController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      hintText: S.of(context).deleteWord,
+                      isDense: true,
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                    onChanged: (_) {
+                      confirmationListener();
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(S.of(context).cancel),
+              onPressed: () => Navigator.pop(dialogContext, false),
+            ),
+            ValueListenableBuilder<bool>(
+              valueListenable: deleteEnabled,
+              builder: (context, isEnabled, child) {
+                return TextButton(
+                  onPressed: isEnabled
+                      ? () => Navigator.pop(dialogContext, true)
+                      : null,
+                  style: TextButton.styleFrom(
+                    foregroundColor: isEnabled ? Colors.red : Colors.grey,
+                  ),
+                  child: Text(S.of(context).deleteButton),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      confirmController.removeListener(confirmationListener);
+      confirmController.dispose();
+      deleteEnabled.dispose();
+    });
+
+    
+
+    if (confirmed == true && mounted) {
+      
+      await _deleteDeficiency(deficiencyKey);
+    }
+  }
+
+  Future<void> _deleteDeficiency(
+    
+    dynamic deficiencyKey,
+  ) async {
+    try {
+      final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
+      await deficienciesBox.delete(deficiencyKey);
+      
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).deficiencyDeleted),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).errorDeletingDeficiency),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Future<void> _generateAndShareDeficiencyReport() async { // <-- УБРАЛИ BuildContext context
+  if (!Hive.isBoxOpen(userProfileBoxName) ||
+      !Hive.isBoxOpen(instancesBoxName) ||
+      !Hive.isBoxOpen(templatesBoxName) ||
+      !Hive.isBoxOpen(deficienciesBoxName)) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(S.of(context).errorHiveBoxesNotOpen), backgroundColor: Colors.red),
+    );
+    return;
+  }
+
+  final profileBox = Hive.box<UserProfile>(userProfileBoxName);
+  final userProfile = profileBox.get(1);
+  final String? targetShipName = userProfile?.shipName;
+
+  if (targetShipName == null || targetShipName.isEmpty) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(S.of(context).vesselNameNotInProfile), backgroundColor: Colors.orange),
+    );
+    return;
+  }
+
+  if (!mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(S.of(context).generatingPdfReportForVessel(targetShipName))),
+  );
+
+  try {
+    final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
+    final templatesBox = Hive.box<ChecklistTemplate>(templatesBoxName);
+    final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
+
+    final Map<dynamic, ChecklistInstance> allInstancesMap = instancesBox.toMap();
+    final Map<dynamic, ChecklistTemplate> allTemplatesMap = templatesBox.toMap();
+
+    List<Deficiency> deficienciesForShip = [];
+    for (var defEntry in deficienciesBox.toMap().entries) {
+      final deficiency = defEntry.value;
+      if (deficiency.instanceId != null) {
+        final instance = allInstancesMap[deficiency.instanceId];
+        if (instance != null && instance.shipName == targetShipName) {
+          deficienciesForShip.add(deficiency);
+        }
+      }
+    }
+
+    if (deficienciesForShip.isEmpty) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).noDeficienciesFoundForVessel(targetShipName)), backgroundColor: Colors.orange),
+      );
+      return;
+    }
+
+    deficienciesForShip.sort((a, b) {
+      int statusCompare = a.status.index.compareTo(b.status.index);
+      if (statusCompare != 0) return statusCompare;
+      return (a.dueDate ?? DateTime(0)).compareTo(b.dueDate ?? DateTime(0));
+    });
+
+    final pdfService = PdfGeneratorService();
+    final Uint8List pdfBytes = await pdfService.generateShipDeficiencyReportPdf(
+      targetShipName, deficienciesForShip, userProfile, allInstancesMap, allTemplatesMap,
+    );
+
+    if (!mounted) return;
+
+    final tempDir = await getTemporaryDirectory();
+    if (!mounted) return;
+
+    final safeShipName = targetShipName.replaceAll(RegExp(r'[^\w\s]+'), '').replaceAll(' ', '_');
+    final filePath = '${tempDir.path}/deficiency_report_${safeShipName}_${DateTime.now().toIso8601String().split('T').first}.pdf';
+    final file = File(filePath);
+    await file.writeAsBytes(pdfBytes);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+    final shareParams = ShareParams(
+      text: S.of(context).deficiencyReportForVessel(targetShipName),
+      files: [XFile(filePath)],
+    );
+    await SharePlus.instance.share(shareParams);
+
+  } catch (e, s) {
+    debugPrint('Ошибка при генерации PDF отчета по несоответствиям: $e\n$s');
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(S.of(context).pdfError), backgroundColor: Colors.red),
+    );
+  }
+}
+
+  String _getDeficiencyStatusName(DeficiencyStatus status) {
+    switch (status) {
+      case DeficiencyStatus.open:
+        return S.of(context).statusOpen;
+      case DeficiencyStatus.inProgress:
+        return S.of(context).statusInProgress;
+      case DeficiencyStatus.closed:
+        return S.of(context).statusClosed;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
+    String formatDate(DateTime dt) {
+      return DateFormat.yMd(Localizations.localeOf(context).languageCode)
+          .format(dt);
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(S.of(context).deficiencyList),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            tooltip: S.of(context).pdfReportForDeficienciesTooltip,
+            onPressed: () => _generateAndShareDeficiencyReport(),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SegmentedButton<DeficiencyStatus?>(
+              segments: <ButtonSegment<DeficiencyStatus?>>[
+                ButtonSegment<DeficiencyStatus?>(
+                  value: null,
+                  label: Text(S.of(context).filterAll),
+                  icon: const Icon(Icons.list_alt_rounded),
+                ),
+                ...DeficiencyStatus.values.map(
+                  (status) => ButtonSegment<DeficiencyStatus?>(
+                    value: status,
+                    label: Text(_getDeficiencyStatusName(status)),
+                  ),
+                ),
+              ],
+              selected: <DeficiencyStatus?>{_selectedFilterStatus},
+              onSelectionChanged: (Set<DeficiencyStatus?> newSelection) {
+                setState(() {
+                  _selectedFilterStatus = newSelection.first;
+                });
+              },
+            ),
+          ),
+          const Divider(),
+          Expanded(
+            child: ValueListenableBuilder(
+              valueListenable: deficienciesBox.listenable(),
+              builder: (context, Box<Deficiency> box, _) {
+                var deficienciesList = box.toMap().entries.toList();
+
+                if (_selectedFilterStatus != null) {
+                  deficienciesList = deficienciesList
+                      .where((entry) =>
+                          entry.value.status == _selectedFilterStatus)
+                      .toList();
+                }
+
+                if (deficienciesList.isEmpty) {
+                  return Center(
+                    child: Text(S.of(context).noDeficienciesRegistered),
+                  );
+                }
+
+                return ListView.builder(
+                  itemCount: deficienciesList.length,
+                  itemBuilder: (context, index) {
+                    final entry = deficienciesList[index];
+                    final dynamic key = entry.key;
+                    final Deficiency deficiency = entry.value;
+
+                    final now = DateTime.now();
+                    final today = DateTime(now.year, now.month, now.day);
+                    bool isItemOverdue = false;
+                    if (deficiency.dueDate != null &&
+                        deficiency.status != DeficiencyStatus.closed) {
+                      final normalizedDueDate = DateTime(
+                          deficiency.dueDate!.year,
+                          deficiency.dueDate!.month,
+                          deficiency.dueDate!.day);
+                      isItemOverdue = normalizedDueDate.isBefore(today);
+                    }
+                    final bool isItemClosed =
+                        deficiency.status == DeficiencyStatus.closed;
+                    Color statusColor =
+                        Theme.of(context).textTheme.bodySmall?.color ??
+                            Colors.grey;
+                    IconData statusIconData = Icons.help_outline;
+
+                    if (isItemClosed) {
+                      statusColor = Colors.green;
+                      statusIconData = Icons.check_circle_outline;
+                    } else if (isItemOverdue) {
+                      statusColor = Colors.red;
+                      statusIconData = Icons.error_outline;
+                    } else if (deficiency.status == DeficiencyStatus.open) {
+                      statusColor = Colors.orangeAccent;
+                      statusIconData = Icons.warning_amber_rounded;
+                    } else if (deficiency.status ==
+                        DeficiencyStatus.inProgress) {
+                      statusColor = Colors.blueAccent;
+                      statusIconData = Icons.hourglass_empty_rounded;
+                    }
+
+                    return ListTile(
+                      leading:
+                          Icon(statusIconData, color: statusColor, size: 28),
+                      title: Text(deficiency.description,
+                          maxLines: 2, overflow: TextOverflow.ellipsis),
+                      subtitle: RichText(
+                        text: TextSpan(
+                          style: DefaultTextStyle.of(context)
+                              .style
+                              .copyWith(fontSize: 12),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: S.of(context).statusLabel(
+                                  _getDeficiencyStatusName(deficiency.status)),
+                              style: TextStyle(
+                                  color: statusColor,
+                                  fontWeight: isItemClosed || isItemOverdue
+                                      ? FontWeight.bold
+                                      : FontWeight.normal),
+                            ),
+                            if (deficiency.dueDate != null)
+                              TextSpan(
+                                text: S.of(context).dueDateLabel(
+                                    formatDate(deficiency.dueDate!)),
+                                style: TextStyle(
+                                    color: isItemOverdue ? Colors.red : null,
+                                    fontWeight: isItemOverdue
+                                        ? FontWeight.bold
+                                        : FontWeight.normal),
+                              ),
+                          ],
+                        ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_outline,
+                            color: Colors.red.withAlpha(196)),
+                        tooltip: S.of(context).deleteDeficiency,
+                        onPressed: () => _showDeleteConfirmationDialog(
+                            context, key, deficiency.description),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DeficiencyDetailScreen(deficiencyKey: key),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DeficiencyDetailScreen(),
+            ),
+          );
+        },
+        tooltip: S.of(context).addDeficiency,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+/* // Файл: lib/screens/deficiency_list_screen.dart
+
 import 'dart:typed_data'; // Для Uint8List
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -622,4 +1058,4 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
   //     default: return Colors.black;
   //   }
   // }
-}
+} */

@@ -154,5 +154,214 @@
                 "type": "Object"
             }
         }
-    }
+    },
+    "instanceNotFoundForKey": "Экземпляр с ключом {key} не найден!",
+    "@instanceNotFoundForKey": {
+        "placeholders": {
+            "key": {
+                "type": "Object"
+            }
+        }
+    },
+    "templateNotFoundForKey": "Шаблон с ключом {key} не найден!",
+    "@templateNotFoundForKey": {
+        "placeholders": {
+            "key": {
+                "type": "Object"
+            }
+        }
+    },
+    "errorLoadingCheckData": "Ошибка загрузки данных проверки: {error}",
+    "@errorLoadingCheckData": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "otherItems": "Прочие пункты",
+    "editComment": "Редактировать комментарий",
+    "addComment": "Добавить комментарий",
+    "managePhoto": "Фото: Управление",
+    "addPhoto": "Добавить фото",
+    "errorDeletingPhoto": "Ошибка удаления старого файла пункта",
+    "camera": "Камера",
+    "gallery": "Галерея",
+    "permissionRequiredFor": "Для добавления фото требуется разрешение на доступ к \"{permissionName}\".",
+    "@permissionRequiredFor": {
+        "placeholders": {
+            "permissionName": {
+                "type": "Object"
+            }
+        }
+    },
+    "permissionPermanentlyDenied": " Пожалуйста, включите разрешение в настройках приложения.",
+    "processingPhoto": "Обработка фото...",
+    "photoAddedOrUpdated": "Фото добавлено/обновлено",
+    "failedToProcessPhoto": "Не удалось обработать фото",
+    "photoError": "Ошибка фото: {error}",
+    "@photoError": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "commentToItem": "Комментарий к п. {itemOrder}",
+    "@commentToItem": {
+        "placeholders": {
+            "itemOrder": {
+                "type": "Object"
+            }
+        }
+    },
+    "enterComment": "Введите комментарий...",
+    "save": "Сохранить",
+    "errorSaving": "Ошибка сохранения!",
+    "checkCompleted": "Проверка завершена",
+    "completeCheck": "Завершить проверку",
+    "failedToLoadCheckData": "Не удалось загрузить данные проверки.",
+    "ok": "ОК",
+    "notOk": "Не ОК",
+    "na": "N/A",
+    "createDeficiency": "Создать Несоответствие?",
+    "itemMarkedAsNotOk": "Пункт {itemOrder}: {itemText} отмечен как \"Не ОК\".",
+    "@itemMarkedAsNotOk": {
+        "placeholders": {
+            "itemOrder": {
+                "type": "Object"
+            },
+            "itemText": {
+                "type": "Object"
+            }
+        }
+    },
+    "later": "Позже",
+    "create": "Создать",
+    "close": "Закрыть",
+    "delete": "Удалить",
+    "replacePhoto": "Заменить фото",
+    "deficiencyList": "Список Несоответствий",
+    "pdfReportForDeficienciesTooltip": "PDF отчет по несоответствиям текущего судна",
+    "deficiencyDeleted": "Несоответствие удалено",
+    "errorDeletingDeficiency": "Ошибка удаления несоответствия",
+    "errorHiveBoxesNotOpen": "Ошибка: Не все ящики Hive открыты.",
+    "vesselNameNotInProfile": "Название судна не указано в профиле!",
+    "generatingPdfReportForVessel": "Генерация PDF отчета для судна \"{vesselName}\"...",
+    "@generatingPdfReportForVessel": {
+        "placeholders": {
+            "vesselName": {
+                "type": "Object"
+            }
+        }
+    },
+    "noDeficienciesFoundForVessel": "Не найдено несоответствий для судна \"{vesselName}\"",
+    "@noDeficienciesFoundForVessel": {
+        "placeholders": {
+            "vesselName": {
+                "type": "Object"
+            }
+        }
+    },
+    "deficiencyReportForVessel": "Отчет о несоответствиях для судна: {vesselName}",
+    "@deficiencyReportForVessel": {
+        "placeholders": {
+            "vesselName": {
+                "type": "Object"
+            }
+        }
+    },
+    "statusOpen": "Открыто",
+    "statusInProgress": "В работе",
+    "statusClosed": "Закрыто",
+    "filterAll": "Все",
+    "noDeficienciesRegistered": "Нет зарегистрированных несоответствий.",
+    "statusLabel": "Статус: {status}",
+    "@statusLabel": {
+        "placeholders": {
+            "status": {
+                "type": "Object"
+            }
+        }
+    },
+    "dueDateLabel": " - Срок: {date}",
+    "@dueDateLabel": {
+        "placeholders": {
+            "date": {
+                "type": "Object"
+            }
+        }
+    },
+    "deleteDeficiency": "Удалить несоответствие",
+    "addDeficiency": "Добавить Несоответствие",
+    "noDescription": "Без описания",
+    "deleteDeficiencyConfirmation": "Вы уверены, что хотите удалить несоответствие:\n\"{description}\"?\n\nЭто действие необратимо!",
+    "@deleteDeficiencyConfirmation": {
+        "placeholders": {
+            "description": {
+                "type": "Object"
+            }
+        }
+    },
+    "deficiencyNotFound": "Несоответствие с ключом {key} не найдено!",
+    "@deficiencyNotFound": {
+        "placeholders": {
+            "key": {
+                "type": "Object"
+            }
+        }
+    },
+    "errorLoadingDeficiency": "Ошибка загрузки данных несоответствия",
+    "deficiencySaved": "Несоответствие сохранено",
+    "errorSavingDeficiency": "Ошибка сохранения несоответствия",
+    "pleaseFixErrorsInForm": "Пожалуйста, исправьте ошибки в форме.",
+    "newDeficiency": "Новое Несоответствие",
+    "deficiencyDetails": "Детали Несоответствия",
+    "deficiencyDescription": "Описание Несоответствия:",
+    "describeTheProblem": "Опишите проблему...",
+    "status": "Статус:",
+    "assignedTo": "Кому Поручено:",
+    "nameOrPosition": "Имя или должность...",
+    "dueDate": "Срок Устранения:",
+    "notSet": "Не установлен",
+    "selectDueDate": "Выбрать дату срока",
+    "correctiveActions": "Корректирующие Действия:",
+    "describeWhatWasDone": "Опишите, что было сделано...",
+    "resolutionDate": "Дата Устранения:",
+    "notSetFeminine": "Не установлена",
+    "selectResolutionDate": "Выбрать дату устранения",
+    "deficiencyPhoto": "Фото Несоответствия:",
+    "viewOrReplacePhoto": "Просмотреть/Заменить Фото",
+    "addDeficiencyPhoto": "Добавить Фото",
+    "photoDeleted": "Фото удалено",
+    "errorDeletingFile": "Ошибка удаления файла",
+    "permissionRequired": "Требуется разрешение для доступа к {permissionName}",
+    "@permissionRequired": {
+        "placeholders": {
+            "permissionName": {
+                "type": "Object"
+            }
+        }
+    },
+    "settingsSaved": "Настройки сохранены!",
+    "errorSavingProfile": "Ошибка сохранения профиля: {error}",
+    "@errorSavingProfile": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "profileSetup": "Настройка Профиля",
+    "appSettings": "Настройки Приложения",
+    "yourName": "Ваше Имя:",
+    "yourNameHint": "Например, Иван Иванов",
+    "nameCannotBeEmpty": "Имя не может быть пустым",
+    "yourPosition": "Ваша Должность:",
+    "yourPositionHint": "Например, 2й Механик",
+    "positionCannotBeEmpty": "Должность не может быть пустой",
+    "defaultVesselName": "Название Судна (по умолчанию):",
+    "defaultVesselNameHint": "Например, MV Example",
+    "captainNameForReports": "Имя Капитана (для отчетов):",
+    "captainNameHint": "Например, Петр Петров"
 }
