@@ -95,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addDeficiency": MessageLookupByLibrary.simpleMessage("Add Deficiency"),
         "addDeficiencyPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add photo"),
+        "appLanguage":
+            MessageLookupByLibrary.simpleMessage("Application Language"),
         "appSettings": MessageLookupByLibrary.simpleMessage("App Settings"),
         "assignedTo": MessageLookupByLibrary.simpleMessage("Assigned To:"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),

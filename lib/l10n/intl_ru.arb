@@ -363,5 +363,6 @@
     "defaultVesselName": "Название Судна (по умолчанию):",
     "defaultVesselNameHint": "Например, MV Example",
     "captainNameForReports": "Имя Капитана (для отчетов):",
-    "captainNameHint": "Например, Петр Петров"
+    "captainNameHint": "Например, Петр Петров",
+    "appLanguage": "Язык приложения"
 }

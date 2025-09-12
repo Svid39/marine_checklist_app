@@ -80,6 +80,10 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
 
       try {
         await _profileBox.put(1, _userProfile);
+        // --- НОВАЯ СТРОКА: Уведомляем приложение о смене языка ---
+        localeNotifier.value = Locale(_userProfile.languageCode ?? 'ru');
+
+        if (!mounted) return;
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -116,7 +120,9 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.isFirstRun ? S.of(context).profileSetup : S.of(context).appSettings,
+          widget.isFirstRun
+              ? S.of(context).profileSetup
+              : S.of(context).appSettings,
         ),
         automaticallyImplyLeading: !widget.isFirstRun,
         actions: [
@@ -127,7 +133,9 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
           ),
         ],
       ),
-      body: _isLoading ? const Center(child: CircularProgressIndicator()) : _buildForm(),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _buildForm(),
     );
   }
 
@@ -139,7 +147,8 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(S.of(context).yourName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(S.of(context).yourName,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             TextFormField(
               controller: _nameController,
@@ -156,7 +165,8 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               },
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).yourPosition, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(S.of(context).yourPosition,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             TextFormField(
               controller: _positionController,
@@ -173,7 +183,8 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               },
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).defaultVesselName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(S.of(context).defaultVesselName,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             TextFormField(
               controller: _shipNameController,
@@ -184,7 +195,8 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).captainNameForReports, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(S.of(context).captainNameForReports,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             TextFormField(
               controller: _captainNameController,
@@ -194,6 +206,38 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                 border: const OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 16),
+            Text(
+              S.of(context).appLanguage,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            DropdownButtonFormField<String>(
+              value:
+                  _userProfile.languageCode ?? 'ru', // Язык по умолчанию 'ru'
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+              ),
+              items: const [
+                // Список поддерживаемых языков
+                DropdownMenuItem(
+                  value: 'ru',
+                  child: Text('Русский 🇷🇺'),
+                ),
+                DropdownMenuItem(
+                  value: 'en',
+                  child: Text('English 🇬🇧'),
+                ),
+              ],
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    _userProfile.languageCode = newValue;
+                  });
+                }
+              },
+            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

@@ -1499,6 +1499,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Язык приложения`
+  String get appLanguage {
+    return Intl.message(
+      'Язык приложения',
+      name: 'appLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

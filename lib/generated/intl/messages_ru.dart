@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addDeficiencyPhoto":
             MessageLookupByLibrary.simpleMessage("Добавить Фото"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавить фото"),
+        "appLanguage": MessageLookupByLibrary.simpleMessage("Язык приложения"),
         "appSettings":
             MessageLookupByLibrary.simpleMessage("Настройки Приложения"),
         "assignedTo": MessageLookupByLibrary.simpleMessage("Кому Поручено:"),

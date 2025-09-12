@@ -21,13 +21,14 @@ class UserProfileAdapter extends TypeAdapter<UserProfile> {
       position: fields[1] as String?,
       shipName: fields[2] as String?,
       captainName: fields[3] as String?,
+      languageCode: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserProfile obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class UserProfileAdapter extends TypeAdapter<UserProfile> {
       ..writeByte(2)
       ..write(obj.shipName)
       ..writeByte(3)
-      ..write(obj.captainName);
+      ..write(obj.captainName)
+      ..writeByte(4)
+      ..write(obj.languageCode);
   }
 
   @override

@@ -4,7 +4,6 @@ part 'user_profile.g.dart'; // Оставляем для Hive
 
 @HiveType(typeId: 0) // Уникальный ID=0
 class UserProfile extends HiveObject {
-
   @HiveField(0) // Номер поля 0
   String? name;
 
@@ -17,10 +16,14 @@ class UserProfile extends HiveObject {
   @HiveField(3) // Номер поля 3
   String? captainName;
 
+  @HiveField(4) // <-- НОВОЕ ПОЛЕ
+  String? languageCode;
+
   UserProfile({
     this.name,
     this.position,
     this.shipName,
     this.captainName,
+    this.languageCode,
   });
 }
