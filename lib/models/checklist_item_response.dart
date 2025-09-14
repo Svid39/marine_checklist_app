@@ -1,32 +1,43 @@
-// checklist_item_response.dart
-// marine_checklist_app/lib/models/checklist_item_response.dart
-import 'package:hive/hive.dart'; // Импорт Hive
+import 'package:hive/hive.dart';
 import 'enums.dart';
 
-part 'checklist_item_response.g.dart'; // Оставляем для Hive
+part 'checklist_item_response.g.dart';
 
-@HiveType(typeId: 4) // Уникальный ID=4
-class ChecklistItemResponse { // НЕ наследуем HiveObject, т.к. будет внутри ChecklistInstance
+/// Хранит ответ пользователя на один конкретный пункт ([ChecklistItem]) чек-листа.
+///
+/// Объекты этого класса не хранятся в собственном "ящике" Hive, а являются
+/// частью списка `responses` внутри объекта [ChecklistInstance].
+@HiveType(typeId: 4)
+class ChecklistItemResponse {
+  /// ID пункта ([ChecklistItem.order]), к которому относится этот ответ.
+  ///
+  /// Это поле связывает ответ с его вопросом в шаблоне.
+  @HiveField(0)
+  int itemId;
 
-  @HiveField(0) // Номер поля 0
-  late int itemId; // Связь с ChecklistItem.order
+  /// Ответ-статус для пунктов типа [ResponseType.okNotOkNA].
+  ///
+  /// Может быть `null`, если ответ другого типа (текст, число).
+  @HiveField(1)
+  ItemResponseStatus? status;
 
-  @HiveField(1) // Номер поля 1
-  ItemResponseStatus? status; // Статус OK/NotOK/NA (Hive сохранит индекс enum'а)
+  /// Текстовый ответ для пунктов типа [ResponseType.text].
+  @HiveField(2)
+  String? textValue;
 
-  @HiveField(2) // Номер поля 2
-  String? textValue; // Текстовый ответ
+  /// Числовой ответ для пунктов типа [ResponseType.number].
+  @HiveField(3)
+  double? numberValue;
 
-  @HiveField(3) // Номер поля 3
-  double? numberValue; // Числовой ответ
+  /// Локальный путь к файлу фотографии, прикрепленной к этому ответу.
+  @HiveField(4)
+  String? photoPath;
 
-  @HiveField(4) // Номер поля 4
-  String? photoPath; // Локальный путь к фото
+  /// Дополнительный текстовый комментарий пользователя к этому ответу.
+  @HiveField(5)
+  String? comment;
 
-  @HiveField(5) // Номер поля 5
-  String? comment; // Комментарий
-
-  // Конструктор оставляем как есть
+  /// Создает новый экземпляр ответа на пункт чек-листа.
   ChecklistItemResponse({
     this.itemId = 0,
     this.status,

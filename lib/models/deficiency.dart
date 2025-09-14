@@ -1,42 +1,58 @@
- import 'package:hive/hive.dart'; // Импорт Hive
+import 'package:hive/hive.dart';
 import 'enums.dart';
 
-part 'deficiency.g.dart'; // Оставляем для Hive
+part 'deficiency.g.dart';
 
-@HiveType(typeId: 5) // Уникальный ID=5
-class Deficiency extends HiveObject { // Наследуем HiveObject
+/// Представляет собой одно "несоответствие" — проблему или замечание,
+/// выявленное в ходе проверки или созданное вручную.
+///
+/// Каждый объект этого класса хранится как отдельная запись в "ящике"
+/// [deficienciesBoxName].
+@HiveType(typeId: 5)
+class Deficiency extends HiveObject {
+  /// Текстовое описание сути несоответствия.
+  @HiveField(0)
+  String description;
 
-  // @Id() - Убираем Isar ID
-  // @Index() - Убираем Isar Index
+  /// ID связанного экземпляра проверки [ChecklistInstance].
+  ///
+  /// Может быть `null`, если несоответствие было создано вручную,
+  /// а не из конкретного пункта чек-листа.
+  @HiveField(1)
+  int? instanceId;
 
-  @HiveField(0) // Номер поля 0
-  late String description; // Описание
+  /// ID связанного пункта проверки [ChecklistItem.order].
+  ///
+  /// Может быть `null`, если несоответствие было создано вручную.
+  @HiveField(2)
+  int? checklistItemId;
 
-  @HiveField(1) // Номер поля 1
-  int? instanceId; // ID связанного ChecklistInstance (необязательно)
+  /// Текущий статус жизненного цикла несоответствия (Открыто, В работе, Закрыто).
+  /// См. перечисление [DeficiencyStatus].
+  @HiveField(3)
+  DeficiencyStatus status;
 
-  @HiveField(2) // Номер поля 2
-  int? checklistItemId; // ID связанного пункта (необязательно)
+  /// Имя или должность ответственного за устранение.
+  @HiveField(4)
+  String? assignedTo;
 
-  @HiveField(3) // Номер поля 3
-  late DeficiencyStatus status; // Статус несоответствия
+  /// Установленный срок, к которому несоответствие должно быть устранено.
+  @HiveField(5)
+  DateTime? dueDate;
 
-  @HiveField(4) // Номер поля 4
-  String? assignedTo; // Кому поручено
+  /// Описание предпринятых действий для устранения проблемы.
+  @HiveField(6)
+  String? correctiveActions;
 
-  @HiveField(5) // Номер поля 5
-  DateTime? dueDate; // Срок устранения
+  /// Фактическая дата, когда несоответствие было устранено.
+  @HiveField(7)
+  DateTime? resolutionDate;
 
-  @HiveField(6) // Номер поля 6
-  String? correctiveActions; // Что сделано
+  /// Локальный путь к файлу фотографии, документирующей несоответствие.
+  @HiveField(8)
+  String? photoPath;
 
-  @HiveField(7) // Номер поля 7
-  DateTime? resolutionDate; // Дата устранения
-
-  @HiveField(8) // Номер поля 8
-  String? photoPath; // Путь к фото
-
-  // Конструктор оставляем как есть
+  /// Создает новый экземпляр несоответствия.
   Deficiency({
     this.description = '',
     this.instanceId,

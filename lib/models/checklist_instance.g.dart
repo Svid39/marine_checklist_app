@@ -18,8 +18,8 @@ class ChecklistInstanceAdapter extends TypeAdapter<ChecklistInstance> {
     };
     return ChecklistInstance(
       templateId: fields[0] as int,
-      shipName: fields[1] as String?,
       date: fields[2] as DateTime,
+      shipName: fields[1] as String?,
       status: fields[3] as ChecklistInstanceStatus,
       responses: (fields[4] as List).cast<ChecklistItemResponse>(),
       completionDate: fields[5] as DateTime?,

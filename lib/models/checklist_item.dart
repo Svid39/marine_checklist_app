@@ -1,37 +1,47 @@
-// checklist_item.dart
-// marine_checklist_app/lib/models/checklist_item.dart
-import 'package:hive/hive.dart'; // Импорт Hive
+import 'package:hive/hive.dart';
 import 'enums.dart';
 
-part 'checklist_item.g.dart'; // Оставляем для Hive
+part 'checklist_item.g.dart';
 
-@HiveType(typeId: 2) // Уникальный ID=2
+/// Представляет собой один пункт (вопрос или утверждение) в рамках [ChecklistTemplate].
+///
+/// Этот класс не хранит ответ пользователя, а только определяет структуру самого пункта.
+@HiveType(typeId: 2)
 class ChecklistItem {
+  /// Основной текст вопроса или пункта проверки.
+  /// Например, "Проверить уровень масла в главном двигателе".
+  @HiveField(0)
+  String text;
 
-  @HiveField(0) // Номер поля 0
-  late String text;
-
-  @HiveField(1) // Номер поля 1
+  /// Необязательная дополнительная информация или уточнение к основному тексту.
+  @HiveField(1)
   String? details;
 
-  @HiveField(2) // Номер поля 2
-  late int order;
+  /// Порядковый номер пункта в списке. Используется для сортировки.
+  @HiveField(2)
+  int order;
 
-  @HiveField(3) // Номер поля 3
-  late ResponseType responseType;
+  /// Определяет, какой тип ответа ожидается от пользователя (например, OK/Не ОК, текст).
+  /// См. перечисление [ResponseType].
+  @HiveField(3)
+  ResponseType responseType;
 
-  @HiveField(4) // Номер поля 4
+  /// Необязательная ссылка на нормативный документ или правило (например, "SOLAS II-2/10.2").
+  @HiveField(4)
   String? regulationRef;
 
-  @HiveField(5) // Номер поля 4
+  /// Название секции, к которой относится этот пункт.
+  /// Используется для группировки пунктов в пользовательском интерфейсе.
+  @HiveField(5) // Номер поля 5
   String? section;
 
+  /// Создает новый экземпляр пункта чек-листа.
   ChecklistItem({
     this.text = '',
     this.details,
     this.order = 0,
     this.responseType = ResponseType.okNotOkNA,
     this.regulationRef,
-    this.section
+    this.section,
   });
 }

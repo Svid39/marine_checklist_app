@@ -1,25 +1,32 @@
-// checklist_template.dart
-// marine_checklist_app/lib/models/checklist_template.dart
-import 'package:hive/hive.dart'; // Импорт Hive
-import 'checklist_item.dart'; // Импортируем адаптированный ChecklistItem
+import 'package:hive/hive.dart';
+import 'checklist_item.dart';
 
-part 'checklist_template.g.dart'; // Оставляем для Hive
+part 'checklist_template.g.dart';
 
-@HiveType(typeId: 1) // Уникальный ID=1
-class ChecklistTemplate extends HiveObject { // Наследуем HiveObject
+/// Представляет собой неизменяемый шаблон (или "чертеж") для чек-листа.
+///
+/// Объекты этого класса определяют структуру, название и список всех пунктов,
+/// которые будут использоваться для создания экземпляров проверок ([ChecklistInstance]).
+@HiveType(typeId: 1)
+class ChecklistTemplate extends HiveObject {
+  /// Пользовательское название чек-листа.
+  /// Например, "Проверка перед отходом".
+  @HiveField(0)
+  String name;
 
-  @HiveField(0) // Номер поля 0
-  late String name;
-
-  @HiveField(1) // Номер поля 1
+  /// Необязательное, более подробное описание назначения чек-листа.
+  @HiveField(1)
   String? description;
 
-  @HiveField(2) // Номер поля 2
-  late int version;
+  /// Версия шаблона. Может использоваться в будущем для миграции данных.
+  @HiveField(2)
+  int version;
 
-  @HiveField(3) // Номер поля 3
-  late List<ChecklistItem> items; // Список адаптированных ChecklistItem
+  /// Список всех пунктов ([ChecklistItem]), входящих в этот шаблон.
+  @HiveField(3)
+  List<ChecklistItem> items;
 
+  /// Создает новый экземпляр шаблона чек-листа.
   ChecklistTemplate({
     this.name = '',
     this.description,

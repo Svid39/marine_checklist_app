@@ -1,25 +1,30 @@
+import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart'; // <-- НУЖЕН для форматирования дат
-import 'package:marine_checklist_app/generated/l10n.dart'; // <-- ГЛАВНЫЙ ИМПОРТ
+import 'package:intl/intl.dart';
+import 'package:marine_checklist_app/generated/l10n.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
-import '../main.dart'; // Для имен ящиков
-import '../models/user_profile.dart'; // Для профиля пользователя
+import '../main.dart';
 import '../models/checklist_instance.dart';
 import '../models/checklist_template.dart';
-import '../models/enums.dart'; // Нужен для статуса
-import 'template_selection_screen.dart'; // Для навигации
-import 'checklist_execution_screen.dart'; // Для навигации
-import 'deficiency_list_screen.dart'; // Для навигации к списку несоответствий
 import '../models/deficiency.dart';
+import '../models/enums.dart';
+import '../models/user_profile.dart';
+import '../services/pdf_generator_service.dart';
 import 'app_settings_screen.dart';
-import '../services/pdf_generator_service.dart'; // Для генерации PDF
-import 'dart:io'; // Для File
-import 'dart:typed_data'; // Для Uint8List
-import 'package:path_provider/path_provider.dart'; // Для getTemporaryDirectory
-import 'package:share_plus/share_plus.dart'; // Для функции "Поделиться"
+import 'checklist_execution_screen.dart';
+import 'deficiency_list_screen.dart';
+import 'template_selection_screen.dart';
 
+/// Главный экран приложения (Дашборд).
+///
+/// Отображает списки проверок (в процессе и завершенных),
+/// счетчик открытых несоответствий и предоставляет навигацию
+/// к основным функциям приложения.
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -28,7 +33,9 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  /// Профиль текущего пользователя для отображения в AppBar.
   UserProfile? _userProfile;
+  /// Карта шаблонов для быстрого доступа к имени шаблона по его ключу.
   Map<dynamic, ChecklistTemplate> _templateMap = {};
 
   @override
@@ -37,6 +44,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _loadInitialData();
   }
 
+  /// Загружает из Hive данные, которые не требуют постоянного обновления:
+  /// профиль пользователя и карту шаблонов.
   Future<void> _loadInitialData() async {
     try {
       final profileBox = Hive.box<UserProfile>(userProfileBoxName);
@@ -48,7 +57,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         });
       }
     } catch (e) {
-      debugPrint("Ошибка загрузки начальных данных дашборда: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -60,6 +68,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  /// Осуществляет переход на экран выполнения/просмотра проверки.
   void _navigateToExecution(dynamic instanceKey, String? templateName) {
     if (instanceKey == null) return;
     Navigator.push(
@@ -73,17 +82,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  /// Показывает диалог с подтверждением перед удалением проверки.
   Future<void> _showDeleteConfirmationDialog(
     dynamic instanceKey,
     String? checklistName,
   ) async {
     if (!mounted) return;
 
-    final TextEditingController confirmController = TextEditingController();
-    final ValueNotifier<bool> deleteEnabled = ValueNotifier<bool>(false);
+    final confirmController = TextEditingController();
+    final deleteEnabled = ValueNotifier<bool>(false);
 
     void confirmationListener() {
-      deleteEnabled.value = confirmController.text.trim() == S.of(context).deleteWord;
+      deleteEnabled.value =
+          confirmController.text.trim() == S.of(context).deleteWord;
     }
 
     confirmController.addListener(confirmationListener);
@@ -119,14 +130,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       hintText: S.of(context).deleteWord,
                       isDense: true,
                       focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
-                    onChanged: (_) {
-                      confirmationListener();
-                    },
+                    onChanged: (_) => confirmationListener(),
                   );
                 },
               ),
@@ -155,6 +162,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       },
     );
 
+    // Безопасное освобождение ресурсов после закрытия диалога.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       confirmController.removeListener(confirmationListener);
       confirmController.dispose();
@@ -166,104 +174,94 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  /// Удаляет экземпляр проверки из Hive.
   Future<void> _deleteChecklistInstance(dynamic instanceKey) async {
-    if (!mounted) return;
     try {
       final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
       await instancesBox.delete(instanceKey);
-      debugPrint("ChecklistInstance с ключом $instanceKey удален.");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).checkDeleted),
-            backgroundColor: Colors.orange,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).checkDeleted),
+          backgroundColor: Colors.orange,
+        ),
+      );
     } catch (e) {
-      debugPrint("Ошибка удаления ChecklistInstance с ключом $instanceKey: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).errorDeleting),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).errorDeleting),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
+  /// Запускает генерацию и отправку PDF-отчета для указанной проверки.
   Future<void> _generateAndShareChecklistPdf(
     dynamic instanceKey,
     String? checklistName,
   ) async {
     if (!mounted) return;
 
+    // TODO: Здесь рекомендуется использовать улучшенный индикатор загрузки,
+    // который мы обсуждали.
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(S.of(context).generatingPdfFor(checklistName ?? S.of(context).report)),
+        content: Text(S.of(context)
+            .generatingPdfFor(checklistName ?? S.of(context).report)),
       ),
     );
 
     try {
-      final instance = Hive.box<ChecklistInstance>(instancesBoxName).get(instanceKey);
-      if (instance == null) {
-        throw Exception(S.of(context).instanceNotFound);
-      }
-      final template = _templateMap[instance.templateId];
-      if (template == null) {
-        throw Exception(S.of(context).templateNotFound);
-      }
+      final instance =
+          Hive.box<ChecklistInstance>(instancesBoxName).get(instanceKey);
+      if (instance == null) throw Exception(S.of(context).instanceNotFound);
 
-      final pdfService = PdfGeneratorService();
-      final Uint8List pdfBytes = await pdfService.generateChecklistInstancePdf(
+      final template = _templateMap[instance.templateId];
+      if (template == null) throw Exception(S.of(context).templateNotFound);
+
+      final pdfBytes = await PdfGeneratorService().generateChecklistInstancePdf(
         instance,
         template,
         _userProfile,
       );
 
       final tempDir = await getTemporaryDirectory();
-      final safeChecklistName =
-          checklistName?.replaceAll(RegExp(r'[^\w\s]+'), '').replaceAll(' ', '_') ?? 'report';
-      final filePath = '${tempDir.path}/${safeChecklistName}_$instanceKey.pdf';
+      final safeName =
+          checklistName?.replaceAll(RegExp(r'[^\w\s]+'), '').replaceAll(' ', '_') ??
+              'report';
+      final filePath = '${tempDir.path}/${safeName}_$instanceKey.pdf';
       final file = File(filePath);
       await file.writeAsBytes(pdfBytes);
-      debugPrint('PDF сохранен во временный файл: $filePath');
 
-      List<String> photoPathsForInstance = [];
+      List<String> photoPaths = [];
       for (var response in instance.responses) {
         if (response.photoPath != null && response.photoPath!.isNotEmpty) {
-          final photoFile = File(response.photoPath!);
-          if (await photoFile.exists()) {
-            photoPathsForInstance.add(response.photoPath!);
+          if (await File(response.photoPath!).exists()) {
+            photoPaths.add(response.photoPath!);
           }
         }
       }
 
-      if (mounted) {
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        List<XFile> filesToShare = [XFile(filePath)];
-        for (String path in photoPathsForInstance) {
-          filesToShare.add(XFile(path));
-        }
-
-        final shareParams = ShareParams(
-          text: S.of(context).checkReportSubject(template.name),
-          files: filesToShare,
-        );
-        await SharePlus.instance.share(shareParams);
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+      
+      final filesToShare = [XFile(filePath), ...photoPaths.map((p) => XFile(p))];
+      final shareParams = ShareParams(
+        text: S.of(context).checkReportSubject(template.name),
+        files: filesToShare,
+      );
+      await SharePlus.instance.share(shareParams);
     } catch (e) {
-      debugPrint('Ошибка при генерации или отправке PDF: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).pdfError),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).pdfError),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -271,11 +269,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
     final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
-
-    // Helper для форматирования даты
-    String formatDate(DateTime dt) {
-        return DateFormat.yMd(Localizations.localeOf(context).languageCode).format(dt);
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -294,9 +287,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AppSettingsScreen(isFirstRun: false),
+                  builder: (context) =>
+                      const AppSettingsScreen(isFirstRun: false),
                 ),
               );
+              // Обновляем данные профиля после возвращения с экрана настроек.
               _loadInitialData();
             },
           ),
@@ -306,13 +301,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            // --- Кнопка создания новой проверки ---
             ElevatedButton.icon(
               icon: const Icon(Icons.add_circle_outline),
               label: Text(S.of(context).startNewCheck),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const TemplateSelectionScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const TemplateSelectionScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -321,147 +318,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             const SizedBox(height: 16),
+
+            // --- Реактивные списки ---
             Expanded(
-              child: ValueListenableBuilder<Box<ChecklistInstance>>(
+              child: ValueListenableBuilder(
                 valueListenable: instancesBox.listenable(),
-                builder: (context, currentInstancesBox, _) {
-                  return ValueListenableBuilder<Box<Deficiency>>(
+                builder: (context, Box<ChecklistInstance> instances, _) {
+                  return ValueListenableBuilder(
                     valueListenable: deficienciesBox.listenable(),
-                    builder: (context, currentDeficienciesBox, _) {
-                      final allInstancesMap = currentInstancesBox.toMap();
-                      final inProgressInstances = allInstancesMap.entries
-                          .where((entry) => entry.value.status == ChecklistInstanceStatus.inProgress)
+                    builder: (context, Box<Deficiency> deficiencies, _) {
+                      // Логика фильтрации и подсчета вынесена для ясности.
+                      final inProgress = instances.values
+                          .where((i) => i.status == ChecklistInstanceStatus.inProgress)
                           .toList();
-                      final completedInstances = allInstancesMap.entries
-                          .where((entry) => entry.value.status == ChecklistInstanceStatus.completed)
+                      final completed = instances.values
+                          .where((i) => i.status == ChecklistInstanceStatus.completed)
                           .toList();
-                      final openDeficienciesCount = currentDeficienciesBox.values
+                      final openDeficienciesCount = deficiencies.values
                           .where((d) => d.status != DeficiencyStatus.closed)
                           .length;
 
                       return ListView(
                         children: [
-                          ListTile(
-                            leading: const Icon(Icons.warning_amber_rounded, color: Colors.orangeAccent),
-                            title: Text(S.of(context).openDeficiencies, style: const TextStyle(fontWeight: FontWeight.w500)),
-                            trailing: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: openDeficienciesCount > 0 ? Colors.redAccent : Colors.blueGrey[300],
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                '$openDeficienciesCount',
-                                style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DeficiencyListScreen()),
-                              );
-                            },
-                          ),
+                          _buildDeficienciesTile(openDeficienciesCount),
                           const Divider(),
                           const SizedBox(height: 16),
-                          Text(
-                            S.of(context).checksInProgress(inProgressInstances.length),
-                            style: Theme.of(context).textTheme.titleMedium,
+                          _buildInstanceList(
+                            title: S.of(context).checksInProgress(inProgress.length),
+                            instances: inProgress,
+                            isCompletedList: false,
                           ),
-                          const Divider(),
-                          const SizedBox(height: 10),
-                          if (inProgressInstances.isEmpty)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16.0),
-                              child: Center(child: Text(S.of(context).noActiveChecks)),
-                            )
-                          else
-                            Column(
-                              children: inProgressInstances.map((entry) {
-                                final instanceKey = entry.key;
-                                final instance = entry.value;
-                                final template = _templateMap[instance.templateId];
-                                return ListTile(
-                                  title: Text(template?.name ?? S.of(context).unknownTemplate),
-                                  subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(S.of(context).startedOn(formatDate(instance.date))),
-                                      if (instance.shipName != null && instance.shipName!.isNotEmpty)
-                                        Text(S.of(context).vessel(instance.shipName!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                      if (instance.port != null && instance.port!.isNotEmpty)
-                                        Text(S.of(context).port(instance.port!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                      if (instance.captainNameOnCheck != null && instance.captainNameOnCheck!.isNotEmpty)
-                                        Text(S.of(context).captain(instance.captainNameOnCheck!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                      if (instance.inspectorName != null && instance.inspectorName!.isNotEmpty)
-                                        Text(S.of(context).inspector(instance.inspectorName!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                    ],
-                                  ),
-                                  trailing: IconButton(
-                                    icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(179)),
-                                    tooltip: S.of(context).deleteCheck,
-                                    onPressed: () => _showDeleteConfirmationDialog(instanceKey, template?.name),
-                                  ),
-                                  onTap: () => _navigateToExecution(instanceKey, template?.name),
-                                );
-                              }).toList(),
-                            ),
                           const SizedBox(height: 24),
-                          Text(
-                            S.of(context).completedChecks(completedInstances.length),
-                            style: Theme.of(context).textTheme.titleMedium,
+                          _buildInstanceList(
+                            title: S.of(context).completedChecks(completed.length),
+                            instances: completed,
+                            isCompletedList: true,
                           ),
-                          const Divider(),
-                          if (completedInstances.isEmpty)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16.0),
-                              child: Center(child: Text(S.of(context).noCompletedChecks)),
-                            )
-                          else
-                            Column(
-                              children: completedInstances.map((entry) {
-                                final instanceKey = entry.key;
-                                final instance = entry.value;
-                                final template = _templateMap[instance.templateId];
-                                return ListTile(
-                                  title: Text(template?.name ?? S.of(context).unknownTemplate),
-                                  subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(instance.completionDate != null
-                                          ? S.of(context).completedOn(formatDate(instance.completionDate!))
-                                          : S.of(context).completedOnUnknownDate),
-                                      if (instance.shipName != null && instance.shipName!.isNotEmpty)
-                                        Text(S.of(context).vessel(instance.shipName!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                      if (instance.port != null && instance.port!.isNotEmpty)
-                                        Text(S.of(context).port(instance.port!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                    ],
-                                  ),
-                                  onTap: () => _navigateToExecution(instanceKey, template?.name),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.picture_as_pdf_outlined),
-                                        iconSize: 20,
-                                        padding: EdgeInsets.zero,
-                                        visualDensity: VisualDensity.compact,
-                                        tooltip: S.of(context).createPdfReport,
-                                        onPressed: () => _generateAndShareChecklistPdf(instanceKey, template?.name),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(179)),
-                                        iconSize: 20,
-                                        padding: EdgeInsets.zero,
-                                        visualDensity: VisualDensity.compact,
-                                        tooltip: S.of(context).deleteCheck,
-                                        onPressed: () => _showDeleteConfirmationDialog(instanceKey, template?.name),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
                         ],
                       );
                     },
@@ -474,803 +366,128 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-}
 
-/* import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart'; // Для ValueListenableBuilder
-import '../main.dart'; // Для имен ящиков
-import '../models/user_profile.dart'; // Для профиля пользователя
-import '../models/checklist_instance.dart';
-import '../models/checklist_template.dart';
-import '../models/enums.dart'; // Нужен для статуса
-import 'template_selection_screen.dart'; // Для навигации
-import 'checklist_execution_screen.dart'; // Для навигации
-import 'deficiency_list_screen.dart'; // Для навигации к списку несоответствий
-import '../models/deficiency.dart';
-import 'app_settings_screen.dart';
-import '../services/pdf_generator_service.dart'; // Для генерации PDF
-import 'dart:io'; // Для File
-import 'dart:typed_data'; // Для Uint8List
-import 'package:path_provider/path_provider.dart'; // Для getTemporaryDirectory
-import 'package:share_plus/share_plus.dart'; // Для функции "Поделиться"
-
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
-
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  // --- ПЕРЕМЕННЫЕ СОСТОЯНИЯ ---
-  UserProfile? _userProfile;
-  // Для хранения шаблонов (чтобы легко получать имя по ID)
-  Map<dynamic, ChecklistTemplate> _templateMap = {};
-  // Мы будем слушать изменения ящиков напрямую с помощью ValueListenableBuilder,
-  // чтобы списки обновлялись автоматически при завершении проверки.
-  // Поэтому отдельные списки в состоянии не строго обязательны,
-  // но оставим _userProfile для AppBar.
-
-  @override
-  void initState() {
-    super.initState();
-    _loadInitialData(); // Загружаем профиль и шаблоны один раз
-  }
-
-  // Загружаем данные, которые не меняются часто (профиль, шаблоны)
-  Future<void> _loadInitialData() async {
-    // ... (код загрузки профиля и шаблонов как был) ...
-    // ВАЖНО: чтобы изменения профиля отражались на дашборде после возврата,
-    // _loadInitialData() должен вызываться снова.
-    // Самый простой способ - сделать это в then() после Navigator.push
-    // Или, если AppSettingsScreen возвращает результат, обработать его.
-    // Пока оставим так, обновление профиля на дашборде рассмотрим после теста.
-    try {
-      final profileBox = Hive.box<UserProfile>(userProfileBoxName);
-      final templatesBox = Hive.box<ChecklistTemplate>(templatesBoxName);
-      if (mounted) {
-        setState(() {
-          _userProfile = profileBox.get(1); // Загружаем профиль (ID=1)
-          _templateMap = templatesBox.toMap(); // Загружаем все шаблоны
-        });
-      }
-    } catch (e) {
-      debugPrint("Ошибка загрузки начальных данных дашборда: $e");
-      // Можно показать ошибку пользователю
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Ошибка загрузки данных: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
-
-  // --- Функция для навигации на экран выполнения ---
-  void _navigateToExecution(dynamic instanceKey, String? templateName) {
-    if (instanceKey == null) return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => ChecklistExecutionScreen(
-              instanceKey: instanceKey,
-              checklistName:
-                  templateName ??
-                  'Checklist', // Используем имя шаблона или дефолтное
-            ),
+  /// Строит плитку для отображения счетчика и навигации к несоответствиям.
+  Widget _buildDeficienciesTile(int count) {
+    return ListTile(
+      leading: const Icon(Icons.warning_amber_rounded, color: Colors.orangeAccent),
+      title: Text(S.of(context).openDeficiencies,
+          style: const TextStyle(fontWeight: FontWeight.w500)),
+      trailing: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          color: count > 0 ? Colors.redAccent : Colors.blueGrey[300],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          '$count',
+          style: const TextStyle(
+              color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+        ),
       ),
-    ).then((_) {
-      // Эта часть выполнится, когда пользователь вернется с экрана ChecklistExecutionScreen
-      // Мы просто вызываем setState, чтобы обновить списки на Дашборде
-      // (если проверка была завершена, она переместится в другой список)
-      if (mounted) {
-        setState(() {});
-      }
-    });
-  }
-
-  // --- НОВЫЙ МЕТОД: Показ диалога подтверждения удаления ---
-  Future<void> _showDeleteConfirmationDialog(
-    dynamic instanceKey,
-    String? checklistName,
-  ) async {
-    if (!mounted) return;
-
-    final TextEditingController confirmController = TextEditingController();
-    // Используем ValueNotifier для управления состоянием кнопки "УДАЛИТЬ"
-    final ValueNotifier<bool> deleteEnabled = ValueNotifier<bool>(false);
-
-    // Слушатель для контроллера, обновляет состояние кнопки
-    void confirmationListener() {
-      deleteEnabled.value = confirmController.text.trim() == 'Delete';
-    }
-
-    confirmController.addListener(confirmationListener);
-
-    // Показываем диалог и ждем результат (true если удалять, false/null если отмена)
-    final bool? confirmed = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false, // Нельзя закрыть диалог кликом вне его
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: const Text('Подтвердите Удаление'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min, // Чтобы колонка не растягивалась
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Вы уверены, что хотите удалить проверку:\n"${checklistName ?? 'Без имени'}"?\n\nЭто действие необратимо!',
-              ),
-              const SizedBox(height: 15),
-              Text(
-                "Пожалуйста, введите слово 'Delete' для подтверждения:",
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const SizedBox(height: 5),
-              // Используем ValueListenableBuilder для TextField, чтобы он обновлялся при изменении
-              ValueListenableBuilder<bool>(
-                valueListenable: deleteEnabled,
-                builder: (context, isEnabled, child) {
-                  return TextField(
-                    controller: confirmController,
-                    autofocus: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Delete',
-                      isDense: true,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ), // Подчеркивание при фокусе
-                      ),
-                    ),
-                    onChanged: (_) {
-                      // Вызываем слушателя вручную при изменении (хотя addListener тоже должен работать)
-                      confirmationListener();
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Отмена'),
-              onPressed:
-                  () => Navigator.pop(dialogContext, false), // Возвращаем false
-            ),
-            // Используем ValueListenableBuilder для кнопки "УДАЛИТЬ"
-            ValueListenableBuilder<bool>(
-              valueListenable: deleteEnabled,
-              builder: (context, isEnabled, child) {
-                return TextButton(
-                  // Кнопка активна только если введено "удалить"
-                  onPressed:
-                      isEnabled
-                          ? () => Navigator.pop(dialogContext, true)
-                          : null, // Возвращаем true
-                  style: TextButton.styleFrom(
-                    foregroundColor: isEnabled ? Colors.red : Colors.grey,
-                  ),
-                  child: const Text('УДАЛИТЬ'),
-                );
-              },
-            ),
-          ],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const DeficiencyListScreen()),
         );
       },
     );
-
-    // Освобождаем ресурсы после закрытия диалога и завершения кадра
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // if (mounted) { // Проверка mounted здесь может быть излишней, т.к. мы уже в callback'е после закрытия
-      confirmController.removeListener(confirmationListener);
-      confirmController.dispose();
-      deleteEnabled.dispose();
-      // }
-    });
-
-    // Если пользователь подтвердил удаление
-    if (confirmed == true && mounted) {
-      await _deleteChecklistInstance(instanceKey);
-    }
   }
-  // ------------------------------------------------------
-
-  // --- НОВЫЙ МЕТОД: Фактическое удаление из Hive ---
-  Future<void> _deleteChecklistInstance(dynamic instanceKey) async {
-    if (!mounted) return;
-    try {
-      final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
-      await instancesBox.delete(instanceKey);
-      debugPrint("ChecklistInstance с ключом $instanceKey удален.");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Проверка удалена'),
-            backgroundColor: Colors.orange,
-          ),
-        );
-        // setState не нужен, ValueListenableBuilder сам обновит список
-      }
-      // TODO: Позже добавить удаление связанных Deficiency и фото
-    } catch (e) {
-      debugPrint("Ошибка удаления ChecklistInstance с ключом $instanceKey: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Ошибка удаления: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+  
+  /// Строит секцию списка проверок (в процессе или завершенных).
+  Widget _buildInstanceList({
+    required String title,
+    required List<ChecklistInstance> instances,
+    required bool isCompletedList,
+  }) {
+    // Helper для форматирования даты, чтобы не передавать context глубоко.
+    String formatDate(DateTime dt) {
+        return DateFormat.yMd(Localizations.localeOf(context).languageCode).format(dt);
     }
-  }
-  // --------------------------------------------------
-
-  // --- работа с PDF ---
-  Future<void> _generateAndShareChecklistPdf(
-    dynamic instanceKey,
-    String? checklistName,
-  ) async {
-    if (!mounted) return;
-
-    // Показываем индикатор загрузки (опционально, но желательно)
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Генерация PDF для "${checklistName ?? "Отчет"}"...'),
-      ),
-    );
-
-    try {
-      // 1. Получаем необходимые данные
-      final instance = Hive.box<ChecklistInstance>(
-        instancesBoxName,
-      ).get(instanceKey);
-      if (instance == null) {
-        throw Exception('Экземпляр проверки не найден для ключа $instanceKey');
-      }
-      final template =
-          _templateMap[instance
-              .templateId]; // _templateMap уже загружен в initState/loadInitialData
-      if (template == null) {
-        throw Exception('Шаблон не найден для ID ${instance.templateId}');
-      }
-      // _userProfile также должен быть уже загружен
-
-      // 2. Генерируем PDF байты
-      final pdfService = PdfGeneratorService();
-      final Uint8List pdfBytes = await pdfService.generateChecklistInstancePdf(
-        instance,
-        template,
-        _userProfile,
-      );
-
-      // 3. Сохраняем PDF во временный файл
-      final tempDir = await getTemporaryDirectory();
-      // Формируем имя файла, делая его более безопасным для разных систем
-      final safeChecklistName =
-          checklistName
-              ?.replaceAll(RegExp(r'[^\w\s]+'), '')
-              .replaceAll(' ', '_') ??
-          'report';
-      final filePath = '${tempDir.path}/${safeChecklistName}_$instanceKey.pdf';
-      final file = File(filePath);
-      await file.writeAsBytes(pdfBytes);
-
-      debugPrint('PDF сохранен во временный файл: $filePath');
-
-      // --- НОВЫЙ КОД: Сбор путей к фотографиям для этого ChecklistInstance ---
-      List<String> photoPathsForInstance = [];
-      for (var response in instance.responses) {
-        if (response.photoPath != null && response.photoPath!.isNotEmpty) {
-          // Проверяем, существует ли файл, прежде чем добавить
-          final photoFile = File(response.photoPath!);
-          if (await photoFile.exists()) {
-            photoPathsForInstance.add(response.photoPath!);
-          } else {
-            debugPrint('Файл фото не найден по пути: ${response.photoPath}');
-          }
-        }
-      }
-      debugPrint(
-        'Найдено ${photoPathsForInstance.length} фото для этого отчета.',
-      );
-      // ---------------------------------------------------------------------
-
-      // 4. Поделиться файлом
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).removeCurrentSnackBar(); // Убираем "Генерация PDF..."
-
-        // --- НОВЫЙ КОД: Формируем список XFile для SharePlus ---
-        List<XFile> filesToShare = [XFile(filePath)];
-        for (String path in photoPathsForInstance) {
-          filesToShare.add(XFile(path));
-        }
-        debugPrint('Всего файлов для отправки: ${filesToShare.length}');
-        // -------------------------------------------------------
-
-        // --- ИЗМЕНЕНИЕ: Создаем ShareParams и вызываем SharePlus.instance.share() ---
-        final shareParams = ShareParams(
-          text:
-              'Отчет о проверке: ${template.name}', // template здесь должно быть доступно
-          files: [XFile(filePath)], // Передаем список файлов
-        );
-        final result = await SharePlus.instance.share(shareParams);
-        // ---------------------------------------------------------------------------
-
-        if (result.status == ShareResultStatus.success) {
-          debugPrint('PDF успешно отправлен/сохранен пользователем.');
-        } else {
-          debugPrint(
-            'Отправка PDF была отменена или не удалась: ${result.status}',
-          );
-        }
-      }
-    } catch (e) {
-      debugPrint('Ошибка при генерации или отправке PDF: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Ошибка PDF: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Получаем ссылки на ящики в начале метода build
-    final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
-    final deficienciesBox = Hive.box<Deficiency>(
-      deficienciesBoxName,
-    ); // <-- Получаем ящик несоответствий
-
-    /* // Создаем объединенный "слушатель" для обоих ящиков
-    final combinedListenable = Listenable.merge([
-      instancesBox.listenable(), // Слушаем изменения в ящике проверок
-      deficienciesBox.listenable(), // Слушаем изменения в ящике несоответствий
-    ]); */
-
-    return Scaffold(
-      appBar: AppBar(
-        // Отображаем данные пользователя
-        title: Text(_userProfile?.position ?? 'Дашборд'),
-        actions: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Text(_userProfile?.name ?? 'Пользователь'),
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+        ),
+        const Divider(),
+        if (instances.isEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Center(
+              child: Text(isCompletedList
+                  ? S.of(context).noCompletedChecks
+                  : S.of(context).noActiveChecks),
             ),
-          ),
-          // --- НОВАЯ КНОПКА НАСТРОЕК ---
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            tooltip: 'Настройки профиля',
-            onPressed: () async {
-              // Делаем async для ожидания результата, если понадобится
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => const AppSettingsScreen(
-                        isFirstRun: false,
-                      ), // Передаем isFirstRun: false
-                ),
+          )
+        else
+          ListView.builder(
+            shrinkWrap: true, // Важно для ListView внутри другого ListView
+            physics: const NeverScrollableScrollPhysics(), // и отключения его скролла
+            itemCount: instances.length,
+            itemBuilder: (context, index) {
+              final instance = instances[index];
+              final template = _templateMap[instance.templateId];
+              return ListTile(
+                title: Text(template?.name ?? S.of(context).unknownTemplate),
+                subtitle: _buildSubtitle(instance, formatDate),
+                onTap: () => _navigateToExecution(instance.key, template?.name),
+                trailing: _buildTrailingButtons(instance, template?.name, isCompletedList),
               );
-              // После возврата с экрана настроек, перезагружаем данные профиля
-              // чтобы обновить AppBar на Дашборде
-              _loadInitialData();
             },
           ),
-          // ------------------------------
-        ],
-      ),
-      body: Padding(
-        // Добавим общие отступы
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          // Основной контент в колонке
-          children: [
-            // Кнопка начала новой проверки
-            ElevatedButton.icon(
-              icon: const Icon(Icons.add_circle_outline),
-              label: const Text('Начать Новую Проверку'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TemplateSelectionScreen(),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(
-                  double.infinity,
-                  40,
-                ), // Кнопка на всю ширину
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-            ),
-            const SizedBox(height: 16), // Отступ
-            // Используем ValueListenableBuilder для автоматического обновления списков
-            Expanded(
-              child: ValueListenableBuilder<Box<ChecklistInstance>>(
-                // Внешний слушает instancesBox
-                valueListenable:
-                    instancesBox
-                        .listenable(), // <--- ИСПРАВЛЕНИЕ: Слушаем конкретный ящик
-                builder: (context, currentInstancesBox, _) {
-                  // <--- ИСПРАВЛЕНИЕ: Получаем currentInstancesBox (это и есть снэпшот)
-                  // Внутренний ValueListenableBuilder слушает deficienciesBox
-                  return ValueListenableBuilder<Box<Deficiency>>(
-                    valueListenable:
-                        deficienciesBox
-                            .listenable(), // <--- ИСПРАВЛЕНИЕ: Слушаем конкретный ящик
-                    builder: (context, currentDeficienciesBox, _) {
-                      // <--- ИСПРАВЛЕНИЕ: Получаем currentDeficienciesBox
-                      // Теперь у нас есть актуальные ящики:
-                      // currentInstancesBox (типа Box<ChecklistInstance>)
-                      // currentDeficienciesBox (типа Box<Deficiency>)
-
-                      final allInstancesMap =
-                          currentInstancesBox
-                              .toMap(); // Используем актуальный ящик
-                      final inProgressInstances =
-                          allInstancesMap.entries
-                              .where(
-                                (entry) =>
-                                    entry.value.status ==
-                                    ChecklistInstanceStatus.inProgress,
-                              )
-                              .toList();
-                      final completedInstances =
-                          allInstancesMap.entries
-                              .where(
-                                (entry) =>
-                                    entry.value.status ==
-                                    ChecklistInstanceStatus.completed,
-                              )
-                              .toList();
-
-                      // Считаем открытые несоответствия из актуального currentDeficienciesBox
-                      final openDeficienciesCount =
-                          currentDeficienciesBox.values
-                              .where(
-                                (d) =>
-                                    d.status == DeficiencyStatus.open ||
-                                    d.status == DeficiencyStatus.inProgress,
-                              )
-                              .length;
-
-                      // Если данных еще нет (или ошибка), можно показать индикатор/сообщение
-                      // Но т.к. ValueListenableBuilder, он сработает когда данные появятся
-
-                      // Используем ListView для всего контента, чтобы он скроллился
-                      return ListView(
-                        children: [
-                          // --- НОВЫЙ КОД: Плитка для Несоответствий ---
-                          ListTile(
-                            leading: const Icon(
-                              Icons.warning_amber_rounded,
-                              color: Colors.orangeAccent, // Цвет иконки
-                            ),
-                            title: const Text(
-                              'Открытые Несоответствия',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ), // Немного выделим заголовок
-                            ),
-                            trailing: Container(
-                              // Внутренние отступы для текста внутри контейнера
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ), // Немного увеличил отступы
-                              decoration: BoxDecoration(
-                                // Цвет фона зависит от количества несоответствий
-                                color:
-                                    openDeficienciesCount > 0
-                                        ? Colors
-                                            .redAccent // Красный, если есть открытые
-                                        : Colors
-                                            .blueGrey[300], // Серо-голубой, если нет
-                                // Закругляем углы контейнера
-                                borderRadius: BorderRadius.circular(
-                                  12,
-                                ), // Сделал немного круглее
-                              ),
-                              // Текст счетчика
-                              child: Text(
-                                '$openDeficienciesCount', // Само число
-                                style: const TextStyle(
-                                  color: Colors.white, // Белый цвет текста
-                                  fontSize: 12, // Размер шрифта
-                                  fontWeight:
-                                      FontWeight
-                                          .bold, // Жирный шрифт для лучшей читаемости
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              // Переход на экран списка несоответствий
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) => const DeficiencyListScreen(),
-                                ),
-                              );
-                            },
-                          ),
-                          const Divider(), // Разделитель
-                          const SizedBox(height: 16),
-                          // --- Секция "В Процессе" ---
-                          Text(
-                            'Проверки в Процессе (${inProgressInstances.length})',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const Divider(),
-                          const SizedBox(height: 10),
-                          // --- Секция "В Процессе" ---
-                          if (inProgressInstances.isEmpty)
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16.0),
-                              child: Center(
-                                child: Text('Нет активных проверок'),
-                              ),
-                            )
-                          else
-                            // Используем Column т.к. мы уже внутри ListView
-                            Column(
-                              children:
-                                  inProgressInstances.map((entry) {
-                                    final instanceKey = entry.key;
-                                    final instance = entry.value;
-                                    final template =
-                                        _templateMap[instance.templateId];
-                                    return ListTile(
-                                      title: Text(
-                                        template?.name ?? 'Неизвестный шаблон',
-                                      ),
-                                      subtitle: Column(
-                                        // Используем Column для нескольких строк в subtitle
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Начато: ${instance.date.day}.${instance.date.month}.${instance.date.year}',
-                                          ),
-                                          // --- НОВЫЕ СТРОКИ ДЛЯ ОТОБРАЖЕНИЯ КОНТЕКСТА ---
-                                          if (instance.shipName != null &&
-                                              instance.shipName!.isNotEmpty)
-                                            Text(
-                                              'Судно: ${instance.shipName}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.port != null &&
-                                              instance.port!.isNotEmpty)
-                                            Text(
-                                              'Порт: ${instance.port}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.captainNameOnCheck !=
-                                                  null &&
-                                              instance
-                                                  .captainNameOnCheck!
-                                                  .isNotEmpty)
-                                            Text(
-                                              'Капитан: ${instance.captainNameOnCheck}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.inspectorName != null &&
-                                              instance
-                                                  .inspectorName!
-                                                  .isNotEmpty)
-                                            Text(
-                                              'Проверяющий: ${instance.inspectorName}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          // -------------------------------------------------
-                                        ],
-                                      ),
-
-                                      trailing: IconButton(
-                                        // <-- ВОТ КНОПКА УДАЛЕНИЯ
-                                        icon: Icon(
-                                          Icons.delete_outline,
-                                          color: Colors.red.withAlpha(179),
-                                        ),
-                                        tooltip: 'Удалить проверку',
-                                        // УБЕДИТЕСЬ, ЧТО ЗДЕСЬ ПРАВИЛЬНЫЙ ВЫЗОВ:
-                                        onPressed:
-                                            () => _showDeleteConfirmationDialog(
-                                              instanceKey,
-                                              template?.name,
-                                            ),
-                                      ),
-                                      onTap:
-                                          () => _navigateToExecution(
-                                            instanceKey,
-                                            template?.name,
-                                          ), // Возобновить
-                                    );
-                                  }).toList(),
-                            ),
-
-                          const SizedBox(height: 24), // Отступ между секциями
-                          // --- Секция "Завершенные" ---
-                          Text(
-                            'Завершенные Проверки (${completedInstances.length})',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const Divider(),
-                          if (completedInstances.isEmpty)
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16.0),
-                              child: Center(
-                                child: Text('Нет завершенных проверок'),
-                              ),
-                            )
-                          else
-                            Column(
-                              children:
-                                  completedInstances.map((entry) {
-                                    final instanceKey = entry.key;
-                                    final instance = entry.value;
-                                    final template =
-                                        _templateMap[instance.templateId];
-                                    return ListTile(
-                                      title: Text(
-                                        template?.name ?? 'Неизвестный шаблон',
-                                      ),
-                                      subtitle: Column(
-                                        // Используем Column
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            instance.completionDate != null
-                                                ? 'Завершено: ${instance.completionDate!.day}.${instance.completionDate!.month}.${instance.completionDate!.year}'
-                                                : 'Завершено: Дата не указана',
-                                          ),
-                                          // --- НОВЫЕ СТРОКИ ДЛЯ ОТОБРАЖЕНИЯ КОНТЕКСТА ---
-                                          if (instance.shipName != null &&
-                                              instance.shipName!.isNotEmpty)
-                                            Text(
-                                              'Судно: ${instance.shipName}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.port != null &&
-                                              instance.port!.isNotEmpty)
-                                            Text(
-                                              'Порт: ${instance.port}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.captainNameOnCheck !=
-                                                  null &&
-                                              instance
-                                                  .captainNameOnCheck!
-                                                  .isNotEmpty)
-                                            Text(
-                                              'Капитан: ${instance.captainNameOnCheck}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          if (instance.inspectorName != null &&
-                                              instance
-                                                  .inspectorName!
-                                                  .isNotEmpty)
-                                            Text(
-                                              'Проверяющий: ${instance.inspectorName}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          // -------------------------------------------------
-                                        ],
-                                      ),
-
-                                      onTap:
-                                          () => _navigateToExecution(
-                                            instanceKey,
-                                            template?.name,
-                                          ), // Просмотреть
-                                      // Добавляем кнопку PDF (пока без функции)
-                                      // --- ИЗМЕНЕНИЕ: Row для кнопок PDF и Удалить ---
-                                      trailing: Row(
-                                        mainAxisSize:
-                                            MainAxisSize
-                                                .min, // Чтобы Row не растягивался
-                                        children: [
-                                          IconButton(
-                                            icon: const Icon(
-                                              Icons.picture_as_pdf_outlined,
-                                            ),
-                                            iconSize:
-                                                20, // <-- Уменьшаем размер иконки
-                                            padding:
-                                                EdgeInsets
-                                                    .zero, // <-- Убираем стандартные отступы кнопки
-                                            visualDensity:
-                                                VisualDensity
-                                                    .compact, // <-- Делаем кнопку компактнее
-                                            tooltip:
-                                                'Создать PDF отчет (не реализовано)',
-                                            onPressed:
-                                                () =>
-                                                    _generateAndShareChecklistPdf(
-                                                      instanceKey,
-                                                      template?.name,
-                                                    ),
-                                          ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.delete_outline,
-                                              color: Colors.red.withAlpha(179),
-                                            ),
-                                            iconSize:
-                                                20, // <-- Уменьшаем размер иконки
-                                            padding:
-                                                EdgeInsets
-                                                    .zero, // <-- Убираем стандартные отступы кнопки
-                                            visualDensity:
-                                                VisualDensity
-                                                    .compact, // <-- Делаем кнопку компактнее
-                                            tooltip: 'Удалить проверку',
-                                            onPressed:
-                                                () =>
-                                                    _showDeleteConfirmationDialog(
-                                                      instanceKey,
-                                                      template?.name,
-                                                    ),
-                                          ),
-                                        ],
-                                      ),
-                                      // ---------------------------------------------
-                                    );
-                                  }).toList(),
-                            ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+      ],
     );
-  } // конец build
-} */
- 
-// ------------------------------------------------------
+  }
+
+  /// Строит подзаголовок для плитки проверки.
+  Widget _buildSubtitle(ChecklistInstance instance, String Function(DateTime) formatDate) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(instance.completionDate != null
+            ? S.of(context).completedOn(formatDate(instance.completionDate!))
+            : S.of(context).startedOn(formatDate(instance.date))),
+        if (instance.shipName != null && instance.shipName!.isNotEmpty)
+          Text(S.of(context).vessel(instance.shipName!),
+              style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        if (instance.port != null && instance.port!.isNotEmpty)
+          Text(S.of(context).port(instance.port!),
+              style: const TextStyle(fontSize: 12, color: Colors.grey)),
+      ],
+    );
+  }
+  
+  /// Строит кнопки действий (PDF, Удалить) для плитки проверки.
+  Widget _buildTrailingButtons(ChecklistInstance instance, String? templateName, bool isCompleted) {
+    // Общие свойства для компактных иконок
+    const iconSize = 20.0;
+    const padding = EdgeInsets.zero;
+    const visualDensity = VisualDensity.compact;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (isCompleted) // Кнопка PDF только для завершенных
+          IconButton(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            iconSize: iconSize,
+            padding: padding,
+            visualDensity: visualDensity,
+            tooltip: S.of(context).createPdfReport,
+            onPressed: () => _generateAndShareChecklistPdf(instance.key, templateName),
+          ),
+        IconButton(
+          icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(179)),
+          iconSize: iconSize,
+          padding: padding,
+          visualDensity: visualDensity,
+          tooltip: S.of(context).deleteCheck,
+          onPressed: () => _showDeleteConfirmationDialog(instance.key, templateName),
+        ),
+      ],
+    );
+  }
+}

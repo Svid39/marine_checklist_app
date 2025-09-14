@@ -1,47 +1,66 @@
-// Файл: lib/models/checklist_instance.dart
-
 import 'package:hive/hive.dart';
-import 'checklist_item_response.dart'; // Убедитесь, что этот файл существует и модель ChecklistItemResponse определена корректно
-import 'enums.dart'; // Убедитесь, что этот файл существует и Enum'ы определены корректно
+import 'checklist_item_response.dart';
+import 'enums.dart';
 
-part 'checklist_instance.g.dart'; // Для генерации Hive
+part 'checklist_instance.g.dart';
 
-@HiveType(typeId: 3) // Убедитесь, что typeId = 3 уникален среди всех @HiveType
+/// Представляет собой конкретный, заполняемый экземпляр чек-листа.
+///
+/// Если [ChecklistTemplate] — это пустой бланк, то `ChecklistInstance` — это
+/// тот же бланк, который пользователь взял, заполнил метаданными (судно, дата)
+/// и начал отвечать на вопросы. Каждый объект этого класса хранится как
+/// отдельная запись в "ящике" [instancesBoxName].
+@HiveType(typeId: 3)
 class ChecklistInstance extends HiveObject {
-
+  /// ID шаблона ([ChecklistTemplate]), на основе которого создан этот экземпляр.
+  ///
+  /// Это поле связывает динамические данные (ответы пользователя) со статической
+  /// структурой (шаблоном).
   @HiveField(0)
-  late int templateId;
+  int templateId;
 
+  /// Название судна, для которого проводится проверка.
   @HiveField(1)
   String? shipName;
 
+  /// Дата и время создания (начала) проверки.
   @HiveField(2)
-  late DateTime date; // Дата начала
+  DateTime date;
 
+  /// Текущий статус проверки (например, "в процессе" или "завершена").
+  /// См. перечисление [ChecklistInstanceStatus].
   @HiveField(3)
-  late ChecklistInstanceStatus status;
+  ChecklistInstanceStatus status;
 
+  /// Список ответов пользователя ([ChecklistItemResponse]) на пункты чек-листа.
+  ///
+  /// Это основное поле, хранящее пользовательский ввод.
   @HiveField(4)
-  late List<ChecklistItemResponse> responses; // Список ответов на пункты
+  List<ChecklistItemResponse> responses;
 
+  /// Необязательная дата и время, когда проверка была помечена как завершенная.
   @HiveField(5)
-  DateTime? completionDate; // Дата завершения (необязательное)
+  DateTime? completionDate;
 
+  /// Порт, в котором проводится проверка.
   @HiveField(6)
-  String? port; // Порт проведения проверки
+  String? port;
 
+  /// Имя капитана на момент проведения проверки.
   @HiveField(7)
-  String? captainNameOnCheck; // Имя капитана на момент проверки
+  String? captainNameOnCheck;
 
+  /// Имя проверяющего (обычно берется из [UserProfile]).
   @HiveField(8)
-  String? inspectorName; // Имя проверяющего
+  String? inspectorName;
 
+  /// Создает новый экземпляр проверки.
   ChecklistInstance({
     required this.templateId,
-    this.shipName,
     required this.date,
+    this.shipName,
     this.status = ChecklistInstanceStatus.inProgress,
-    this.responses = const [], // Инициализируем пустым списком
+    this.responses = const [],
     this.completionDate,
     this.port,
     this.captainNameOnCheck,

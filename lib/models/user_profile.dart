@@ -1,24 +1,36 @@
-import 'package:hive/hive.dart'; // Импорт Hive
+import 'package:hive/hive.dart';
 
-part 'user_profile.g.dart'; // Оставляем для Hive
+part 'user_profile.g.dart';
 
-@HiveType(typeId: 0) // Уникальный ID=0
+/// Модель для хранения данных профиля пользователя и общих настроек приложения.
+///
+/// Хранится в Hive в "ящике" [userProfileBoxName] под единственным ключом `1`.
+/// Наследует [HiveObject] для удобного доступа к ключу и ящику.
+@HiveType(typeId: 0)
 class UserProfile extends HiveObject {
-  @HiveField(0) // Номер поля 0
+  /// Имя пользователя (например, инспектора), используется в отчетах.
+  @HiveField(0)
   String? name;
 
-  @HiveField(1) // Номер поля 1
+  /// Должность пользователя, используется в отчетах.
+  @HiveField(1)
   String? position;
 
-  @HiveField(2) // Номер поля 2
+  /// Название судна по умолчанию для предзаполнения в новых проверках.
+  @HiveField(2)
   String? shipName;
 
-  @HiveField(3) // Номер поля 3
+  /// Имя капитана по умолчанию для предзаполнения в новых проверках.
+  @HiveField(3)
   String? captainName;
 
-  @HiveField(4) // <-- НОВОЕ ПОЛЕ
+  /// Код выбранного пользователем языка (например, 'en' или 'ru').
+  ///
+  /// Используется для сохранения языковых предпочтений между сессиями.
+  @HiveField(4)
   String? languageCode;
 
+  /// Создает экземпляр профиля пользователя.
   UserProfile({
     this.name,
     this.position,
