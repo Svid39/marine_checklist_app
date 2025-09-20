@@ -459,9 +459,12 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
     final permission = source == ImageSource.camera ? Permission.camera : Permission.photos;
     final permissionName = source == ImageSource.camera ? S.of(context).camera : S.of(context).gallery;
     PermissionStatus status = await permission.status;
-    if (status.isDenied) {
+    if (status.isDenied|| status.isRestricted) {
       status = await permission.request();
     }
+     // Проверяем, активен ли виджет, сразу после асинхронного запроса
+    if (!mounted) return;
+    
     if (!status.isGranted) {
       String message = S.of(context).permissionRequiredFor(permissionName);
       if(status.isPermanentlyDenied) {
@@ -476,6 +479,9 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
     final pickedFile = await ImagePicker().pickImage(source: source);
     if (pickedFile == null || !mounted) return;
 
+    // Проверяем, активен ли виджет, сразу после асинхронной операции
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.of(context).processingPhoto)));
 
     try {
@@ -486,6 +492,7 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
       if (newPath != null) {
         final oldPath = currentResponse.photoPath;
         await _updateItemPhotoPath(item, newPath);
+        if (!mounted) return;
         if (oldPath != null && oldPath.isNotEmpty && oldPath != newPath) {
           try {
             final oldFile = File(oldPath);
