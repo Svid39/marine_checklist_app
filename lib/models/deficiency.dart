@@ -52,6 +52,9 @@ class Deficiency extends HiveObject {
   @HiveField(8)
   String? photoPath;
 
+  @HiveField(9) // version 1.1
+  String? shipName; // Название судна, к которому относится несоответствие
+
   /// Создает новый экземпляр несоответствия.
   Deficiency({
     this.description = '',
@@ -63,5 +66,6 @@ class Deficiency extends HiveObject {
     this.correctiveActions,
     this.resolutionDate,
     this.photoPath,
+    this.shipName, // version 1.1
   });
 }

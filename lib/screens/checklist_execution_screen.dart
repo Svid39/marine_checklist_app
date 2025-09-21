@@ -407,6 +407,7 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
                         initialDescription: item.text,
                         initialInstanceKey: widget.instanceKey,
                         initialChecklistItemId: item.order,
+                        initialShipName: _instance?.shipName, // Передаем имя судна version1.1
                       ),
                     ),
                   );

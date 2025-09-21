@@ -41,6 +41,7 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       deleteEnabled.value =
           confirmController.text.trim() == S.of(context).deleteWord;
     }
+
     confirmController.addListener(confirmationListener);
 
     final bool? confirmed = await showDialog<bool>(
@@ -89,8 +90,9 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
               valueListenable: deleteEnabled,
               builder: (context, isEnabled, child) {
                 return TextButton(
-                  onPressed:
-                      isEnabled ? () => Navigator.pop(dialogContext, true) : null,
+                  onPressed: isEnabled
+                      ? () => Navigator.pop(dialogContext, true)
+                      : null,
                   style: TextButton.styleFrom(
                     foregroundColor: isEnabled ? Colors.red : Colors.grey,
                   ),
@@ -150,13 +152,17 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
 
     if (targetShipName == null || targetShipName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).vesselNameNotInProfile), backgroundColor: Colors.orange),
+        SnackBar(
+            content: Text(S.of(context).vesselNameNotInProfile),
+            backgroundColor: Colors.orange),
       );
       return;
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(S.of(context).generatingPdfReportForVessel(targetShipName))),
+      SnackBar(
+          content:
+              Text(S.of(context).generatingPdfReportForVessel(targetShipName))),
     );
 
     try {
@@ -177,7 +183,10 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(S.of(context).noDeficienciesFoundForVessel(targetShipName)), backgroundColor: Colors.orange),
+          SnackBar(
+              content: Text(
+                  S.of(context).noDeficienciesFoundForVessel(targetShipName)),
+              backgroundColor: Colors.orange),
         );
         return;
       }
@@ -188,21 +197,29 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
         return (a.dueDate ?? DateTime(0)).compareTo(b.dueDate ?? DateTime(0));
       });
 
-      final pdfBytes = await PdfGeneratorService().generateShipDeficiencyReportPdf(
-          targetShipName, deficienciesForShip, userProfile, allInstancesMap, allTemplatesMap,
+      final pdfBytes =
+          await PdfGeneratorService().generateShipDeficiencyReportPdf(
+        targetShipName,
+        deficienciesForShip,
+        userProfile,
+        allInstancesMap,
+        allTemplatesMap,
       );
-      
+
       if (!mounted) return;
-      
+
       final tempDir = await getTemporaryDirectory();
-      final safeShipName = targetShipName.replaceAll(RegExp(r'[^\w\s]+'), '').replaceAll(' ', '_');
-      final filePath = '${tempDir.path}/deficiency_report_${safeShipName}_${DateTime.now().toIso8601String().split('T').first}.pdf';
+      final safeShipName = targetShipName
+          .replaceAll(RegExp(r'[^\w\s]+'), '')
+          .replaceAll(' ', '_');
+      final filePath =
+          '${tempDir.path}/deficiency_report_${safeShipName}_${DateTime.now().toIso8601String().split('T').first}.pdf';
       final file = File(filePath);
       await file.writeAsBytes(pdfBytes);
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
-      
+
       final shareParams = ShareParams(
         text: S.of(context).deficiencyReportForVessel(targetShipName),
         files: [XFile(filePath)],
@@ -212,7 +229,8 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).pdfError), backgroundColor: Colors.red),
+        SnackBar(
+            content: Text(S.of(context).pdfError), backgroundColor: Colors.red),
       );
     }
   }
@@ -301,7 +319,9 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
         valueListenable: deficienciesBox.listenable(),
         builder: (context, Box<Deficiency> box, _) {
           final deficienciesList = box.values
-              .where((def) => _selectedFilterStatus == null || def.status == _selectedFilterStatus)
+              .where((def) =>
+                  _selectedFilterStatus == null ||
+                  def.status == _selectedFilterStatus)
               .toList();
 
           if (deficienciesList.isEmpty) {
@@ -326,38 +346,77 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
   Widget _buildDeficiencyListItem(Deficiency deficiency) {
     final statusStyle = _getStatusStyle(deficiency.status, deficiency.dueDate);
     String formatDate(DateTime dt) {
-        return DateFormat.yMd(Localizations.localeOf(context).languageCode).format(dt);
+      return DateFormat.yMd(Localizations.localeOf(context).languageCode)
+          .format(dt);
     }
-    
+
     return ListTile(
       leading: Icon(statusStyle['icon'], color: statusStyle['color'], size: 28),
-      title: Text(deficiency.description, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: RichText(
-        text: TextSpan(
-          style: DefaultTextStyle.of(context).style.copyWith(fontSize: 12),
-          children: <TextSpan>[
-            TextSpan(
-              text: S.of(context).statusLabel(_getDeficiencyStatusName(deficiency.status)),
-              style: TextStyle(color: statusStyle['color'], fontWeight: statusStyle['fontWeight']),
-            ),
-            if (deficiency.dueDate != null)
-              TextSpan(
-                text: S.of(context).dueDateLabel(formatDate(deficiency.dueDate!)),
-                style: TextStyle(color: statusStyle['isOverdue'] ? Colors.red : null, fontWeight: statusStyle['isOverdue'] ? FontWeight.bold : FontWeight.normal),
+      title: Text(deficiency.description,
+          maxLines: 2, overflow: TextOverflow.ellipsis),
+
+      // Наш новый subtitle с Column и именем судна
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (deficiency.shipName != null && deficiency.shipName!.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0, bottom: 2.0),
+              child: Text(
+                deficiency.shipName!,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Theme.of(context).textTheme.bodySmall?.color,
+                ),
               ),
-          ],
-        ),
+            ),
+          RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style.copyWith(fontSize: 12),
+              children: <TextSpan>[
+                TextSpan(
+                  text: S
+                      .of(context)
+                      .statusLabel(_getDeficiencyStatusName(deficiency.status)),
+                  style: TextStyle(
+                      color: statusStyle['color'],
+                      fontWeight: statusStyle['fontWeight']),
+                ),
+                if (deficiency.dueDate != null)
+                  TextSpan(
+                    text: S
+                        .of(context)
+                        .dueDateLabel(formatDate(deficiency.dueDate!)),
+                    style: TextStyle(
+                        color: statusStyle['isOverdue'] ? Colors.red : null,
+                        fontWeight: statusStyle['isOverdue']
+                            ? FontWeight.bold
+                            : FontWeight.normal),
+                  ),
+              ],
+            ),
+          ),
+        ],
       ),
+
+      // <-- ВОССТАНОВЛЕННЫЙ trailing С КНОПКОЙ УДАЛЕНИЯ
       trailing: IconButton(
         icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(196)),
         tooltip: S.of(context).deleteDeficiency,
-        onPressed: () => _showDeleteConfirmationDialog(deficiency.key, deficiency.description),
+        onPressed: () => _showDeleteConfirmationDialog(
+          deficiency.key,
+          deficiency.description,
+        ),
       ),
+
+      // <-- ВОССТАНОВЛЕННЫЙ onTap ДЛЯ ПЕРЕХОДА К РЕДАКТИРОВАНИЮ
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DeficiencyDetailScreen(deficiencyKey: deficiency.key),
+            builder: (context) =>
+                DeficiencyDetailScreen(deficiencyKey: deficiency.key),
           ),
         );
       },
@@ -365,25 +424,47 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
   }
 
   /// Возвращает Map со стилями (иконка, цвет, шрифт) в зависимости от статуса несоответствия.
-  Map<String, dynamic> _getStatusStyle(DeficiencyStatus status, DateTime? dueDate) {
+  Map<String, dynamic> _getStatusStyle(
+      DeficiencyStatus status, DateTime? dueDate) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     bool isOverdue = false;
     if (dueDate != null && status != DeficiencyStatus.closed) {
-      final normalizedDueDate = DateTime(dueDate.year, dueDate.month, dueDate.day);
+      final normalizedDueDate =
+          DateTime(dueDate.year, dueDate.month, dueDate.day);
       isOverdue = normalizedDueDate.isBefore(today);
     }
 
     if (status == DeficiencyStatus.closed) {
-      return {'color': Colors.green, 'icon': Icons.check_circle_outline, 'fontWeight': FontWeight.normal, 'isOverdue': false};
+      return {
+        'color': Colors.green,
+        'icon': Icons.check_circle_outline,
+        'fontWeight': FontWeight.normal,
+        'isOverdue': false
+      };
     }
     if (isOverdue) {
-      return {'color': Colors.red, 'icon': Icons.error_outline, 'fontWeight': FontWeight.bold, 'isOverdue': true};
+      return {
+        'color': Colors.red,
+        'icon': Icons.error_outline,
+        'fontWeight': FontWeight.bold,
+        'isOverdue': true
+      };
     }
     if (status == DeficiencyStatus.open) {
-      return {'color': Colors.orangeAccent, 'icon': Icons.warning_amber_rounded, 'fontWeight': FontWeight.normal, 'isOverdue': false};
+      return {
+        'color': Colors.orangeAccent,
+        'icon': Icons.warning_amber_rounded,
+        'fontWeight': FontWeight.normal,
+        'isOverdue': false
+      };
     }
     // if (status == DeficiencyStatus.inProgress)
-    return {'color': Colors.blueAccent, 'icon': Icons.hourglass_empty_rounded, 'fontWeight': FontWeight.normal, 'isOverdue': false};
+    return {
+      'color': Colors.blueAccent,
+      'icon': Icons.hourglass_empty_rounded,
+      'fontWeight': FontWeight.normal,
+      'isOverdue': false
+    };
   }
 }

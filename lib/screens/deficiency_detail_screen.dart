@@ -28,6 +28,7 @@ class DeficiencyDetailScreen extends StatefulWidget {
 
   /// ID связанного пункта чек-листа.
   final int? initialChecklistItemId;
+  final String? initialShipName; // version1.1
 
   const DeficiencyDetailScreen({
     super.key,
@@ -35,6 +36,7 @@ class DeficiencyDetailScreen extends StatefulWidget {
     this.initialDescription,
     this.initialInstanceKey,
     this.initialChecklistItemId,
+    this.initialShipName, // version1.1
   });
 
   @override
@@ -77,7 +79,6 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
   /// Загружает данные для экрана в зависимости от режима (создание/редактирование).
   Future<void> _loadInitialData() async {
     setState(() => _isLoading = true);
-
 
     _loadedUserProfile = Hive.box<UserProfile>(userProfileBoxName).get(1);
 
@@ -187,6 +188,18 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     _deficiency!.dueDate = _dueDate;
     _deficiency!.resolutionDate = _resolutionDate;
     _deficiency!.photoPath = _photoPath;
+
+    // --- НОВАЯ ЛОГИКА Version 1.1 ---
+// Если это новое, созданное вручную несоответствие без привязки к проверке,
+// берем имя судна из профиля пользователя.
+    if (_isNew) {
+      if (widget.initialShipName != null) {
+        _deficiency!.shipName = widget.initialShipName;
+      } else {
+        _deficiency!.shipName = _loadedUserProfile?.shipName;
+      }
+    }
+// --- КОНЕЦ НОВОЙ ЛОГИКИ ---
 
     try {
       if (_isNew) {
@@ -320,7 +333,6 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
       if (newPath != null) {
-        
         if (_photoPath != null &&
             _photoPath!.isNotEmpty &&
             _photoPath != newPath) {
@@ -332,7 +344,7 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
 
         if (!mounted) return;
         setState(() => _photoPath = newPath);
-        
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).photoAddedOrUpdated),
             backgroundColor: Colors.green));
@@ -465,8 +477,9 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
                 border: const OutlineInputBorder(),
               ),
               validator: (value) {
-                if (value == null || value.trim().isEmpty)
-                  {return S.of(context).noDescription;}
+                if (value == null || value.trim().isEmpty) {
+                  return S.of(context).noDescription;
+                }
                 return null;
               },
             ),
