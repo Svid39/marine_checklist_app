@@ -47,13 +47,31 @@ class ChecklistItem {
 
   /// Создает экземпляр [ChecklistItem] из JSON-формата version 1.1
   Map<String, dynamic> toJson() {
-  return {
-    'text': text,
-    'details': details,
-    'order': order,
-    'responseType': responseType.name,
-    'regulationRef': regulationRef,
-    'section': section,
-  };
-}
+    return {
+      'text': text,
+      'details': details,
+      'order': order,
+      'responseType': responseType.name,
+      'regulationRef': regulationRef,
+      'section': section,
+    };
+  }
+
+  // Внутри класса ChecklistItem
+
+  /// Фабричный конструктор для создания [ChecklistItem] из JSON-карты.
+  factory ChecklistItem.fromJson(Map<String, dynamic> json) {
+    return ChecklistItem(
+      text: json['text'] ?? '',
+      details: json['details'],
+      order: json['order'] ?? 0,
+      // Преобразуем строку в значение enum, если не найдено - ставим по умолчанию
+      responseType: ResponseType.values.firstWhere(
+        (e) => e.name == json['responseType'],
+        orElse: () => ResponseType.okNotOkNA,
+      ),
+      regulationRef: json['regulationRef'],
+      section: json['section'],
+    );
+  }
 }

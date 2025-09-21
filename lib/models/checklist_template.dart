@@ -36,11 +36,28 @@ class ChecklistTemplate extends HiveObject {
 
   /// Создает экземпляр [ChecklistTemplate] из JSON-формата version 1.1
   Map<String, dynamic> toJson() {
-  return {
-    'name': name,
-    'description': description,
-    'version': version,
-    'items': items.map((item) => item.toJson()).toList(),
-  };
-}
+    return {
+      'name': name,
+      'description': description,
+      'version': version,
+      'items': items.map((item) => item.toJson()).toList(),
+    };
+  }
+
+  // Внутри класса ChecklistTemplate
+
+  /// Фабричный конструктор для создания [ChecklistTemplate] из JSON-карты.
+  factory ChecklistTemplate.fromJson(Map<String, dynamic> json) {
+    // Преобразуем список JSON-объектов в список объектов ChecklistItem
+    var itemsList = json['items'] as List;
+    List<ChecklistItem> items =
+        itemsList.map((itemJson) => ChecklistItem.fromJson(itemJson)).toList();
+
+    return ChecklistTemplate(
+      name: json['name'] ?? '',
+      version: json['version'] ?? 1,
+      items: items,
+      description: json['description'],
+    );
+  }
 }
