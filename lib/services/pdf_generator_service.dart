@@ -69,7 +69,7 @@ class PdfGeneratorService {
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(32),
-        header: (context) => _buildPageHeader(context, 'Отчет о несоответствиях - Судно: $targetShipName'),
+        header: (context) => _buildPageHeader(context, 'Non-Conformity Report - Vessel: $targetShipName'),
         footer: (context) => _buildPageFooter(context),
         build: (pageContext) => [
           _buildDeficiencyReportHeader(targetShipName, userProfile),
@@ -104,7 +104,7 @@ class PdfGeneratorService {
       alignment: pw.Alignment.centerRight,
       margin: const pw.EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
       child: pw.Text(
-        'Стр. ${context.pageNumber} из ${context.pagesCount}',
+        'Page. ${context.pageNumber} of ${context.pagesCount}',
         style: pw.Theme.of(context).defaultTextStyle.copyWith(color: PdfColors.grey),
       ),
     );
@@ -133,17 +133,17 @@ class PdfGeneratorService {
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('Судно: ${instance.shipName ?? 'N/A'}'),
-                pw.Text('Порт: ${instance.port ?? 'N/A'}'),
-                pw.Text('Проверяющий: ${instance.inspectorName ?? userProfile?.name ?? 'N/A'}'),
+                pw.Text('Vessel: ${instance.shipName ?? 'N/A'}'),
+                pw.Text('Port: ${instance.port ?? 'N/A'}'),
+                pw.Text('Inspector: ${instance.inspectorName ?? userProfile?.name ?? 'N/A'}'),
               ],
             ),
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('Капитан: ${instance.captainNameOnCheck ?? 'N/A'}'),
-                pw.Text('Дата начала: ${formatDate(instance.date)}'),
-                pw.Text('Дата завершения: ${formatDate(instance.completionDate)}'),
+                pw.Text('Captain: ${instance.captainNameOnCheck ?? 'N/A'}'),
+                pw.Text('Start date: ${formatDate(instance.date)}'),
+                pw.Text('Completion date: ${formatDate(instance.completionDate)}'),
               ],
             ),
           ],
@@ -167,11 +167,11 @@ class PdfGeneratorService {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Text('Отчет о Несоответствиях', style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
-        pw.Text('Судно: $targetShipName', style: pw.TextStyle(fontSize: 16)),
+        pw.Text('Non-Conformity Report', style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+        pw.Text('Vessel: $targetShipName', style: pw.TextStyle(fontSize: 16)),
         pw.SizedBox(height: 5),
-        pw.Text('Проверяющий: ${userProfile?.name ?? 'N/A'}', style: const pw.TextStyle(fontSize: 12)),
-        pw.Text('Дата отчета: ${formatDate(DateTime.now())}', style: const pw.TextStyle(fontSize: 12)),
+        pw.Text('Inspector: ${userProfile?.name ?? 'N/A'}', style: const pw.TextStyle(fontSize: 12)),
+        pw.Text('Date: ${formatDate(DateTime.now())}', style: const pw.TextStyle(fontSize: 12)),
         pw.SizedBox(height: 10),
         pw.Divider(),
       ],
@@ -183,7 +183,7 @@ class PdfGeneratorService {
     ChecklistInstance instance,
     ChecklistTemplate template,
   ) {
-    final headers = ['№', 'Пункт Проверки', 'Статус', 'Комментарий', 'Фото'];
+    final headers = ['№', 'Item', 'Status', 'Comment', 'Photo'];
 
     final data = template.items.map((item) {
       final response = instance.responses.firstWhere(
@@ -192,10 +192,10 @@ class PdfGeneratorService {
       );
       return [
         item.order.toString(),
-        '${item.section != null ? "[${item.section}] " : ""}${item.text}${item.details != null ? "\nДетали: ${item.details}" : ""}',
+        '${item.section != null ? "[${item.section}] " : ""}${item.text}${item.details != null ? "\nDetails: ${item.details}" : ""}',
         _getItemResponseStatusName(response.status),
         response.comment ?? '',
-        (response.photoPath != null && response.photoPath!.isNotEmpty) ? 'Да' : 'Нет',
+        (response.photoPath != null && response.photoPath!.isNotEmpty) ? 'Yes' : 'No',
       ];
     }).toList();
 
@@ -227,7 +227,7 @@ class PdfGeneratorService {
     Map<dynamic, ChecklistInstance> instancesMap,
     Map<dynamic, ChecklistTemplate> templatesMap,
   ) {
-    final headers = ['№', 'Описание', 'Статус', 'Ответственный', 'Срок', 'Источник', 'Фото'];
+    final headers = ['№', 'Description', 'Status', 'Responsible', 'Date', 'Sourse', 'Photo'];
     int counter = 0;
     final data = deficiencies.map((def) {
       counter++;
@@ -238,7 +238,7 @@ class PdfGeneratorService {
       if (instance != null && template != null) {
         sourceInfo = '${template.name} (п. ${def.checklistItemId ?? 'N/A'}) от ${DateFormat('dd.MM.yy').format(instance.date)}';
       } else {
-        sourceInfo = 'Создано вручную';
+        sourceInfo = 'Manual Entry';
       }
 
       return [
@@ -248,7 +248,7 @@ class PdfGeneratorService {
         def.assignedTo ?? 'N/A',
         def.dueDate != null ? DateFormat('dd.MM.yyyy').format(def.dueDate!) : 'N/A',
         sourceInfo,
-        (def.photoPath != null && def.photoPath!.isNotEmpty) ? 'Да' : 'Нет',
+        (def.photoPath != null && def.photoPath!.isNotEmpty) ? 'Yes' : 'No',
       ];
     }).toList();
 
@@ -281,11 +281,11 @@ class PdfGeneratorService {
   String _getDeficiencyStatusName(DeficiencyStatus status) {
     switch (status) {
       case DeficiencyStatus.open:
-        return 'Открыто';
+        return 'Open';
       case DeficiencyStatus.inProgress:
-        return 'В работе';
+        return 'In Progress';
       case DeficiencyStatus.closed:
-        return 'Закрыто';
+        return 'Closed';
     }
   }
 
@@ -296,7 +296,7 @@ class PdfGeneratorService {
       case ItemResponseStatus.ok:
         return 'OK';
       case ItemResponseStatus.notOk:
-        return 'Не ОК';
+        return 'Not OK';
       case ItemResponseStatus.na:
         return 'N/A';
     }

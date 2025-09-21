@@ -31,7 +31,7 @@ class DatabaseSeeder {
       // в сервис аналитики (например, Firebase Crashlytics).
       // В данном случае просто перехватываем ошибку, чтобы не "уронить" приложение.
       if (kDebugMode) {
-        print('Ошибка при добавлении начальных шаблонов: $e');
+        print('Error adding initial templates: $e');
       }
     }
   }
