@@ -33,4 +33,14 @@ class ChecklistTemplate extends HiveObject {
     this.version = 1,
     this.items = const [],
   });
+
+  /// Создает экземпляр [ChecklistTemplate] из JSON-формата version 1.1
+  Map<String, dynamic> toJson() {
+  return {
+    'name': name,
+    'description': description,
+    'version': version,
+    'items': items.map((item) => item.toJson()).toList(),
+  };
+}
 }

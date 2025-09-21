@@ -44,4 +44,16 @@ class ChecklistItem {
     this.regulationRef,
     this.section,
   });
+
+  /// Создает экземпляр [ChecklistItem] из JSON-формата version 1.1
+  Map<String, dynamic> toJson() {
+  return {
+    'text': text,
+    'details': details,
+    'order': order,
+    'responseType': responseType.name,
+    'regulationRef': regulationRef,
+    'section': section,
+  };
+}
 }

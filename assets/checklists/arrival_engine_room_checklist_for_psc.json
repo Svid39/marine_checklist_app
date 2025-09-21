@@ -1,0 +1,151 @@
+{
+  "name": "Arrival Engine Room Checklist for PSC",
+  "description": null,
+  "version": 1,
+  "items": [
+    {
+      "text": "Are all auxiliary engines in good working order?",
+      "details": null,
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Mechanical Systems"
+    },
+    {
+      "text": "Do all components of the main propulsion engine function correctly and properly?",
+      "details": null,
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Mechanical Systems"
+    },
+    {
+      "text": "Has it been confirmed that all piping is free from leaks and temporary repairs (soft patches)?",
+      "details": "(See additional info p.24)",
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Mechanical Systems"
+    },
+    {
+      "text": "Are all tank tops and bilges clean and free of excessive oil or debris? Are tools and equipment stored properly to prevent hazards? Are emergency exits unobstructed? Has it been confirmed that there are no oil leaks, deposits, or slicks present in any area?",
+      "details": "(See additional info p.22)",
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Cleanliness and Safety"
+    },
+    {
+      "text": "Are all emergency exits clearly marked and easily accessible without any obstructions?",
+      "details": null,
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Cleanliness and Safety"
+    },
+    {
+      "text": "Do the self-closing mechanisms of all fire doors function correctly and are they free from any hold-back devices, where self-closing doors are required by SOLAS regulations?",
+      "details": "(See additional info p.14)",
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Cleanliness and Safety"
+    },
+    {
+      "text": "Is the insulation on all \"A\" class bulkheads and decks in good condition, without damage or deterioration? Are all cable penetrations in \"A\" or \"B\" class divisions properly sealed and in good condition to maintain fire integrity?",
+      "details": "(See additional info p.15)",
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Cleanliness and Safety"
+    },
+    {
+      "text": "Are all EEBDs stowed in readily accessible locations and in good order? Is the indicated air pressure within the acceptable range for each EEBD?",
+      "details": null,
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Are all emergency lights in the engine room, engine control room (ECR), and escape trunk in good working order? Are all light guards intact and not damaged?",
+      "details": null,
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Do the emergency shut-off valves for fuel oil (FO) tanks operate correctly and can they be easily accessed in an emergency?",
+      "details": "(See additional info p.23)",
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Have all portable fire extinguishers been serviced within the required intervals and are they clearly marked with the date of the last service? Are the pressure gauges indicating the correct pressure?",
+      "details": null,
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Are all fireman's outfits complete, in good condition, and readily accessible? Are the torches within the outfits in good working order and equipped with charged batteries? Have all cylinders for self-contained breathing apparatus (SCBA) been properly serviced and within their hydrostatic test date? Are there adequate onboard means for recharging SCBA cylinders, or is a sufficient number of fully charged spare cylinders readily available for use during drills and emergencies?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Are all fire pumps capable of being started and operating at their rated capacity, providing adequate pressure at the fire hydrants?",
+      "details": "(See additional info p.23)",
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Equipment"
+    },
+    {
+      "text": "Where required, are high-pressure fuel lines fitted with a jacketed system and are spray shields correctly installed? Are the associated leakage detection alarms functioning correctly?",
+      "details": null,
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fuel and Oil Systems"
+    },
+    {
+      "text": "Does the oily water separating equipment operate effectively and in accordance with regulations? Are the casings and discharge lines free from excessive corrosion or wastage? Is the interior of the discharge lines clean and free from oil residue or accumulated dirt? Has it been verified that no unauthorized bypass lines have been fitted to the system?",
+      "details": "(See additional info p.24)",
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fuel and Oil Systems"
+    },
+    {
+      "text": "Are all maintenance activities related to piping systems and the oily water separating equipment accurately and fully recorded in the Oil Record Book, including dates and details of work performed?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fuel and Oil Systems"
+    },
+    {
+      "text": "Is the sewage treatment plant in good working order and being operated in accordance with regulations? If untreated sewage stored in holding tanks is discharged, is an approved discharge rate table readily available onboard?",
+      "details": "(Refer to relevant guidelines, e.g., ClassNK Technical Information, No.TEC-0758.)",
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Pollution Prevention"
+    },
+    {
+      "text": "Does the 15 ppm alarm system for the oily water separator function correctly, including automatic stopping devices, audible and visual alarms, and associated gauges? Is a valid and up-to-date calibration certificate for the 15 ppm alarm system readily available onboard?",
+      "details": "(This applies to equipment certified under MEPC.107(49) or later standards.)",
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Pollution Prevention"
+    }
+  ]
+}
