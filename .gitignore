@@ -5,7 +5,6 @@
 *.swp
 .DS_Store
 .atom/
-.build/
 .buildlog/
 .history
 .svn/
@@ -24,14 +23,13 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+build/
+**/ios/Flutter/.last_build_id
 
 # Symbolication related
 app.*.symbols
@@ -39,11 +37,25 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Generated plugin registrant files
+# (добавлено для полноты)
+/ios/Flutter/GeneratedPluginRegistrant.*
+/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+/macos/Flutter/GeneratedPluginRegistrant.swift
+/windows/flutter/generated_plugin_registrant.cc
+/windows/flutter/generated_plugin_registrant.h
+/windows/flutter/generated_plugins.cmake
+/linux/flutter/generated_plugin_registrant.cc
+/linux/flutter/generated_plugin_registrant.h
+/linux/flutter/generated_plugins.cmake
 
 # Firebase and Google Services
+# (добавлены точные пути и новые файлы)
 /lib/firebase_options.dart
-google-services.json
+/android/app/google-services.json
+firebase.json
+
+# Signing keys
+# (добавлено для будущей безопасности)
+*.jks
+*.keystore
