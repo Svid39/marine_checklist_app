@@ -41,7 +41,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBtvg5Y3_K_eXez7fQGQVlJb4K6p7sH9WM',
+    apiKey: '',
     appId: '1:583034955555:web:05099c7a8f2fbaddf70e96',
     messagingSenderId: '583034955555',
     projectId: 'marine-checklist-36b30',
