@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBWczAborTVgoTEezQ-cAgiV97Kh_J6etc',
+    apiKey: '',
     appId: '1:583034955555:android:da11a569580b07b8f70e96',
     messagingSenderId: '583034955555',
     projectId: 'marine-checklist-36b30',
@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDdzXdkrvxSEGnEoA8apVN2a4eLOThjnck',
+    apiKey: '',
     appId: '1:583034955555:ios:e660af5546ab9038f70e96',
     messagingSenderId: '583034955555',
     projectId: 'marine-checklist-36b30',
@@ -68,7 +68,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDdzXdkrvxSEGnEoA8apVN2a4eLOThjnck',
+    apiKey: '',
     appId: '1:583034955555:ios:e660af5546ab9038f70e96',
     messagingSenderId: '583034955555',
     projectId: 'marine-checklist-36b30',
@@ -77,7 +77,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD5UtVNlS0upXK2dXONVwyEkkGTU8Vf7hg',
+    apiKey: '',
     appId: '1:583034955555:web:5af1c2701bfe90e6f70e96',
     messagingSenderId: '583034955555',
     projectId: 'marine-checklist-36b30',
