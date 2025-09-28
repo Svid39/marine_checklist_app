@@ -26,13 +26,14 @@ class DeficiencyAdapter extends TypeAdapter<Deficiency> {
       correctiveActions: fields[6] as String?,
       resolutionDate: fields[7] as DateTime?,
       photoPath: fields[8] as String?,
+      shipName: fields[9] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Deficiency obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.description)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class DeficiencyAdapter extends TypeAdapter<Deficiency> {
       ..writeByte(7)
       ..write(obj.resolutionDate)
       ..writeByte(8)
-      ..write(obj.photoPath);
+      ..write(obj.photoPath)
+      ..writeByte(9)
+      ..write(obj.shipName);
   }
 
   @override

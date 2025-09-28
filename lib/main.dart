@@ -20,6 +20,11 @@ import 'services/database_seeder.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/app_settings_screen.dart';
 
+// --- НОВЫЕ ИМПОРТЫ ДЛЯ FIREBASE ---
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+// ------------------------------------
+
 // --- Константы для имен "ящиков" Hive ---
 
 /// Имя ящика для хранения профиля пользователя [UserProfile].
@@ -37,10 +42,28 @@ const String deficienciesBoxName = 'deficienciesBox';
 /// дерево виджетов при смене языка.
 final ValueNotifier<Locale> localeNotifier = ValueNotifier(const Locale('en'));
 
+// --- ПРАВИЛЬНОЕ МЕСТО ДЛЯ ОБЪЯВЛЕНИЯ ---
+/// Глобальный уведомитель для статуса подключения к Firebase.
+final ValueNotifier<bool> firebaseConnectedNotifier = ValueNotifier(false);
+// ----------------------------------------
+
 /// Основная функция и точка входа в приложение.
 Future<void> main() async {
   // Гарантирует, что все биндинги Flutter инициализированы перед выполнением асинхронных операций.
   WidgetsFlutterBinding.ensureInitialized();
+
+   // --- НОВЫЙ БЛОК: Инициализация Firebase ---
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    // Если успешно, меняем статус на "онлайн"
+    firebaseConnectedNotifier.value = true;
+  } catch (e) {
+    // Если ошибка (нет интернета), статус остается "офлайн"
+    firebaseConnectedNotifier.value = false;
+  }
+  // -----------------------------------------
   
   // Инициализирует Hive и все его компоненты.
   await _initializeHive();
@@ -73,6 +96,7 @@ void _registerHiveAdapters() {
   Hive.registerAdapter(ResponseTypeAdapter());
   Hive.registerAdapter(ItemResponseStatusAdapter());
   Hive.registerAdapter(DeficiencyStatusAdapter());
+  Hive.registerAdapter(SyncStatusAdapter()); // <-- Убедитесь, что этот адаптер добавлен
 }
 
 /// Открывает все ящики Hive, используемые в приложении.
