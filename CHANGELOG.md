@@ -1,15 +1,7 @@
 # Changelog
 
-## [1.2.0] - 2025-11-02
+All notable changes to this project will be documented in this file.
 
-### Added 🚀
-
-Added 5 new predefined checklists in JSON format:
-  * Main Inspection
-  *  PSC Inspection
-  *  ISM (International Safety Management)
-  *  ISPS (International Ship and Port Facility Security)
-  *  MLC (Maritime Labour Convention)
 
 ## [1.1.0] - 2025-09-21
 
