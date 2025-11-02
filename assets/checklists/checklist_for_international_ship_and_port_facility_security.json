@@ -1,0 +1,154 @@
+{
+  "name": "Checklist IV (For International Ship and Port Facility Security)",
+  "description": "A checklist for verifying compliance with the International Ship and Port Facility Security (ISPS) Code before entering port.",
+  "version": 1,
+  "items": [
+    {
+      "text": "Is a valid International Ship Security Certificate (ISSC) or Interim ISSC on board?",
+      "details": null,
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": "XI-2/9.2.1.1"
+    },
+    {
+      "text": "Is the latest approved Ship Security Plan (SSP) available?",
+      "details": null,
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/9.1"
+    },
+    {
+      "text": "Is the current Security Level of the ship and the next port of call known and being adhered to?",
+      "details": null,
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": "XI-2/9.2.1.2"
+    },
+    {
+      "text": "Is there documentary evidence of the declaration of the Company Security Officer (CSO) for the vessel?",
+      "details": null,
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/11.1"
+    },
+    {
+      "text": "Does the designated Ship Security Officer (SSO) hold a valid certificate?",
+      "details": "Is there documentary evidence for the assignment of the SSO by the CSO?",
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/12.1, STCW VI/5"
+    },
+    {
+      "text": "Do crew members hold valid certification in security awareness training or training for designated security duties?",
+      "details": null,
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": "STCW VI/6"
+    },
+    {
+      "text": "Has a Declaration of Security (DoS) been exchanged with the port authority of the next port of call, if required?",
+      "details": null,
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/5"
+    },
+    {
+      "text": "Are all security records kept in the working language of the ship?",
+      "details": "If the language is not English, French, or Spanish, a translation into one of those languages must be included.",
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.2"
+    },
+    {
+      "text": "Are records of security trainings, drills, and exercises properly maintained?",
+      "details": "Check records for drills, especially if more than 25% of the crew have been changed.",
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.1.1, B/13.6"
+    },
+    {
+      "text": "Are records of changes in security level and communications relating to the direct security of the ship available?",
+      "details": null,
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.1.4, A/10.1.6"
+    },
+    {
+      "text": "Are records of periodic reviews of the Ship Security Assessment (SSA) and Ship Security Plan (SSP) maintained?",
+      "details": null,
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.1.7, A/10.1.8"
+    },
+    {
+      "text": "Are records of internal security audits available?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.1.5"
+    },
+    {
+      "text": "Are records for maintenance, calibration, and testing of the Ship Security Alert System (SSAS) maintained?",
+      "details": null,
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/10.1.10"
+    },
+    {
+      "text": "Is a record of the last 10 calls at port facilities available?",
+      "details": null,
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": "XI-2/9.2.3"
+    },
+    {
+      "text": "Does the crew know who the Company Security Officer (CSO) is?",
+      "details": null,
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/11.1"
+    },
+    {
+      "text": "Does the crew know who the Ship Security Officer (SSO) is?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A/12.1"
+    },
+    {
+      "text": "Does the crew know where the designated access point will be during the port stay?",
+      "details": null,
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": null
+    },
+    {
+      "text": "Does the assigned crew know how to control and log all visitors and their effects?",
+      "details": null,
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": null
+    },
+    {
+      "text": "Does the crew know the location of restricted areas and how they are to be controlled?",
+      "details": "Check familiarity with monitoring of deck and ship surroundings.",
+      "order": 19,
+      "responseType": "okNotOkNA",
+      "regulationRef": "B/9"
+    },
+    {
+      "text": "Is the crew familiar with how the loading of cargo, ship's stores, and spare parts is to be controlled?",
+      "details": null,
+      "order": 20,
+      "responseType": "okNotOkNA",
+      "regulationRef": null
+    },
+    {
+      "text": "Does the crew know when and how a stowaway search is to be conducted?",
+      "details": null,
+      "order": 21,
+      "responseType": "okNotOkNA",
+      "regulationRef": null
+    }
+  ]
+}

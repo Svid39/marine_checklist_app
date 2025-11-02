@@ -1,0 +1,575 @@
+{
+  "name": "Checklist II (For PSC Inspection - Typical Deficiencies)",
+  "description": "Checklist based on typical deficiencies pointed out during Port State Control inspections.",
+  "version": 1,
+  "items": [
+    {
+      "text": "Fire-Dampers, Valves, Quick Closing Devices: Are closing devices inoperable or fire dampers wasted? Is the internal fire damper operating normally?",
+      "details": null,
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Emergency shut-off valves on FO tanks: Are they seized or not operating normally?",
+      "details": null,
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "LO tanks closing valve: Is it disabled in the open position or not closing properly?",
+      "details": null,
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Emergency fire pumps: Is the emergency fire pump inoperable or showing low pressure? Is the priming pump operating normally?",
+      "details": null,
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire main: Is there wastage, corrosion, or leaking? Are there any leaks when the system is running?",
+      "details": null,
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire main isolating valve: Is it inoperable or not operating normally?",
+      "details": null,
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire proof doors: Is there any damage to the fire door, including its packing and frame?",
+      "details": null,
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Self-closing proof doors: Is the self-closing device damaged or not operating normally?",
+      "details": null,
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire protection on Escape trunk: Is there any damage to the fire protection for the escape trunk or its door?",
+      "details": null,
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Cable penetration material: Is insulation material for fire division bulkheads/decks damaged or missing?",
+      "details": null,
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire protection material in Engine room: Are there any damaged or missing parts of fire protection material?",
+      "details": null,
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Explosive proof lamp: Is any explosive proof lamp defective or damaged?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fixed Fire Extinguishing system (CO2): Is the system inoperative? Are CO2 cylinder pilot lines disconnected? Is there wastage on the CO2 pipeline?",
+      "details": "Check if CO2/Foam system has been tested by air blow or water flow.",
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Hyper mist F.F.E system: Is the system inoperative? Is it switched on and is the suction valve opened?",
+      "details": null,
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Safety Measures"
+    },
+    {
+      "text": "Fire Extinguishers: Is the service report missing or not valid?",
+      "details": null,
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Fighting Equipment"
+    },
+    {
+      "text": "Fire hose/nozzle: Is any hose or nozzle defective or damaged?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Fighting Equipment"
+    },
+    {
+      "text": "Jacketed piping system for high pressure fuel lines: Has there been improper modification of the drain line or leakage alarm system? Are prevention measures correctly constructed and alarms operating normally?",
+      "details": null,
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Fighting Equipment"
+    },
+    {
+      "text": "Ready availability of Fire Fighting Equipment: Are portable fire extinguishers improperly arranged (not as shown in the fire plan)?",
+      "details": null,
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Fighting Equipment"
+    },
+    {
+      "text": "Fire main hydrant valve: Is any valve seized or not operating normally?",
+      "details": null,
+      "order": 19,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire Fighting Equipment"
+    },
+    {
+      "text": "Fireman's outfit: Is the outfit defective or wasted?",
+      "details": null,
+      "order": 20,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Personal equipment"
+    },
+    {
+      "text": "Breathing Apparatus: Is it unserviceable? Has the cylinder been serviced properly?",
+      "details": null,
+      "order": 21,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Personal equipment"
+    },
+    {
+      "text": "Emergency escape breathing device (EEBD): Is any EEBD inoperative or not showing sufficient pressure?",
+      "details": null,
+      "order": 22,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Personal equipment"
+    },
+    {
+      "text": "Fire Detection System: Is the system inoperative or not operating normally?",
+      "details": null,
+      "order": 23,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Fire detection"
+    },
+    {
+      "text": "Lifeboat engine: Is the engine inoperable or not operating normally?",
+      "details": null,
+      "order": 24,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifeboat shell: Is the shell wasted, holed, or damaged?",
+      "details": null,
+      "order": 25,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifeboat steering system: Is the steering system inoperative?",
+      "details": null,
+      "order": 26,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "On-load release gear: Is it inoperable, inadequate, or not properly reset?",
+      "details": null,
+      "order": 27,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifeboat Inventory: Is any equipment missing or expired?",
+      "details": null,
+      "order": 28,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Embarkation ladder: Is the ladder wasted or damaged?",
+      "details": null,
+      "order": 29,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Embarkation lights: Are the lights or cables damaged?",
+      "details": null,
+      "order": 30,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifeboat davit: Is the davit wasted, holed, or corroded?",
+      "details": null,
+      "order": 31,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Launching sheaves and hooks: Is there corrosion or wastage on sheaves or hooks?",
+      "details": null,
+      "order": 32,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Inflatable Liferafts: Is the service certificate expired?",
+      "details": null,
+      "order": 33,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Liferaft stowage: Is the storage unsatisfactory or improper?",
+      "details": null,
+      "order": 34,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Hydrostatic release and painter: Are they incorrectly installed on float-free liferafts?",
+      "details": null,
+      "order": 35,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifebuoys: Are attachments defective? Is the lifebuoy itself, its markings, line, or retro-reflective tape wasted?",
+      "details": null,
+      "order": 36,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Lifebuoy smoke signal / self-igniting light: Is the smoke signal expired or is the self-igniting light out of order?",
+      "details": null,
+      "order": 37,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Life Saving Appliances"
+    },
+    {
+      "text": "Oily-Water Separating Equipment: Is the separator inoperable? Is the casing wasted, holed, or corroded?",
+      "details": null,
+      "order": 38,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "OWS discharge line: Is the discharge line wasted or corroded? Is the inside of the discharge pipe oily and dirty?",
+      "details": null,
+      "order": 39,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "OWS by-pass line: Has an illegal by-pass line been fitted to the oil filtering equipment?",
+      "details": null,
+      "order": 40,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "15ppm alarm arrangement: Is the alarm failing or not operating normally?",
+      "details": null,
+      "order": 41,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "15ppm automatic stopping device: Is the device inoperable or not functioning normally?",
+      "details": null,
+      "order": 42,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "SOPEP: Is the plan not updated? Are the lists of coastal state contacts current?",
+      "details": null,
+      "order": 43,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "MARPOL-ANNEX I"
+    },
+    {
+      "text": "Cleanliness of Engine Room: Is there excessive oil or dirt in the engine room?",
+      "details": null,
+      "order": 44,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Propulsion & Auxiliary Machinery"
+    },
+    {
+      "text": "Propulsion main engine/Auxiliary engine: Is there any leakage of fuel oil or lubricating oil from the main engine, auxiliary engines, or other piping?",
+      "details": null,
+      "order": 45,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Propulsion & Auxiliary Machinery"
+    },
+    {
+      "text": "Auxiliary engine: Is any stand-by auxiliary engine not ready to use?",
+      "details": null,
+      "order": 46,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Propulsion & Auxiliary Machinery"
+    },
+    {
+      "text": "Beams, Frames, Floors: Is there wastage on hold frames, beams, etc.?",
+      "details": null,
+      "order": 47,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Structure Conditions"
+    },
+    {
+      "text": "Longitudinals and transverse webs in WBTs: Is there wastage of longitudinals and transverse webs in Water Ballast Tanks?",
+      "details": null,
+      "order": 48,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Structure Conditions"
+    },
+    {
+      "text": "Bulkheads: Are there any wasted or holed bulkheads in any compartment?",
+      "details": null,
+      "order": 49,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Structure Conditions"
+    },
+    {
+      "text": "Emergency Lighting, Batteries & Switches: Is the emergency generator or battery deficient or not operating normally?",
+      "details": null,
+      "order": 50,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Systems"
+    },
+    {
+      "text": "Emergency lighting: Are any emergency lights inoperable?",
+      "details": null,
+      "order": 51,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Emergency Systems"
+    },
+    {
+      "text": "Ventilators, Air Pipes, Casings: Are there wasted or holed ventilators or air pipes?",
+      "details": null,
+      "order": 52,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Air pipe head float and closing device: Is the float of the air pipe head or its closing device damaged or stuck?",
+      "details": null,
+      "order": 53,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Hatch cover, Hatch coaming: Is there corrosion or wastage on hatch covers or coamings?",
+      "details": null,
+      "order": 54,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Hatch securing device: Is any securing device defective, missing, or showing excessive wear, including cleat-support brackets?",
+      "details": null,
+      "order": 55,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Hatch rubber packing: Is any rubber packing damaged or missing?",
+      "details": null,
+      "order": 56,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Weather tight doors: Is weather tightness defective? Are doors or packings corroded or wasted?",
+      "details": null,
+      "order": 57,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Multiple Load Line Certificates: Are different and valid LL certificates kept onboard? (Certificates not in use must be in a sealed envelope in the Master's safe).",
+      "details": null,
+      "order": 58,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Load Lines"
+    },
+    {
+      "text": "Navigation equipment: Is any navigation equipment inoperative or not operating normally?",
+      "details": null,
+      "order": 59,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety of Navigation"
+    },
+    {
+      "text": "Charts: Are navigation charts not updated or corrected to the latest available information? Are charts for the intended voyage available?",
+      "details": null,
+      "order": 60,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety of Navigation"
+    },
+    {
+      "text": "Nautical Publications: Are publications (tide table, list of lights, list of radio signals, etc.) not updated or correct? Are the latest corrected supplements available?",
+      "details": null,
+      "order": 61,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety of Navigation"
+    },
+    {
+      "text": "Navigation lights: Are any navigation lights improperly fitted (not as shown in drawings)?",
+      "details": null,
+      "order": 62,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety of Navigation"
+    },
+    {
+      "text": "Daylight signaling light: Is it failing or not operating normally?",
+      "details": null,
+      "order": 63,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety of Navigation"
+    },
+    {
+      "text": "MF/HF Radio Installation: Is the MF/HF radio not operable? Is the GMDSS officer familiar with its operation, including function tests?",
+      "details": null,
+      "order": 64,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Radio Communications"
+    },
+    {
+      "text": "Reserve source of energy for radio: Is the DC power not operating normally? Do the batteries have low voltage?",
+      "details": null,
+      "order": 65,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Radio Communications"
+    },
+    {
+      "text": "Endorsement by flag states: Is any endorsement missing on STCW certificates from the flag state?",
+      "details": null,
+      "order": 66,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Certification and Documentation - Crew"
+    },
+    {
+      "text": "Certificates of Master & Officers: Does any crew member not have a valid certificate? Is any officer's certificate expired?",
+      "details": null,
+      "order": 67,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Certification and Documentation - Crew"
+    },
+    {
+      "text": "Abandon ship drills: Are crew members not familiar with the drill?",
+      "details": "Is the abandon ship drill and related education executed?",
+      "order": 68,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "SOLAS Related Operational Defects"
+    },
+    {
+      "text": "Fire drills: Are crew members not familiar with the drill?",
+      "details": "Is the fire drill and related education executed?",
+      "order": 69,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "SOLAS Related Operational Defects"
+    },
+    {
+      "text": "Enclosed space entry and rescue drills: Are crew members not familiar with the drill?",
+      "details": "Is the enclosed space entry and rescue drill and related education executed?",
+      "order": 70,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "SOLAS Related Operational Defects"
+    },
+    {
+      "text": "MARPOL equipment operation: Are crew members not familiar with the operation of OWS, Incinerator, or Sewage treatment plant?",
+      "details": "Is demonstration of operation and related education executed?",
+      "order": 71,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "SOLAS Related Operational Defects"
+    }
+  ]
+}

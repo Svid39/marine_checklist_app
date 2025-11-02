@@ -1,0 +1,196 @@
+{
+  "name": "Checklist III (For Safety Management System)",
+  "description": "A checklist to verify compliance with the International Safety Management (ISM) Code.",
+  "version": 1,
+  "items": [
+    {
+      "text": "Is a copy of the Document of Compliance (DOC) on board and is it effective for the ship type and flag state?",
+      "details": "Check that the annual verification is within 3 months before or after the anniversary date.",
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 13"
+    },
+    {
+      "text": "Are ship's personnel familiar with the Company's safety and environmental protection policy?",
+      "details": null,
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 2.2"
+    },
+    {
+      "text": "Is the ship manned with qualified, certified, and medically fit seafarers in accordance with STCW and Flag State requirements?",
+      "details": null,
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 6.2"
+    },
+    {
+      "text": "Has on-board training in support of the SMS been conducted according to procedures?",
+      "details": null,
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 6.5"
+    },
+    {
+      "text": "For multi-national crews, is a working language established and are all orders/instructions clearly understood?",
+      "details": "Ensure all crew can communicate effectively. Check that SMS posters and documents are in a language understood by the personnel.",
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 6.6 / 6.7"
+    },
+    {
+      "text": "Are watch-keeping and rest hours being kept and recorded as required?",
+      "details": null,
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are all officers conversant with the documented procedures for their assigned duties?",
+      "details": null,
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Is the crew familiar with the garbage collection and disposal procedure?",
+      "details": null,
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are personnel familiar with procedures for hazardous work, such as enclosed space entry?",
+      "details": null,
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are all officers familiar with the operation of key equipment: Navigation, GMDSS, AIS, BNWAS, ECDIS?",
+      "details": null,
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are charts and Nautical Publications corrected up to the latest Notice to Mariners?",
+      "details": null,
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Is the voyage plan prepared with appropriate large-scale charts?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Do engineers have sufficient skills for the smooth function test of the 15ppm Bilge alarm?",
+      "details": null,
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are engineers familiar with FO/DO change-over procedures for SOx Emission Control Areas and bunkering procedures?",
+      "details": null,
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 7"
+    },
+    {
+      "text": "Are all crewmembers familiar with their designated muster stations?",
+      "details": null,
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 8.2"
+    },
+    {
+      "text": "Does the crew know the position of isolation valves on the fire main line?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 8.2"
+    },
+    {
+      "text": "Are the crew familiar with abandon ship drills and can they start the engine of the lifeboat/rescue boat?",
+      "details": null,
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 8.2"
+    },
+    {
+      "text": "Are the crew familiar with fire drills, including the use of a fireman's outfit?",
+      "details": null,
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 8.2"
+    },
+    {
+      "text": "Are the Emergency Contact Numbers updated and available?",
+      "details": null,
+      "order": 19,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 8.3"
+    },
+    {
+      "text": "Have any non-conformities been reported to the Company?",
+      "details": null,
+      "order": 20,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 9.1"
+    },
+    {
+      "text": "Has the Company taken corrective action for all reported non-conformities?",
+      "details": null,
+      "order": 21,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 9.2"
+    },
+    {
+      "text": "Have deficiencies pointed out by the last PSC been reported, investigated, and analyzed to prevent recurrence?",
+      "details": null,
+      "order": 22,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 9.1 / 9.2"
+    },
+    {
+      "text": "Is the vessel and its equipment being properly maintained to avoid common ISM deficiencies?",
+      "details": "Check for: Hull/hatch corrosion; Engine room oil leaks & equipment malfunctions; Navigation & LSA equipment defects; Firefighting system faults; Ventilator corrosion.",
+      "order": 23,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 10.2.1"
+    },
+    {
+      "text": "Are all valid documents (Certificates, SOLAS, MARPOL, STCW manuals, etc.) available onboard?",
+      "details": null,
+      "order": 24,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 11.2"
+    },
+    {
+      "text": "Have obsolete documents been removed from all areas of work?",
+      "details": "If the Safety Management Manual is bilingual, are both versions up to date?",
+      "order": 25,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 11.2"
+    },
+    {
+      "text": "Has the internal audit of the vessel by company personnel been carried out at intervals not exceeding 12 months?",
+      "details": null,
+      "order": 26,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 12.1"
+    },
+    {
+      "text": "Are records of external audits available on board, and have any required corrective actions been taken in a timely manner?",
+      "details": null,
+      "order": 27,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ISM 9.2"
+    }
+  ]
+}

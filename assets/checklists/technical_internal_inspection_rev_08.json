@@ -4,7 +4,7 @@
   "version": 8,
   "items": [
     {
-      "text": "1.1 Are all statutory Certificates are valid and respectively endorsed? (to be checked in office prior inspection)",
+      "text": "Are all statutory Certificates are valid and respectively endorsed? (to be checked in office prior inspection)",
       "details": null,
       "order": 1,
       "responseType": "okNotOkNA",
@@ -12,7 +12,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.2 Are no obsolete Certificates in folders and Maitenance System? (to be checked in office prior inspection)",
+      "text": "Are no obsolete Certificates in folders and Maitenance System? (to be checked in office prior inspection)",
       "details": null,
       "order": 2,
       "responseType": "okNotOkNA",
@@ -20,7 +20,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.3 Are they Implemented and updated? Are Bulletins filed (Paper or Electronical)",
+      "text": "Are they Implemented and updated? Are Bulletins filed (Paper or Electronical)",
       "details": null,
       "order": 3,
       "responseType": "okNotOkNA",
@@ -28,7 +28,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.4 SMS Handbook - Known by all Crewmembers",
+      "text": "SMS Handbook - Known by all Crewmembers",
       "details": null,
       "order": 4,
       "responseType": "okNotOkNA",
@@ -36,7 +36,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.5 SOPEP Plan - Updated with Contact Points? (to be checked in office prior inspection)",
+      "text": "SOPEP Plan - Updated with Contact Points? (to be checked in office prior inspection)",
       "details": null,
       "order": 5,
       "responseType": "okNotOkNA",
@@ -44,7 +44,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.6 Cargo Security Plan available and approved",
+      "text": "Cargo Security Plan available and approved",
       "details": null,
       "order": 6,
       "responseType": "okNotOkNA",
@@ -52,7 +52,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.7 SOPEP Plan available and approved",
+      "text": "SOPEP Plan available and approved",
       "details": null,
       "order": 7,
       "responseType": "okNotOkNA",
@@ -60,7 +60,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.8 Garbage Management Plan available",
+      "text": "Garbage Management Plan available",
       "details": null,
       "order": 8,
       "responseType": "okNotOkNA",
@@ -68,7 +68,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.9 Emergency Towage Plan available and approved",
+      "text": "Emergency Towage Plan available and approved",
       "details": null,
       "order": 9,
       "responseType": "okNotOkNA",
@@ -76,7 +76,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.10 Ballast Water Management Plan available and approved",
+      "text": "Ballast Water Management Plan available and approved",
       "details": null,
       "order": 10,
       "responseType": "okNotOkNA",
@@ -84,7 +84,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.11 Ship Energy Efficient Management Pland (SEEMP)",
+      "text": "Ship Energy Efficient Management Pland (SEEMP)",
       "details": null,
       "order": 11,
       "responseType": "okNotOkNA",
@@ -92,7 +92,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.12 Manual for Entering Enclosed Spaces",
+      "text": "Manual for Entering Enclosed Spaces",
       "details": null,
       "order": 12,
       "responseType": "okNotOkNA",
@@ -100,7 +100,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.13 IHM Maintenance Manual",
+      "text": "IHM Maintenance Manual",
       "details": null,
       "order": 13,
       "responseType": "okNotOkNA",
@@ -108,7 +108,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.14 Asbestos Procedure Manual",
+      "text": "Asbestos Procedure Manual",
       "details": null,
       "order": 14,
       "responseType": "okNotOkNA",
@@ -116,7 +116,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.15 Cyber Security Plan",
+      "text": "Cyber Security Plan",
       "details": null,
       "order": 15,
       "responseType": "okNotOkNA",
@@ -124,7 +124,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.16 Damage Control Booklet",
+      "text": "Damage Control Booklet",
       "details": null,
       "order": 16,
       "responseType": "okNotOkNA",
@@ -132,7 +132,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.17 Energy Storage System Manual",
+      "text": "Energy Storage System Manual",
       "details": null,
       "order": 17,
       "responseType": "okNotOkNA",
@@ -140,7 +140,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.18 Shipboard Operation Manual",
+      "text": "Shipboard Operation Manual",
       "details": null,
       "order": 18,
       "responseType": "okNotOkNA",
@@ -148,7 +148,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.19 Safe Mooring operation manual",
+      "text": "Safe Mooring operation manual",
       "details": null,
       "order": 19,
       "responseType": "okNotOkNA",
@@ -156,7 +156,7 @@
       "section": "Documentation"
     },
     {
-      "text": "1.20 Check by random that publications are available and updated",
+      "text": "Check by random that publications are available and updated",
       "details": null,
       "order": 20,
       "responseType": "okNotOkNA",
@@ -164,7 +164,7 @@
       "section": "Documentation"
     },
     {
-      "text": "2.1 Are nautical publications including pilot books, list of lights, sailing directions, tide tables, code of signals to be used for the intended voyage updated to the latest available amendments/corrections?",
+      "text": "Are nautical publications including pilot books, list of lights, sailing directions, tide tables, code of signals to be used for the intended voyage updated to the latest available amendments/corrections?",
       "details": null,
       "order": 21,
       "responseType": "okNotOkNA",
@@ -172,7 +172,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.2 Are Charts to be used for the intended voyage and in General updated to the latest available Notice to Mariners? (Ref CC 12.12)",
+      "text": "Are Charts to be used for the intended voyage and in General updated to the latest available Notice to Mariners? (Ref CC 12.12)",
       "details": null,
       "order": 22,
       "responseType": "okNotOkNA",
@@ -180,7 +180,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.3 Is a system for correcting all nautical publications onboard available?",
+      "text": "Is a system for correcting all nautical publications onboard available?",
       "details": null,
       "order": 23,
       "responseType": "okNotOkNA",
@@ -188,7 +188,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.4 Are navigational instruments as radar including ARPA devices, echo sounder and speed log in operational condition?",
+      "text": "Are navigational instruments as radar including ARPA devices, echo sounder and speed log in operational condition?",
       "details": null,
       "order": 24,
       "responseType": "okNotOkNA",
@@ -196,7 +196,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.5 Are the navigation lights incl. duplication and failure alarm working?",
+      "text": "Are the navigation lights incl. duplication and failure alarm working?",
       "details": null,
       "order": 25,
       "responseType": "okNotOkNA",
@@ -204,7 +204,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.6 Is the steering gear including rudder angle indicator as well as emergency steering gear including switch-over devices in operating condition and the steering gear alarm functioning? Ref CC 12.5",
+      "text": "Is the steering gear including rudder angle indicator as well as emergency steering gear including switch-over devices in operating condition and the steering gear alarm functioning? Ref CC 12.5",
       "details": null,
       "order": 26,
       "responseType": "okNotOkNA",
@@ -212,7 +212,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.7 Are instructions for handling posted in vicinity?",
+      "text": "Are instructions for handling posted in vicinity?",
       "details": null,
       "order": 27,
       "responseType": "okNotOkNA",
@@ -220,7 +220,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.8 Are daylight shapes in operational condition?",
+      "text": "Are daylight shapes in operational condition?",
       "details": null,
       "order": 28,
       "responseType": "okNotOkNA",
@@ -228,7 +228,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.9 Is the daylight signalling lamp and the independent power supply in good operational condition?",
+      "text": "Is the daylight signalling lamp and the independent power supply in good operational condition?",
       "details": null,
       "order": 29,
       "responseType": "okNotOkNA",
@@ -236,7 +236,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.10 Is the automatic position indicator (e.g. GPS) available and in good condition?  ",
+      "text": "Is the automatic position indicator (e.g. GPS) available and in good condition?  ",
       "details": null,
       "order": 30,
       "responseType": "okNotOkNA",
@@ -244,7 +244,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.11 Are communication systems between bridge and engine room and steering gear room in working condition? Ref CC 12.4",
+      "text": "Are communication systems between bridge and engine room and steering gear room in working condition? Ref CC 12.4",
       "details": null,
       "order": 31,
       "responseType": "okNotOkNA",
@@ -252,7 +252,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.12 Is the NAVTEX receiver in good working condition and enough spare paper available?",
+      "text": "Is the NAVTEX receiver in good working condition and enough spare paper available?",
       "details": null,
       "order": 32,
       "responseType": "okNotOkNA",
@@ -260,7 +260,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.13 Is the echosounder in good working condition",
+      "text": "Is the echosounder in good working condition",
       "details": null,
       "order": 33,
       "responseType": "okNotOkNA",
@@ -268,7 +268,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.14 Is illustrated table of life saving signals incl. helicopter communication signs posted on the bridge?",
+      "text": "Is illustrated table of life saving signals incl. helicopter communication signs posted on the bridge?",
       "details": null,
       "order": 34,
       "responseType": "okNotOkNA",
@@ -276,7 +276,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.15 Is the magnetic steering compass in good condition and properly visible from steering position?",
+      "text": "Is the magnetic steering compass in good condition and properly visible from steering position?",
       "details": null,
       "order": 35,
       "responseType": "okNotOkNA",
@@ -284,7 +284,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.16 Is a spare magnetic compass available and in good condition? Ref CC 12.24",
+      "text": "Is a spare magnetic compass available and in good condition? Ref CC 12.24",
       "details": null,
       "order": 36,
       "responseType": "okNotOkNA",
@@ -292,7 +292,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.17 Is an updated calibration table available?",
+      "text": "Is an updated calibration table available?",
       "details": null,
       "order": 37,
       "responseType": "okNotOkNA",
@@ -300,7 +300,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "2.18 Is the AIS system installed, constantly switched on and is the existence verified in the Safety Equipment’s Record “E”?",
+      "text": "Is the AIS system installed, constantly switched on and is the existence verified in the Safety Equipment’s Record “E”?",
       "details": null,
       "order": 38,
       "responseType": "okNotOkNA",
@@ -308,7 +308,7 @@
       "section": "Navigation Equipment"
     },
     {
-      "text": "3.1 Are all components of the GMDSS transmitting and receiving equipment, including sources of energy, properly working?",
+      "text": "Are all components of the GMDSS transmitting and receiving equipment, including sources of energy, properly working?",
       "details": null,
       "order": 39,
       "responseType": "okNotOkNA",
@@ -316,7 +316,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.2 Are radio operators familiar with cancellation procedures for false distress alarms?",
+      "text": "Are radio operators familiar with cancellation procedures for false distress alarms?",
       "details": null,
       "order": 40,
       "responseType": "okNotOkNA",
@@ -324,7 +324,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.3 Has the radio log book been kept as required, incl. records of tests?",
+      "text": "Has the radio log book been kept as required, incl. records of tests?",
       "details": null,
       "order": 41,
       "responseType": "okNotOkNA",
@@ -332,7 +332,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.4 Are portable VHF handheld radios for survival craft, including batteries with spares / re-charger, in good working condition?",
+      "text": "Are portable VHF handheld radios for survival craft, including batteries with spares / re-charger, in good working condition?",
       "details": null,
       "order": 42,
       "responseType": "okNotOkNA",
@@ -340,7 +340,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.5 Are antenna systems in good condition without any signs of corrosion or damage?",
+      "text": "Are antenna systems in good condition without any signs of corrosion or damage?",
       "details": null,
       "order": 43,
       "responseType": "okNotOkNA",
@@ -348,7 +348,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.6 Are Radar Transponders in working condition and ready in case of emergency?",
+      "text": "Are Radar Transponders in working condition and ready in case of emergency?",
       "details": null,
       "order": 44,
       "responseType": "okNotOkNA",
@@ -356,7 +356,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.7 Are they serviced following the manufacturer's requirements by shore service?",
+      "text": "Are they serviced following the manufacturer's requirements by shore service?",
       "details": null,
       "order": 45,
       "responseType": "okNotOkNA",
@@ -364,7 +364,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.8 Is the EPIRB in the correct and float-free position? Is the life date of the battery and hydrostatic release still valid?",
+      "text": "Is the EPIRB in the correct and float-free position? Is the life date of the battery and hydrostatic release still valid?",
       "details": null,
       "order": 46,
       "responseType": "okNotOkNA",
@@ -372,7 +372,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.9 Are radio publications and manuals updated?",
+      "text": "Are radio publications and manuals updated?",
       "details": null,
       "order": 47,
       "responseType": "okNotOkNA",
@@ -380,7 +380,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.10 Is a valid COC (Certificate of Complaince) for VDR is available on board? VDR/EPIRB battery, acoustic beacon and HRU are valid?",
+      "text": "Is a valid COC (Certificate of Complaince) for VDR is available on board? VDR/EPIRB battery, acoustic beacon and HRU are valid?",
       "details": null,
       "order": 48,
       "responseType": "okNotOkNA",
@@ -388,7 +388,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.11 Is a valid Radio Licence onboard?",
+      "text": "Is a valid Radio Licence onboard?",
       "details": null,
       "order": 49,
       "responseType": "okNotOkNA",
@@ -396,7 +396,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "3.12 Are all Radio Equipment in the Radio License corresponding with the equipment on board?",
+      "text": "Are all Radio Equipment in the Radio License corresponding with the equipment on board?",
       "details": null,
       "order": 50,
       "responseType": "okNotOkNA",
@@ -404,7 +404,7 @@
       "section": "Radio Equipment"
     },
     {
-      "text": "4.1 Have up-to-date fire control plans been posted in accommodation alleyways, are they readable, and show a sign of approval?",
+      "text": "Have up-to-date fire control plans been posted in accommodation alleyways, are they readable, and show a sign of approval?",
       "details": null,
       "order": 51,
       "responseType": "okNotOkNA",
@@ -412,7 +412,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.2 Is one copy stored in a prominently marked, weather-tight container outside the deckhouse?",
+      "text": "Is one copy stored in a prominently marked, weather-tight container outside the deckhouse?",
       "details": null,
       "order": 52,
       "responseType": "okNotOkNA",
@@ -420,7 +420,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.3 Are SOLAS training manuals available? They should provide specific instructions for the appliances installed onboard and be written in a language understood by all crew members.",
+      "text": "Are SOLAS training manuals available? They should provide specific instructions for the appliances installed onboard and be written in a language understood by all crew members.",
       "details": null,
       "order": 53,
       "responseType": "okNotOkNA",
@@ -428,7 +428,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.4 Are Instruction Manuals for onboard maintenance of life-saving appliances available and understood by all crew members?",
+      "text": "Are Instruction Manuals for onboard maintenance of life-saving appliances available and understood by all crew members?",
       "details": null,
       "order": 54,
       "responseType": "okNotOkNA",
@@ -436,7 +436,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.5 Is regular maintenance being recorded?",
+      "text": "Is regular maintenance being recorded?",
       "details": null,
       "order": 55,
       "responseType": "okNotOkNA",
@@ -444,7 +444,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.6 Are Operating Instructions for lifesaving appliances posted on scene and under emergency illumination?",
+      "text": "Are Operating Instructions for lifesaving appliances posted on scene and under emergency illumination?",
       "details": null,
       "order": 56,
       "responseType": "okNotOkNA",
@@ -452,7 +452,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.7 Are they in a language understood by all crew members?",
+      "text": "Are they in a language understood by all crew members?",
       "details": null,
       "order": 57,
       "responseType": "okNotOkNA",
@@ -460,7 +460,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.8 ave regular drills for fire fighting, abandon ship, and rescue boat operation been carried out satisfactorily as required?",
+      "text": "Are regular drills for fire fighting, abandon ship, and rescue boat operation been carried out satisfactorily as required?",
       "details": null,
       "order": 58,
       "responseType": "okNotOkNA",
@@ -468,7 +468,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.9 Are they recorded in the logbook?",
+      "text": "Are they recorded in the logbook?",
       "details": null,
       "order": 59,
       "responseType": "okNotOkNA",
@@ -476,7 +476,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.10 Is a working language established and recorded in the logbook?",
+      "text": "Is a working language established and recorded in the logbook?",
       "details": null,
       "order": 60,
       "responseType": "okNotOkNA",
@@ -484,7 +484,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.11  Is a plan or program for maintenance available?",
+      "text": "Is a plan or program for maintenance available?",
       "details": null,
       "order": 61,
       "responseType": "okNotOkNA",
@@ -492,7 +492,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.12 Have drills for use of emergency steering gear and switch-over procedures been carried out?",
+      "text": "Have drills for use of emergency steering gear and switch-over procedures been carried out?",
       "details": null,
       "order": 62,
       "responseType": "okNotOkNA",
@@ -500,7 +500,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.13 Are they recorded in the logbook?",
+      "text": "Are they recorded in the logbook?",
       "details": null,
       "order": 63,
       "responseType": "okNotOkNA",
@@ -508,7 +508,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.14 Are up-to-date muster lists written in a language understood by the crew members?",
+      "text": "Are up-to-date muster lists written in a language understood by the crew members?",
       "details": null,
       "order": 64,
       "responseType": "okNotOkNA",
@@ -516,7 +516,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.15 Are duties about maintenance of safety equipment included?  Are duties about carrying emergency radio equipment into the survival crafts included? Are names of substitutes of key persons listed?",
+      "text": "Are duties about maintenance of safety equipment included?  Are duties about carrying emergency radio equipment into the survival crafts included? Are names of substitutes of key persons listed?",
       "details": null,
       "order": 65,
       "responseType": "okNotOkNA",
@@ -524,7 +524,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.16 Are they posted on the bridge, in engine control room and accommodation spaces?",
+      "text": "Are they posted on the bridge, in engine control room and accommodation spaces?",
       "details": null,
       "order": 66,
       "responseType": "okNotOkNA",
@@ -532,7 +532,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.17 Are public alarm systems, the general alarm, and the engineer's alarm of the unmanned machinery system working properly?",
+      "text": "Are public alarm systems, the general alarm, and the engineer's alarm of the unmanned machinery system working properly?",
       "details": null,
       "order": 67,
       "responseType": "okNotOkNA",
@@ -540,7 +540,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.18 Are all paint materials stored inside the designated paint locker only?",
+      "text": "Are all paint materials stored inside the designated paint locker only?",
       "details": null,
       "order": 68,
       "responseType": "okNotOkNA",
@@ -548,7 +548,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.19 Are all escape ways accessible and free of obstructions, and are they properly illuminated?",
+      "text": "Are all escape ways accessible and free of obstructions, and are they properly illuminated?",
       "details": null,
       "order": 69,
       "responseType": "okNotOkNA",
@@ -556,7 +556,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.20 Are IMO symbols properly used for marking escape ways and locations of emergency equipment?",
+      "text": "Are IMO symbols properly used for marking escape ways and locations of emergency equipment?",
       "details": null,
       "order": 70,
       "responseType": "okNotOkNA",
@@ -564,7 +564,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.21 Are pilot ladders and related boarding arrangements clean and in good condition?",
+      "text": "Are pilot ladders and related boarding arrangements clean and in good condition?",
       "details": null,
       "order": 71,
       "responseType": "okNotOkNA",
@@ -572,7 +572,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.22 Is the crew familiar with the use of all lifesaving and firefighting equipment?",
+      "text": "Is the crew familiar with the use of all lifesaving and firefighting equipment?",
       "details": null,
       "order": 72,
       "responseType": "okNotOkNA",
@@ -580,7 +580,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.23 Is the crew working on the bridge familiar with the steering gear switch-over procedures and with the use of emerg. steering device?",
+      "text": "Is the crew working on the bridge familiar with the steering gear switch-over procedures and with the use of emerg. steering device?",
       "details": null,
       "order": 73,
       "responseType": "okNotOkNA",
@@ -588,7 +588,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.24 Is the key engine crew familiar with emergency power arrangements?",
+      "text": "Is the key engine crew familiar with emergency power arrangements?",
       "details": null,
       "order": 74,
       "responseType": "okNotOkNA",
@@ -596,7 +596,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.25 Are the key personnel for firefighting familiar with starting the emergency fire pump?",
+      "text": "Are the key personnel for firefighting familiar with starting the emergency fire pump?",
       "details": null,
       "order": 75,
       "responseType": "okNotOkNA",
@@ -604,7 +604,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.26 Is the designated rescue boat crew familiar with starting the engines?",
+      "text": "Is the designated rescue boat crew familiar with starting the engines?",
       "details": null,
       "order": 76,
       "responseType": "okNotOkNA",
@@ -612,7 +612,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.27 Are responsible personnel familiar with the use of the OWS(Oil Water Separator) arrangements?",
+      "text": "Are responsible personnel familiar with the use of the OWS(Oil Water Separator) arrangements?",
       "details": null,
       "order": 77,
       "responseType": "okNotOkNA",
@@ -620,7 +620,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "4.28 Are heaving lines made with rope only and not contain added weighting material?",
+      "text": "Are heaving lines made with rope only and not contain added weighting material?",
       "details": null,
       "order": 78,
       "responseType": "okNotOkNA",
@@ -628,7 +628,7 @@
       "section": "Safety in General"
     },
     {
-      "text": "5.1 Is rescue boat inventory complete and in good condition?",
+      "text": "Is rescue boat inventory complete and in good condition?",
       "details": null,
       "order": 79,
       "responseType": "okNotOkNA",
@@ -636,7 +636,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.2 Are the dates of expiration for pyrotechnics and foodstuff rations recorded and not outdated?",
+      "text": "Are the dates of expiration for pyrotechnics and foodstuff rations recorded and not outdated?",
       "details": null,
       "order": 80,
       "responseType": "okNotOkNA",
@@ -644,7 +644,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.3 Are rescue boats complete and in good condition?",
+      "text": "Are rescue boats complete and in good condition?",
       "details": null,
       "order": 81,
       "responseType": "okNotOkNA",
@@ -652,7 +652,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.4 Is the inventory as required stored in the boat?",
+      "text": "Is the inventory as required stored in the boat?",
       "details": null,
       "order": 82,
       "responseType": "okNotOkNA",
@@ -660,7 +660,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.5 Are rescue boat engines in good working condition and starting easily?",
+      "text": "Are rescue boat engines in good working condition and starting easily?",
       "details": null,
       "order": 83,
       "responseType": "okNotOkNA",
@@ -668,7 +668,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.6 Are life rafts and launching arrangements in good working condition?",
+      "text": "Are life rafts and launching arrangements in good working condition?",
       "details": null,
       "order": 84,
       "responseType": "okNotOkNA",
@@ -676,7 +676,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.7 Is the ship's name updated on the outside data placards if available?",
+      "text": "Is the ship's name updated on the outside data placards if available?",
       "details": null,
       "order": 85,
       "responseType": "okNotOkNA",
@@ -684,7 +684,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.8  Is the hydrostatic release for the rafts properly connected and still valid?",
+      "text": "Is the hydrostatic release for the rafts properly connected and still valid?",
       "details": null,
       "order": 86,
       "responseType": "okNotOkNA",
@@ -692,7 +692,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.9 Is a ladder or other means for embarkation for the additional life raft at the bow(if appropriate) readily available? ",
+      "text": "Is a ladder or other means for embarkation for the additional life raft at the bow(if appropriate) readily available? ",
       "details": null,
       "order": 87,
       "responseType": "okNotOkNA",
@@ -700,7 +700,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.10 Are launching arrangements for rescue boats including limit switches in good condition and without wastage?",
+      "text": "Are launching arrangements for rescue boats including limit switches in good condition and without wastage?",
       "details": null,
       "order": 88,
       "responseType": "okNotOkNA",
@@ -708,7 +708,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.11 Are the embarkation ladders incl. their shackles and padeyes on deck in good condition?",
+      "text": "Are the embarkation ladders incl. their shackles and padeyes on deck in good condition?",
       "details": null,
       "order": 89,
       "responseType": "okNotOkNA",
@@ -716,7 +716,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.12 Are wire falls of all launching/recovery arrangements in good condition and turned/renewed as required?",
+      "text": "Are wire falls of all launching/recovery arrangements in good condition and turned/renewed as required?",
       "details": null,
       "order": 90,
       "responseType": "okNotOkNA",

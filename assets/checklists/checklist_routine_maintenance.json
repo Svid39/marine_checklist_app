@@ -1,0 +1,1087 @@
+{
+  "name": "Checklist I (For Routine Maintenance)",
+  "description": "A comprehensive checklist for routine ship maintenance covering certificates, equipment, and general safety procedures.",
+  "version": 1,
+  "items": [
+    {
+      "text": "Is the Flag Registry Certificate valid and on board?",
+      "details": null,
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Certificates & Documents"
+    },
+    {
+      "text": "Is the Radio Station License valid and on board?",
+      "details": null,
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Certificates & Documents"
+    },
+    {
+      "text": "Is the Class Certificate valid and properly endorsed (AS/IS)?",
+      "details": null,
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Certificates & Documents"
+    },
+    {
+      "text": "Is the Load Line Certificate valid and properly endorsed?",
+      "details": null,
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Safety Construction Certificate valid and properly endorsed?",
+      "details": "Especially check endorsement at In-Water Survey if carried out independently.",
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Safety Equipment Certificate valid and properly endorsed?",
+      "details": null,
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Safety Radio Certificate valid and properly endorsed?",
+      "details": null,
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Oil Pollution Prevention Certificate (IOPP) valid and properly endorsed?",
+      "details": null,
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Sewage Pollution Prevention Certificate valid and on board?",
+      "details": "MARPOL Annex IV",
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Air Pollution Prevention Certificate (IAPP) valid and on board?",
+      "details": "MARPOL Annex VI",
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Engine International Air Pollution Prevention (EIAPP) Certificate on board for each applicable diesel engine?",
+      "details": "For each diesel engine with a power output of more than 130kW installed on a ship constructed on or after 1 January 2000.",
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Energy Efficiency Certificate on board?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Ballast Water Management Certificate (or SOC) on board and valid?",
+      "details": "BWM Convention.",
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Safety Management Certificate (SMC) valid and properly endorsed for Intermediate Audit?",
+      "details": null,
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is a copy of the Document of Compliance (DOC) on board and endorsed for Annual Audit?",
+      "details": null,
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the International Ship Security Certificate (ISSC) valid and on board?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Maritime Labour Certificate (MLC) or Statement of Compliance (SOC) valid and properly endorsed for inspections?",
+      "details": null,
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Are DMLC Part I and Part II on board and valid?",
+      "details": null,
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Statutory Certificates (HSSC)"
+    },
+    {
+      "text": "Is the Minimum Manning Certificate available on board?",
+      "details": null,
+      "order": 19,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS 74/00 V/14",
+      "section": "Miscellaneous Certificates"
+    },
+    {
+      "text": "Are all officer Certificates of Competence (Master, C/O, C/E, 2/E, Engineer, GMDSS operator) valid and endorsed by the flag state?",
+      "details": "Check regulations II/2, II/1, III/2, III/1, IV/2.",
+      "order": 20,
+      "responseType": "okNotOkNA",
+      "regulationRef": "STCW",
+      "section": "STCW Certificates"
+    },
+    {
+      "text": "Do all crew members hold valid Certificates of Proficiency (watch-keeping, basic training, survival craft, advanced fire fighting, etc.)?",
+      "details": null,
+      "order": 21,
+      "responseType": "okNotOkNA",
+      "regulationRef": "STCW",
+      "section": "STCW Certificates"
+    },
+    {
+      "text": "Does every crew member have a valid medical certificate?",
+      "details": null,
+      "order": 22,
+      "responseType": "okNotOkNA",
+      "regulationRef": "STCW I/9",
+      "section": "STCW Certificates"
+    },
+    {
+      "text": "Are the Stability Information Booklet and Loading Manual approved and understood by the crew?",
+      "details": null,
+      "order": 23,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the Shipboard Oil Pollution Emergency Plan (SOPEP) or SMPEP approved and available?",
+      "details": null,
+      "order": 24,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the Technical File for NOx emission control verification available?",
+      "details": null,
+      "order": 25,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the Emergency Towing Booklet (Procedure) available?",
+      "details": "For all cargo ships 500GT or over.",
+      "order": 26,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS 74 Reg.II-1/3-4",
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Are the Damage Control Plan and Booklet approved and available?",
+      "details": null,
+      "order": 27,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS",
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the Ship Energy Efficiency Management Plan (SEEMP) available on board?",
+      "details": null,
+      "order": 28,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the approved Ballast Water Management Plan (BWMP) on board?",
+      "details": null,
+      "order": 29,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Documents & Manuals"
+    },
+    {
+      "text": "Is the Oil Record Book (Parts I and II) properly recorded?",
+      "details": "Reference: MEPC.1/Circ.736",
+      "order": 30,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Record Books"
+    },
+    {
+      "text": "Is the Garbage Record Book and Garbage Management Plan properly maintained?",
+      "details": null,
+      "order": 31,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL Annex V/10",
+      "section": "Record Books"
+    },
+    {
+      "text": "Is the Continuous Synopsis Record (CSR) file complete and up-to-date?",
+      "details": null,
+      "order": 32,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS 74/00 XI/5",
+      "section": "Record Books"
+    },
+    {
+      "text": "Is the Cargo Gear Booklet properly recorded and endorsed?",
+      "details": null,
+      "order": 33,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Cargo Gear"
+    },
+    {
+      "text": "Are nautical charts for the intended voyage available, up-to-date, and properly corrected?",
+      "details": null,
+      "order": 34,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/21, 27",
+      "section": "Nautical Publications"
+    },
+    {
+      "text": "Are essential nautical publications (Sailing Directions, List of Lights, Notice to Mariners, Tide Tables, etc.) the latest editions and up-to-date?",
+      "details": null,
+      "order": 35,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS",
+      "section": "Nautical Publications"
+    },
+    {
+      "text": "Are mandatory international conventions (SOLAS, MARPOL, COLREG, ILLC, STCW, MLC) and flag state maritime laws available on board?",
+      "details": null,
+      "order": 36,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Nautical Publications"
+    },
+    {
+      "text": "Are steering gear tests and drills recorded with date and details in the logbook?",
+      "details": null,
+      "order": 37,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/26",
+      "section": "Logbook Entries"
+    },
+    {
+      "text": "Are abandon ship drills and fire drills recorded with date and details in the logbook?",
+      "details": null,
+      "order": 38,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/19.5",
+      "section": "Logbook Entries"
+    },
+    {
+      "text": "Are weekly and monthly inspections of survival craft and life-saving appliances recorded in the logbook?",
+      "details": null,
+      "order": 39,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20.6, 20.7",
+      "section": "Logbook Entries"
+    },
+    {
+      "text": "Are Fire Control Plans up-to-date, exhibited in key locations, and stored in watertight containers outside accommodation?",
+      "details": null,
+      "order": 40,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/15",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Is the Muster List up-to-date, exhibited in key locations, and written in a language understood by the crew?",
+      "details": null,
+      "order": 41,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/8, 37",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Is the Training Manual available and its contents consistent with the ship's current equipment?",
+      "details": null,
+      "order": 42,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/35",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Are posters or signs for life-saving appliances provided near their location and using IMO symbols?",
+      "details": null,
+      "order": 43,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/9",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Is the pilot ladder in good condition (side ropes, steps) and are proper handholds available?",
+      "details": null,
+      "order": 44,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/23",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Is the accommodation ladder/gangway in good order and has it passed its 5-yearly load test?",
+      "details": null,
+      "order": 45,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-1/3-9",
+      "section": "Safety in General"
+    },
+    {
+      "text": "Is the portable instrument for measuring oxygen and flammable vapor concentrations in good order and calibrated?",
+      "details": null,
+      "order": 46,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Safety in General"
+    },
+    {
+      "text": "Has the emergency generator been tested, including automatic starting and quick-closing FO valve operation?",
+      "details": null,
+      "order": 47,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-1/43-44",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Have the main and emergency fire pumps been tested for operation and sufficient delivery pressure?",
+      "details": "Required pressure: 0.27 N/mm² (≥6000 GT), 0.25 N/mm² (<6000 GT).",
+      "order": 48,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Has the steering gear system been tested within 12 hours before departure (all remote controls, alarms, rudder indicators, etc.)?",
+      "details": null,
+      "order": 49,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/26",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Is the emergency steering gear drill conducted every 3 months?",
+      "details": null,
+      "order": 50,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/26",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Are abandon ship drills and fire drills conducted monthly and within 24 hours of departure if more than 25% of the crew is new?",
+      "details": null,
+      "order": 51,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/19",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Is the enclosed space entry and rescue drill conducted every 2 months?",
+      "details": null,
+      "order": 52,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Are weekly inspections of all survival craft, rescue boats and launching appliances performed and recorded?",
+      "details": "Includes running lifeboat engines for 3 mins.",
+      "order": 53,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20.6",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Are monthly inspections of all life-saving appliances and lifeboat equipment performed using a checklist and recorded?",
+      "details": null,
+      "order": 54,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20.7",
+      "section": "Testing and Drills"
+    },
+    {
+      "text": "Is the Magnetic Compass readable, bubble-free, and has a valid deviation curve (updated annually)?",
+      "details": null,
+      "order": 55,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the Gyro Compass and its repeaters working correctly with no excessive course difference?",
+      "details": null,
+      "order": 56,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the Radar/ARPA/ATA working satisfactorily?",
+      "details": null,
+      "order": 57,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the Echo Sounder working satisfactorily?",
+      "details": null,
+      "order": 58,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the Speed and Distance Log working satisfactorily?",
+      "details": null,
+      "order": 59,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the ECDIS working with the latest official charts (ENC) and software?",
+      "details": null,
+      "order": 60,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the AIS working and has its annual test been carried out and recorded?",
+      "details": null,
+      "order": 61,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the VDR/S-VDR working and has its annual test been carried out and recorded?",
+      "details": null,
+      "order": 62,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/20",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the BNWAS working satisfactorily?",
+      "details": null,
+      "order": 63,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS V/19",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Are all navigation lights (masthead, side, stern, anchor) and shapes in good working order?",
+      "details": null,
+      "order": 64,
+      "responseType": "okNotOkNA",
+      "regulationRef": "COLREG",
+      "section": "Navigational Equipment"
+    },
+    {
+      "text": "Is the lifeboat/rescueboat hull, rudder, and all internal fittings in good condition (no rust, damage)?",
+      "details": null,
+      "order": 65,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Does the lifeboat engine start easily and run correctly? Is the inventory (provisions, pyrotechnics) complete and within expiry dates?",
+      "details": null,
+      "order": 66,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Have the launching appliance and on-load release gear had their annual and 5-yearly examinations by an approved service firm?",
+      "details": "Falls to be renewed at intervals not exceeding 5 years.",
+      "order": 67,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are inflatable liferafts serviced at intervals not exceeding 12 months? Is the hydrostatic release unit within its expiry date?",
+      "details": null,
+      "order": 68,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/20",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are distress flares (12 parachute rockets) available and within their expiry date?",
+      "details": null,
+      "order": 69,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/6.3",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are lifebuoys correctly stowed, marked, and equipped with lights/smoke signals as required? Are lights and smoke signals within expiry dates?",
+      "details": null,
+      "order": 70,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/7.1, 32",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Is there a lifejacket for every person on board, plus additional for watchkeepers? Are they fitted with a light and whistle?",
+      "details": null,
+      "order": 71,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/7.2, 32",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are immersion suits provided for every person on board and in good condition?",
+      "details": null,
+      "order": 72,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/32",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are two-way VHF radiotelephone apparatus and radar transponders (SARTs) available and their batteries within expiry dates?",
+      "details": null,
+      "order": 73,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/6.2",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Are line-throwing appliances complete with 4 rockets and are the rockets within their expiry date?",
+      "details": null,
+      "order": 74,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS III/18",
+      "section": "Lifesaving Appliances"
+    },
+    {
+      "text": "Is the fire integrity of 'A' and 'B' class divisions maintained? Are all penetrations properly sealed?",
+      "details": null,
+      "order": 75,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/9",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Do all fire doors, especially self-closing doors, operate satisfactorily and are they free from hold-back devices?",
+      "details": null,
+      "order": 76,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/9",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are fire dampers for engine room, accommodation, and cargo holds operating satisfactorily?",
+      "details": null,
+      "order": 77,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/5.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are the main and emergency fire pumps and their prime movers in good condition and operating correctly?",
+      "details": null,
+      "order": 78,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Is the fire main piping free from leakages, heavy wastage, and temporary repairs (soft patches)?",
+      "details": null,
+      "order": 79,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are all fire hoses and nozzles in good condition and correctly stowed?",
+      "details": null,
+      "order": 80,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are portable fire extinguishers correctly located, in good condition, and serviced within required intervals?",
+      "details": null,
+      "order": 81,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Is the fixed fire extinguishing arrangement (CO2, Foam, etc.) in E/R and cargo spaces in good order? Have CO2 cylinders been weighed/checked?",
+      "details": "Is the release alarm tested and working?",
+      "order": 82,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Do the remote shut-off valves for fuel oil tanks operate correctly?",
+      "details": null,
+      "order": 83,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/4.2.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Do the emergency stops for fans and fuel oil pumps operate correctly?",
+      "details": null,
+      "order": 84,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/5.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are all fireman's outfits (min. 2 sets) complete, in good condition, and are breathing apparatus cylinders charged and serviced?",
+      "details": "Are 200% spare air cylinders available or 100% + compressor?",
+      "order": 85,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10.10",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Are Emergency Escape Breathing Devices (EEBDs) correctly stowed, with air pressure in the acceptable range and within their shelf life?",
+      "details": null,
+      "order": 86,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/13",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Is the International Shore Connection available with standard flange, bolts, nuts, and gasket?",
+      "details": null,
+      "order": 87,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-2/10.2",
+      "section": "Fire Fighting Appliances"
+    },
+    {
+      "text": "Do all radio installations (VHF, MF/HF, INMARSAT) function satisfactorily, including DSC checks?",
+      "details": null,
+      "order": 88,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Does the NAVTEX receiver function correctly?",
+      "details": null,
+      "order": 89,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV/7.1.4",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Has the Satellite EPIRB passed its annual onboard test and 5-yearly shore-based maintenance? Is the battery within its expiry date?",
+      "details": null,
+      "order": 90,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV/15.9",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Is the reserve source of energy (batteries) for radio equipment in good condition (checked specific gravity, liquid level, voltage)?",
+      "details": null,
+      "order": 91,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV/13",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Are antennas and their masts in good condition, without heavy corrosion or damage?",
+      "details": null,
+      "order": 92,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV/6",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Is the Radio Log Book properly kept with records of daily, weekly, and monthly checks?",
+      "details": null,
+      "order": 93,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS IV/17",
+      "section": "Radio Installation"
+    },
+    {
+      "text": "Are freeboard marks clearly marked on both sides of the shell plating?",
+      "details": null,
+      "order": 94,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.5, 6",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are doors of all access openings in superstructure bulkheads weathertight, with gaskets and clamping devices in good order?",
+      "details": null,
+      "order": 95,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.12",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are cargo hatches and their coamings in good condition (no heavy wastage or holes) and weathertight?",
+      "details": "Check gaskets, clamping devices, cleats, battens, wedges, and tarpaulins.",
+      "order": 96,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg. 13-16",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are machinery space openings, manholes, and flush scuttles weathertight and in good condition?",
+      "details": null,
+      "order": 97,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.17, 18",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are ventilators and their closing arrangements weathertight and in good condition?",
+      "details": null,
+      "order": 98,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.19",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are air pipes, their coamings, and heads in good condition, with floats and wire gauzes intact?",
+      "details": null,
+      "order": 99,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.20",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are scuppers, inlets, and discharges, including their non-return valves, in good order?",
+      "details": null,
+      "order": 100,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.22",
+      "section": "Load Line"
+    },
+    {
+      "text": "Are bulwarks, guard rails, and lifelines in good condition without heavy corrosion or damage?",
+      "details": null,
+      "order": 101,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILLC AX I Reg.25",
+      "section": "Load Line"
+    },
+    {
+      "text": "Is the hull plating (main deck, forecastle, poop) in good order with no heavy wastage, corrosion or cracks?",
+      "details": null,
+      "order": 102,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Hull Construction"
+    },
+    {
+      "text": "Are all piping and electrical conduits on deck in good condition?",
+      "details": null,
+      "order": 103,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Hull Construction"
+    },
+    {
+      "text": "Are internal structures of cargo holds, ballast tanks, and fuel oil tanks in good condition (no heavy corrosion, wastage, holes)?",
+      "details": null,
+      "order": 104,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Hull Construction"
+    },
+    {
+      "text": "Does the Main Engine operate satisfactorily, with all safety/alarm devices and remote controls functioning properly?",
+      "details": null,
+      "order": 105,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-1 Part C",
+      "section": "Machinery"
+    },
+    {
+      "text": "Are high-pressure fuel oil pipes jacketed and is the leak alarm in good order?",
+      "details": null,
+      "order": 106,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-2/4",
+      "section": "Machinery"
+    },
+    {
+      "text": "Do Generator Engines operate satisfactorily with all safety/alarm devices functioning?",
+      "details": null,
+      "order": 107,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-1 Part C",
+      "section": "Machinery"
+    },
+    {
+      "text": "Do Boilers operate satisfactorily with safety devices, pressure gauges, and water level gauges in good order?",
+      "details": null,
+      "order": 108,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-1 Part C",
+      "section": "Machinery"
+    },
+    {
+      "text": "Is all essential machinery (pumps, etc.) operating correctly with no leakages?",
+      "details": null,
+      "order": 109,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Machinery"
+    },
+    {
+      "text": "Is all piping free from heavy corrosion, leaks, and temporary repairs (soft patches, cement boxes)?",
+      "details": null,
+      "order": 110,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Machinery"
+    },
+    {
+      "text": "Are bilge pumps and piping, including the emergency bilge suction, in good order and operating correctly?",
+      "details": null,
+      "order": 111,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Machinery"
+    },
+    {
+      "text": "Is the Engine Room clean and free from rubbish or waste oil?",
+      "details": null,
+      "order": 112,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Machinery"
+    },
+    {
+      "text": "Are guards and fencing for moving machinery parts in place and in good condition?",
+      "details": null,
+      "order": 113,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Machinery"
+    },
+    {
+      "text": "Is insulation for all hot surfaces (above 220°C) and oil spray shields on flanges in good condition?",
+      "details": null,
+      "order": 114,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-2/4",
+      "section": "Machinery"
+    },
+    {
+      "text": "Are all lights and protective covers in the E/R, accommodation, and other spaces in good order?",
+      "details": null,
+      "order": 115,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Electrical Equipment"
+    },
+    {
+      "text": "Are anti-explosion lights in dangerous spaces (pump room, battery room, paint locker) intact and properly sealed?",
+      "details": null,
+      "order": 116,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Electrical Equipment"
+    },
+    {
+      "text": "Are insulating mats provided around the Main and Emergency Switchboards?",
+      "details": null,
+      "order": 117,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Electrical Equipment"
+    },
+    {
+      "text": "Are emergency batteries in good order (checked specific gravity, liquid level, voltage) and are maintenance records updated?",
+      "details": null,
+      "order": 118,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-1 Part D",
+      "section": "Electrical Equipment"
+    },
+    {
+      "text": "Does the Emergency Generator operate satisfactorily, including its primary and secondary starting arrangements?",
+      "details": null,
+      "order": 119,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS Ch.II-1 Part D",
+      "section": "Electrical Equipment"
+    },
+    {
+      "text": "Are anchors, chain cables, and the windlass (including brakes) in good condition?",
+      "details": null,
+      "order": 120,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Mooring Arrangements"
+    },
+    {
+      "text": "Is the mooring system (winches, brakes, ropes) in good condition and sufficient for use?",
+      "details": null,
+      "order": 121,
+      "responseType": "okNotOkNA",
+      "regulationRef": null,
+      "section": "Mooring Arrangements"
+    },
+    {
+      "text": "Are Emergency Towing Arrangements (ETA), if required, in good condition?",
+      "details": "For tankers, gas, chemical carriers of not less than 20,000 DWT.",
+      "order": 122,
+      "responseType": "okNotOkNA",
+      "regulationRef": "SOLAS II-1/3-4",
+      "section": "Mooring Arrangements"
+    },
+    {
+      "text": "Does the Oily Water Separator (OWS) operate satisfactorily with no visible oil in the discharged water?",
+      "details": "Check for corrosion on casing and piping.",
+      "order": 123,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL I",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Is the 15 PPM alarm and its automatic stopping device functioning properly?",
+      "details": null,
+      "order": 124,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL I",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Is the Oil Discharge Monitoring system (ODM) operating correctly?",
+      "details": null,
+      "order": 125,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL I",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Is garbage managed correctly according to the Garbage Management Plan, and is the Garbage Record Book maintained?",
+      "details": null,
+      "order": 126,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL V",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Does the Sewage Treatment Plant or holding tank system operate satisfactorily?",
+      "details": null,
+      "order": 127,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL IV",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Are engine parameters being recorded as per the NOx Technical File? Is the fuel oil change-over procedure for SOx Emission Control Areas being followed and recorded?",
+      "details": null,
+      "order": 128,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL VI",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Does the incinerator, if installed, operate correctly with all safety features intact?",
+      "details": null,
+      "order": 129,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MARPOL VI Reg.16",
+      "section": "Marine Pollution"
+    },
+    {
+      "text": "Are masts, booms, jibs and all loose gear (blocks, hooks, shackles, wire ropes) in good condition with no serious wear or damage?",
+      "details": "Check for distinguishing numbers and valid test certificates.",
+      "order": 130,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILO 152",
+      "section": "Cargo Handling Gear"
+    },
+    {
+      "text": "Have the annual thorough survey and 5-yearly load test of cargo gear been completed and the booklet endorsed?",
+      "details": null,
+      "order": 131,
+      "responseType": "okNotOkNA",
+      "regulationRef": "ILO 152",
+      "section": "Cargo Handling Gear"
+    },
+    {
+      "text": "Are toilets, showers, and laundry facilities clean, in good condition, and with hot water available?",
+      "details": null,
+      "order": 132,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Accommodation"
+    },
+    {
+      "text": "Is the galley clean, with range hoods and ventilation free of oil? Is medical equipment and medicine on board and within validity dates?",
+      "details": null,
+      "order": 133,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Accommodation"
+    },
+    {
+      "text": "Are mess rooms, recreation rooms, and crew cabins clean and free of rubbish?",
+      "details": null,
+      "order": 134,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Accommodation"
+    },
+    {
+      "text": "Are provisions of good quality and quantity, and are cold rooms clean and at the correct temperature?",
+      "details": null,
+      "order": 135,
+      "responseType": "okNotOkNA",
+      "regulationRef": "MLC,2006",
+      "section": "Accommodation"
+    }
+  ]
+}
