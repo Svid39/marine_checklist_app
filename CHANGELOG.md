@@ -4,7 +4,7 @@
 
 ### Added 🚀
 
--   Added 5 new predefined checklists in JSON format:
+Added 5 new predefined checklists in JSON format:
   * Main Inspection
   *  PSC Inspection
   *  ISM (International Safety Management)
