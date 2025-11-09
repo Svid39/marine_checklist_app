@@ -1,0 +1,133 @@
+{
+  "name": "Checklist V (For Maritime Labour Convention, 2006)",
+  "description": "A checklist to verify compliance with the Maritime Labour Convention (MLC), 2006, covering seafarers' working and living conditions.",
+  "version": 1,
+  "items": [
+    {
+      "text": "Is the age of every seafarer not lower than 16 (or the minimum age specified in DMLC Part II, whichever is higher)?",
+      "details": "To be checked at embarkation.",
+      "order": 1,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A1.1.1"
+    },
+    {
+      "text": "Does every seafarer hold a valid medical certificate, dated prior to beginning work?",
+      "details": "If the certificate expires during a voyage, the extension period should not exceed 3 months. For international voyages, the certificate must be in English.",
+      "order": 2,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A1.2.1, A1.2.7, A1.2.8"
+    },
+    {
+      "text": "Does the medical certificate clearly state that the seafarer is medically fit for their duties and free from any condition that could be aggravated by sea service or endanger others?",
+      "details": "Must confirm that sight, hearing, and color vision (if applicable) are satisfactory.",
+      "order": 3,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A1.2.1"
+    },
+    {
+      "text": "Do all seafarers on board possess the required valid certifications, qualifications, and training certificates for their roles?",
+      "details": null,
+      "order": 4,
+      "responseType": "okNotOkNA",
+      "regulationRef": "R.1.3.1"
+    },
+    {
+      "text": "Is a valid Seafarers' Employment Agreement (SEA) for every crew member available on board?",
+      "details": "A standard form of the SEA should also be available. The agreement must be in English for ships on international voyages.",
+      "order": 5,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A2.1.1e, A2.1.2a"
+    },
+    {
+      "text": "Does the SEA contain all required information (shipowner's details, seafarer's details, wages, paid leave, termination conditions, repatriation entitlement, etc.)?",
+      "details": null,
+      "order": 6,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A2.1.4"
+    },
+    {
+      "text": "If a private recruitment and placement service (SRPS) was used, is there documented evidence that it is licensed, certified, or operates in compliance with MLC, 2006?",
+      "details": null,
+      "order": 7,
+      "responseType": "okNotOkNA",
+      "regulationRef": "R1.4.2, A1.4.6"
+    },
+    {
+      "text": "Are the records of daily hours of work or rest correctly maintained, endorsed by the master (or an authorized person) and the seafarer?",
+      "details": "Is a copy of the record provided to each seafarer?",
+      "order": 8,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A2.3.12"
+    },
+    {
+      "text": "Are crew accommodation and on-board recreational facilities inspected at appropriate intervals, with inspection records maintained?",
+      "details": "Inspection to be conducted by the master or a designated officer.",
+      "order": 9,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A3.1.18"
+    },
+    {
+      "text": "Are regular inspections conducted for food and drinking water supplies, storage spaces, and galley equipment, with records maintained?",
+      "details": null,
+      "order": 10,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A3.2.7"
+    },
+    {
+      "text": "Has a safe and hygienic living, working, and training environment been maintained on board?",
+      "details": null,
+      "order": 11,
+      "responseType": "okNotOkNA",
+      "regulationRef": "R4.3.1, A4.3.1a"
+    },
+    {
+      "text": "On ships with 5 or more seafarers, is a ship safety committee held at regular intervals, with minutes recorded and issues addressed in a timely manner?",
+      "details": null,
+      "order": 12,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A4.3.2c, A4.3.2d"
+    },
+    {
+      "text": "Are on-board occupational accidents, injuries, and diseases adequately inspected and reported?",
+      "details": null,
+      "order": 13,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A4.3.5"
+    },
+    {
+      "text": "Do seafarers receive free medical care and health protection services on board and in foreign ports?",
+      "details": "Check that the ship's medicine chest, medical equipment, and medical guides are properly maintained.",
+      "order": 14,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A4.1.1.d, A4.1.4.a"
+    },
+    {
+      "text": "Has a copy of the on-board complaint procedures been provided to all seafarers?",
+      "details": null,
+      "order": 15,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A5.1.5.4"
+    },
+    {
+      "text": "Do all seafarers receive their wages in full at least monthly, in accordance with their employment agreements?",
+      "details": null,
+      "order": 16,
+      "responseType": "okNotOkNA",
+      "regulationRef": "R.2.2.1, A2.2.1"
+    },
+    {
+      "text": "Is each seafarer given a monthly account of payments due and amounts paid (including wages and any additional payments)?",
+      "details": null,
+      "order": 17,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A2.2.2"
+    },
+    {
+      "text": "Is a system in place allowing all seafarers to transmit all or part of their earnings to their families?",
+      "details": "Any charges for such transmissions must be in accordance with flag state requirements.",
+      "order": 18,
+      "responseType": "okNotOkNA",
+      "regulationRef": "A2.2.3, A2.2.4"
+    }
+  ]
+}
