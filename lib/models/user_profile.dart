@@ -30,12 +30,16 @@ class UserProfile extends HiveObject {
   @HiveField(4)
   String? languageCode;
 
-  /// Создает экземпляр профиля пользователя.
+  /// Предпочтительная тема оформления: 'light', 'standard', 'dark'.
+  @HiveField(5)
+  String? themePreference;
+
   UserProfile({
     this.name,
     this.position,
     this.shipName,
     this.captainName,
     this.languageCode,
+    this.themePreference, // Не забудь добавить в конструктор
   });
 }

@@ -6,13 +6,19 @@ import '../main.dart';
 import '../models/user_profile.dart';
 import 'dashboard_screen.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/theme_provider.dart';
+import '../theme/app_themes.dart';
+
 /// Экран для настройки профиля пользователя и параметров приложения.
 ///
 /// Работает в двух режимах:
-/// - Режим первого запуска (`isFirstRun = true`), где нельзя вернуться назад.
-/// - Режим обычных настроек (`isFirstRun = false`), куда можно зайти из главного меню.
-class AppSettingsScreen extends StatefulWidget {
-  /// Флаг, определяющий, является ли это первым запуском приложения.
+/// - **Первый запуск** (`isFirstRun = true`): Пользователь обязан заполнить профиль,
+///   кнопка "Назад" скрыта. После сохранения происходит переход на Дашборд.
+/// - **Настройки** (`isFirstRun = false`): Обычный режим редактирования, доступен
+///   из главного меню.
+class AppSettingsScreen extends ConsumerStatefulWidget {
+  /// Флаг, указывающий, является ли это первым запуском приложения.
   final bool isFirstRun;
 
   const AppSettingsScreen({
@@ -21,14 +27,16 @@ class AppSettingsScreen extends StatefulWidget {
   });
 
   @override
-  State<AppSettingsScreen> createState() => _AppSettingsScreenState();
+  ConsumerState<AppSettingsScreen> createState() => _AppSettingsScreenState();
 }
 
-class _AppSettingsScreenState extends State<AppSettingsScreen> {
+class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
   /// "Ящик" Hive для доступа к профилю пользователя.
   late Box<UserProfile> _profileBox;
+
   /// "Рабочий" объект профиля, который редактируется на этом экране.
   UserProfile _userProfile = UserProfile();
+
   /// Флаг состояния загрузки данных.
   bool _isLoading = true;
 
@@ -56,78 +64,87 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     super.dispose();
   }
 
-  /// Загружает существующий профиль из Hive или инициализирует новый.
+  /// Загружает данные профиля из Hive.
+  ///
+  /// Если профиль уже существует, заполняет поля формы его данными.
+  /// Если профиля нет (первый запуск), инициализирует пустую форму.
   Future<void> _loadProfileData() async {
     if (!mounted) return;
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+    });
 
     final existingProfile = _profileBox.get(1);
     if (existingProfile != null) {
       _userProfile = existingProfile;
     }
 
-    // Заполняем контроллеры и состояние данными из профиля
+    // Заполняем контроллеры данными
     _nameController.text = _userProfile.name ?? '';
     _positionController.text = _userProfile.position ?? '';
     _shipNameController.text = _userProfile.shipName ?? '';
     _captainNameController.text = _userProfile.captainName ?? '';
-    
-    // Устанавливаем язык в Dropdown. Если не сохранен, по умолчанию 'en'.
-    // Мы также обновили это значение в main.dart при запуске.
+
+    // Устанавливаем язык по умолчанию, если он еще не выбран
     _userProfile.languageCode ??= 'en';
 
-
     if (mounted) {
-      setState(() => _isLoading = false);
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
-  /// Валидирует и сохраняет данные формы в Hive.
+  /// Валидирует форму, сохраняет данные в Hive и обновляет настройки приложения.
   Future<void> _saveSettings() async {
-    if (!(_formKey.currentState?.validate() ?? false)) {
-      return;
-    }
-    _formKey.currentState!.save();
+    if (!mounted) return;
 
-    // Обновляем "рабочий" объект данными из контроллеров.
-    _userProfile.name = _nameController.text.trim();
-    _userProfile.position = _positionController.text.trim();
-    _userProfile.shipName = _shipNameController.text.trim();
-    _userProfile.captainName = _captainNameController.text.trim();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
 
-    try {
-      await _profileBox.put(1, _userProfile);
+      // Обновляем объект профиля данными из контроллеров
+      _userProfile.name = _nameController.text.trim();
+      _userProfile.position = _positionController.text.trim();
+      _userProfile.shipName = _shipNameController.text.trim();
+      _userProfile.captainName = _captainNameController.text.trim();
 
-      // Уведомляем остальную часть приложения о возможной смене языка.
-      localeNotifier.value = Locale(_userProfile.languageCode ?? 'en');
+      try {
+        // Сохраняем профиль в Hive (ключ всегда 1)
+        await _profileBox.put(1, _userProfile);
 
-      if (!mounted) return;
+        // Мгновенно обновляем язык приложения через глобальный notifier
+        localeNotifier.value = Locale(_userProfile.languageCode ?? 'en');
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).settingsSaved),
-          backgroundColor: Colors.green,
-        ),
-      );
+        if (!mounted) return;
 
-      if (widget.isFirstRun) {
-        // Заменяем экран настроек на главный экран без возможности вернуться.
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(S.of(context).settingsSaved),
+            backgroundColor: Colors.green,
+          ),
         );
-      } else {
-        // Просто закрываем экран настроек.
-        Navigator.pop(context);
+
+        // Логика навигации
+        if (widget.isFirstRun) {
+          // Если первый запуск — заменяем экран на Дашборд
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DashboardScreen()),
+          );
+        } else {
+          // Если просто настройки — возвращаемся назад
+          if (Navigator.canPop(context)) Navigator.pop(context);
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(S.of(context).errorSavingProfile(e.toString())),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       }
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).errorSavingProfile(e.toString())),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
   }
 
@@ -155,7 +172,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     );
   }
 
-  /// Строит виджет формы для редактирования данных профиля.
+  /// Строит форму настроек.
   Widget _buildForm() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
@@ -164,7 +181,11 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(S.of(context).yourName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            // --- Имя ---
+            Text(
+              S.of(context).yourName,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 4),
             TextFormField(
               controller: _nameController,
@@ -181,7 +202,12 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               },
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).yourPosition, style: const TextStyle(fontWeight: FontWeight.bold)),
+
+            // --- Должность ---
+            Text(
+              S.of(context).yourPosition,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 4),
             TextFormField(
               controller: _positionController,
@@ -198,7 +224,12 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               },
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).defaultVesselName, style: const TextStyle(fontWeight: FontWeight.bold)),
+
+            // --- Название судна ---
+            Text(
+              S.of(context).defaultVesselName,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 4),
             TextFormField(
               controller: _shipNameController,
@@ -209,7 +240,12 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(S.of(context).captainNameForReports, style: const TextStyle(fontWeight: FontWeight.bold)),
+
+            // --- Имя Капитана ---
+            Text(
+              S.of(context).captainNameForReports,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 4),
             TextFormField(
               controller: _captainNameController,
@@ -220,13 +256,15 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
               ),
             ),
             const SizedBox(height: 24),
+
+            // --- Язык приложения ---
             Text(
               S.of(context).appLanguage,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             DropdownButtonFormField<String>(
-              value: _userProfile.languageCode,
+              initialValue: _userProfile.languageCode,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
@@ -242,10 +280,46 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                 }
               },
             ),
+            const SizedBox(height: 24),
+            // --- Тема приложения ---
+            const Text(
+              'Theme (Тема оформления)', // Можно потом вынести в S.of(context)
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            DropdownButtonFormField<AppThemeMode>(
+              // Читаем текущую тему напрямую из Riverpod
+              // ignore: deprecated_member_use
+              value: ref.watch(themeProvider),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+              ),
+              items: const [
+                DropdownMenuItem(
+                    value: AppThemeMode.light,
+                    child: Text('☀️ Marine Light (Deck)')),
+                DropdownMenuItem(
+                    value: AppThemeMode.standard,
+                    child: Text('⚙️ Marine Standard (Engine)')),
+                DropdownMenuItem(
+                    value: AppThemeMode.dark,
+                    child: Text('🌙 Marine Dark (Bridge)')),
+              ],
+              onChanged: (AppThemeMode? newTheme) {
+                if (newTheme != null) {
+                  // Обновляем тему через провайдер (UI перерисуется мгновенно)
+                  ref.read(themeProvider.notifier).setTheme(newTheme);
+
+                  // Синхронизируем локальный объект профиля для корректного сохранения формы
+                  setState(() {
+                    _userProfile.themePreference = newTheme.name;
+                  });
+                }
+              },
+            ),
           ],
         ),
       ),
     );
   }
 }
-

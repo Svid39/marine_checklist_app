@@ -21,8 +21,10 @@ class TemplateSelectionScreen extends StatefulWidget {
 class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
   /// Флаг состояния загрузки данных из Hive.
   bool _isLoading = true;
+
   /// Карта всех доступных шаблонов, загруженных из Hive.
   Map<dynamic, ChecklistTemplate> _templateMap = {};
+
   /// Профиль пользователя для предзаполнения полей в диалоге.
   UserProfile? _userProfile;
 
@@ -71,9 +73,12 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
     String templateName,
   ) async {
     final formKey = GlobalKey<FormState>();
-    final shipNameController = TextEditingController(text: _userProfile?.shipName ?? '');
+    // Создаем контроллеры локально, так как они нужны только для этого диалога
+    final shipNameController =
+        TextEditingController(text: _userProfile?.shipName ?? '');
     final portController = TextEditingController();
-    final captainNameController = TextEditingController(text: _userProfile?.captainName ?? '');
+    final captainNameController =
+        TextEditingController(text: _userProfile?.captainName ?? '');
 
     final result = await showDialog<Map<String, String>>(
       context: context,
@@ -157,12 +162,10 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
       },
     );
 
-    // Безопасное освобождение ресурсов контроллеров.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      shipNameController.dispose();
-      portController.dispose();
-      captainNameController.dispose();
-    });
+    // Освобождаем ресурсы контроллеров после закрытия диалога
+    shipNameController.dispose();
+    portController.dispose();
+    captainNameController.dispose();
 
     return result;
   }
@@ -172,42 +175,50 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
     dynamic templateKey,
     ChecklistTemplate template,
   ) async {
+    if (!mounted) return;
+
     // 1. Запрашиваем у пользователя контекстные данные через диалог.
-    final Map<String, String>? contextData = await _showContextDataDialog(template.name);
+    final Map<String, String>? contextData =
+        await _showContextDataDialog(template.name);
+
     if (!mounted || contextData == null) return;
 
     // 2. Если данные получены, создаем и сохраняем новый экземпляр проверки.
     final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
+    final String? inspectorName = _userProfile?.name;
+
     try {
       final newInstance = ChecklistInstance(
         templateId: templateKey,
         shipName: contextData['shipName'],
         port: contextData['port'],
         captainNameOnCheck: contextData['captainNameOnCheck'],
-        inspectorName: _userProfile?.name,
+        inspectorName: inspectorName,
         date: DateTime.now(),
         status: ChecklistInstanceStatus.inProgress,
         responses: [],
       );
 
       final newInstanceKey = await instancesBox.add(newInstance);
-      if (!mounted) return;
 
-      // 3. Переходим на экран выполнения созданной проверки.
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChecklistExecutionScreen(
-            instanceKey: newInstanceKey,
-            checklistName: template.name,
+      if (mounted) {
+        // 3. Переходим на экран выполнения созданной проверки.
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChecklistExecutionScreen(
+              instanceKey: newInstanceKey,
+              checklistName: template.name,
+            ),
           ),
-        ),
-      );
+        );
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(S.of(context).criticalErrorCreatingCheck(e.toString())),
+            content:
+                Text(S.of(context).criticalErrorCreatingCheck(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -222,7 +233,9 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _templateMap.isEmpty
-              ? Center(child: Text(S.of(context).templatesNotFound))
+              ? Center(
+                  child: Text(S.of(context).templatesNotFound),
+                )
               : ListView.builder(
                   itemCount: _templateMap.length,
                   itemBuilder: (context, index) {

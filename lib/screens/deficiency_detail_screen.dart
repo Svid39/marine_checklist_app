@@ -16,19 +16,24 @@ import '../models/enums.dart';
 import '../models/user_profile.dart';
 
 /// Экран для создания нового или редактирования существующего несоответствия.
+///
+/// Позволяет пользователю ввести описание, назначить ответственного,
+/// установить сроки и прикрепить фото.
 class DeficiencyDetailScreen extends StatefulWidget {
-  /// Ключ существующего [Deficiency] в Hive. `null` для создания нового.
+  /// Ключ существующего [Deficiency] в Hive. Если `null` — режим создания.
   final dynamic deficiencyKey;
 
-  /// Начальное описание (предзаполняется при создании из пункта чек-листа).
+  /// Начальное описание (при создании из пункта чек-листа).
   final String? initialDescription;
 
-  /// Ключ связанного [ChecklistInstance].
+  /// Ключ связанного экземпляра проверки.
   final dynamic initialInstanceKey;
 
   /// ID связанного пункта чек-листа.
   final int? initialChecklistItemId;
-  final String? initialShipName; // version1.1
+
+  /// Имя судна для автоматического заполнения (важно для контекста).
+  final String? initialShipName;
 
   const DeficiencyDetailScreen({
     super.key,
@@ -36,7 +41,7 @@ class DeficiencyDetailScreen extends StatefulWidget {
     this.initialDescription,
     this.initialInstanceKey,
     this.initialChecklistItemId,
-    this.initialShipName, // version1.1
+    this.initialShipName,
   });
 
   @override
@@ -46,15 +51,20 @@ class DeficiencyDetailScreen extends StatefulWidget {
 class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
   late Box<Deficiency> _deficienciesBox;
   Deficiency? _deficiency;
+  
+  /// Флаг загрузки данных (при открытии экрана).
   bool _isLoading = true;
+  /// Режим работы: создание нового или редактирование.
   bool _isNew = true;
 
   final _formKey = GlobalKey<FormState>();
 
+  // Контроллеры
   final _descriptionController = TextEditingController();
   final _assignedToController = TextEditingController();
   final _actionsController = TextEditingController();
 
+  // Переменные состояния
   DeficiencyStatus _selectedStatus = DeficiencyStatus.open;
   DateTime? _dueDate;
   DateTime? _resolutionDate;
@@ -76,23 +86,32 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     super.dispose();
   }
 
-  /// Загружает данные для экрана в зависимости от режима (создание/редактирование).
+  // --- Методы загрузки и подготовки данных ---
+
+  /// Инициализирует данные экрана.
   Future<void> _loadInitialData() async {
     setState(() => _isLoading = true);
-
-    _loadedUserProfile = Hive.box<UserProfile>(userProfileBoxName).get(1);
+    final profileBox = Hive.box<UserProfile>(userProfileBoxName);
+    _loadedUserProfile = profileBox.get(1);
 
     if (widget.deficiencyKey == null) {
+      // Режим создания
       _isNew = true;
+      
+      // Приоритет имени судна: переданное > из профиля
+      final shipName = widget.initialShipName ?? _loadedUserProfile?.shipName;
+
       _deficiency = Deficiency(
         description: widget.initialDescription ?? '',
         instanceId: widget.initialInstanceKey,
         checklistItemId: widget.initialChecklistItemId,
         status: DeficiencyStatus.open,
+        shipName: shipName,
       );
       _updateStateFromDeficiency();
       if (mounted) setState(() => _isLoading = false);
     } else {
+      // Режим редактирования
       _isNew = false;
       try {
         final loadedDeficiency = _deficienciesBox.get(widget.deficiencyKey!);
@@ -123,7 +142,7 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     }
   }
 
-  /// Обновляет контроллеры и переменные состояния данными из объекта [_deficiency].
+  /// Переносит данные из объекта модели в контроллеры формы.
   void _updateStateFromDeficiency() {
     if (_deficiency == null) return;
     _descriptionController.text = _deficiency!.description;
@@ -135,7 +154,32 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     _photoPath = _deficiency!.photoPath;
   }
 
-  /// Форматирует дату в локализованный строковый формат.
+  // --- Методы UI (индикаторы и форматирование) ---
+
+  void _showLoadingDialog(String message) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => Dialog(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 20),
+              Expanded(child: Text(message)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _hideLoadingDialog() {
+    if (mounted) Navigator.pop(context);
+  }
+
   String _formatDate(DateTime? date, {bool feminine = false}) {
     if (date == null) {
       return feminine ? S.of(context).notSetFeminine : S.of(context).notSet;
@@ -144,7 +188,6 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
         .format(date);
   }
 
-  /// Отображает DatePicker для выбора даты и обновляет состояние.
   Future<void> _selectDate({required bool isDueDate}) async {
     final initialDate =
         (isDueDate ? _dueDate : _resolutionDate) ?? DateTime.now();
@@ -166,8 +209,12 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     }
   }
 
-  /// Валидирует форму и сохраняет объект [Deficiency] в Hive.
+  // --- Основные действия ---
+
+  /// Сохраняет изменения в базу данных.
   Future<void> _saveDeficiency() async {
+    if (!mounted) return;
+
     if (!(_formKey.currentState?.validate() ?? false)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -177,29 +224,19 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
       return;
     }
 
+    // Обновляем объект данными из полей
     _deficiency!.description = _descriptionController.text.trim();
     _deficiency!.assignedTo = _assignedToController.text.trim().isNotEmpty
         ? _assignedToController.text.trim()
         : null;
-    _deficiency!.correctiveActions = _actionsController.text.trim().isNotEmpty
-        ? _actionsController.text.trim()
-        : null;
+    _deficiency!.correctiveActions =
+        _actionsController.text.trim().isNotEmpty
+            ? _actionsController.text.trim()
+            : null;
     _deficiency!.status = _selectedStatus;
     _deficiency!.dueDate = _dueDate;
     _deficiency!.resolutionDate = _resolutionDate;
     _deficiency!.photoPath = _photoPath;
-
-    // --- НОВАЯ ЛОГИКА Version 1.1 ---
-// Если это новое, созданное вручную несоответствие без привязки к проверке,
-// берем имя судна из профиля пользователя.
-    if (_isNew) {
-      if (widget.initialShipName != null) {
-        _deficiency!.shipName = widget.initialShipName;
-      } else {
-        _deficiency!.shipName = _loadedUserProfile?.shipName;
-      }
-    }
-// --- КОНЕЦ НОВОЙ ЛОГИКИ ---
 
     try {
       if (_isNew) {
@@ -225,8 +262,11 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     }
   }
 
-  /// Оркестрирует весь процесс работы с фото для несоответствия.
+  /// Обрабатывает добавление, замену или удаление фото.
   Future<void> _handleDeficiencyPhoto() async {
+    if (!mounted) return;
+
+    // 1. Если фото уже есть - показываем диалог управления
     if (_photoPath != null && _photoPath!.isNotEmpty) {
       final action = await _showViewOrManagePhotoDialog(_photoPath!);
       if (!mounted || action == null) return;
@@ -238,9 +278,7 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
           try {
             final oldFile = File(pathToDelete);
             if (await oldFile.exists()) await oldFile.delete();
-          } catch (e) {
-            // Ошибка удаления файла не критична
-          }
+          } catch (e) { /* ignore */ }
         }
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -251,9 +289,10 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
         }
         return;
       }
-      // Если action == 'replace', продолжаем выполнение
+      // Если action == 'replace', идем дальше
     }
 
+    // 2. Выбор источника
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (context) => SafeArea(
@@ -261,53 +300,59 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: const Icon(Icons.photo_camera),
-              title: Text(S.of(context).camera),
-              onTap: () => Navigator.pop(context, ImageSource.camera),
-            ),
+                leading: const Icon(Icons.photo_camera),
+                title: Text(S.of(context).camera),
+                onTap: () => Navigator.pop(context, ImageSource.camera)),
             ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: Text(S.of(context).gallery),
-              onTap: () => Navigator.pop(context, ImageSource.gallery),
-            ),
+                leading: const Icon(Icons.photo_library),
+                title: Text(S.of(context).gallery),
+                onTap: () => Navigator.pop(context, ImageSource.gallery)),
           ],
         ),
       ),
     );
     if (source == null || !mounted) return;
 
-    final permission =
-        source == ImageSource.camera ? Permission.camera : Permission.photos;
-    final permissionName = source == ImageSource.camera
-        ? S.of(context).camera
-        : S.of(context).gallery;
+    // 3. Разрешения
+    final permission = source == ImageSource.camera
+        ? Permission.camera
+        : Permission.photos;
+    
     PermissionStatus permissionStatus = await permission.status;
-    if (permissionStatus.isDenied) {
+    if (permissionStatus.isDenied || permissionStatus.isRestricted) {
       permissionStatus = await permission.request();
     }
+
     if (!mounted) return;
     if (!permissionStatus.isGranted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(S.of(context).permissionRequired(permissionName))),
+            content:
+                Text(S.of(context).permissionRequired(source == ImageSource.camera ? S.of(context).camera : S.of(context).gallery))),
       );
       return;
     }
 
-    final pickedFile = await ImagePicker().pickImage(source: source);
+    // 4. Получение фото
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
     if (pickedFile == null || !mounted) return;
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(S.of(context).processingPhoto)));
+    // --- ПОКАЗЫВАЕМ ИНДИКАТОР (v1.3.0) ---
+    _showLoadingDialog(S.of(context).processingPhoto);
 
     try {
       String? contextShipName, contextPort;
       DateTime? contextDate;
       String contextIdentifier;
-      final instanceId = _deficiency?.instanceId ?? widget.initialInstanceKey;
-      if (instanceId != null) {
-        final instance =
-            Hive.box<ChecklistInstance>(instancesBoxName).get(instanceId);
+
+      // Определяем контекст для имени файла
+      final instanceIdForContext =
+          _deficiency?.instanceId ?? widget.initialInstanceKey;
+
+      if (instanceIdForContext != null) {
+        final instance = Hive.box<ChecklistInstance>(instancesBoxName)
+            .get(instanceIdForContext);
         if (instance != null) {
           contextShipName = instance.shipName;
           contextPort = instance.port;
@@ -326,100 +371,87 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
             : (widget.deficiencyKey?.toString() ?? "MANUAL_EDT");
       }
 
-      final newPath = await _compressAndSaveDeficiencyImage(pickedFile,
-          contextShipName, contextPort, contextDate, contextIdentifier);
+      final newCompressedPath = await _compressAndSaveDeficiencyImage(
+          pickedFile,
+          contextShipName,
+          contextPort,
+          contextDate,
+          contextIdentifier);
+
+      // --- СКРЫВАЕМ ИНДИКАТОР ---
+      _hideLoadingDialog();
 
       if (!mounted) return;
-      ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
-      if (newPath != null) {
+      if (newCompressedPath != null) {
+        // Очистка старого файла при замене
         if (_photoPath != null &&
             _photoPath!.isNotEmpty &&
-            _photoPath != newPath) {
+            _photoPath != newCompressedPath) {
           try {
             final oldFile = File(_photoPath!);
             if (await oldFile.exists()) await oldFile.delete();
-          } catch (e) {/* Не критично */}
+          } catch (e) { /* ignore */ }
         }
 
+        setState(() => _photoPath = newCompressedPath);
+        
         if (!mounted) return;
-        setState(() => _photoPath = newPath);
-
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(S.of(context).photoAddedOrUpdated),
-            backgroundColor: Colors.green));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(S.of(context).photoAddedOrUpdated),
+              backgroundColor: Colors.green),
+        );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(S.of(context).failedToProcessPhoto),
-            backgroundColor: Colors.orange));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(S.of(context).failedToProcessPhoto),
+              backgroundColor: Colors.orange),
+        );
       }
     } catch (e) {
+      _hideLoadingDialog(); // Скрываем при ошибке
       if (mounted) {
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(S.of(context).photoError(e.toString())),
-            backgroundColor: Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(S.of(context).photoError(e.toString())),
+              backgroundColor: Colors.red),
+        );
       }
     }
   }
 
-  /// Показывает диалог для просмотра, удаления или замены фото.
   Future<String?> _showViewOrManagePhotoDialog(String imagePath) async {
-    return showDialog<String>(
+    if (!mounted) return null;
+    return await showDialog<String>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        insetPadding: const EdgeInsets.all(10),
-        contentPadding: const EdgeInsets.all(8),
-        content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [Image.file(File(imagePath))]),
-        actionsAlignment: MainAxisAlignment.center,
-        actions: <Widget>[
-          TextButton(
-              child: Text(S.of(context).close),
-              onPressed: () => Navigator.pop(dialogContext)),
-          TextButton(
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(S.of(context).delete),
-            onPressed: () => Navigator.pop(dialogContext, 'delete'),
-          ),
-          ElevatedButton(
-            child: Text(S.of(context).replacePhoto),
-            onPressed: () => Navigator.pop(dialogContext, 'replace'),
-          ),
-        ],
-      ),
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(8),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [Image.file(File(imagePath))]),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            TextButton(
+                child: Text(S.of(context).close),
+                onPressed: () => Navigator.pop(dialogContext, null)),
+            TextButton(
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text(S.of(context).delete),
+              onPressed: () => Navigator.pop(dialogContext, 'delete'),
+            ),
+            ElevatedButton(
+              child: Text(S.of(context).replacePhoto),
+              onPressed: () => Navigator.pop(dialogContext, 'replace'),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  /// Сжимает и сохраняет изображение, возвращая новый путь.
-  Future<String?> _compressAndSaveDeficiencyImage(XFile originalFile,
-      String? shipName, String? port, DateTime? date, String identifier) async {
-    try {
-      final appDir = await getApplicationDocumentsDirectory();
-      final imageDir = '${appDir.path}/deficiency_photos';
-      await Directory(imageDir).create(recursive: true);
-      final ext = originalFile.path.split('.').last.toLowerCase();
-      final shipPart = _sanitizeForFilename(shipName, defaultVal: 'ShipU');
-      final portPart = _sanitizeForFilename(port, defaultVal: 'PortU');
-      final idPart =
-          _sanitizeForFilename(identifier, defaultVal: 'ID_U', maxLength: 25);
-      final datePart = date != null
-          ? "${date.year}${date.month.toString().padLeft(2, '0')}${date.day.toString().padLeft(2, '0')}"
-          : "DateU";
-      final uniqueName =
-          'DEF_${shipPart}_${portPart}_${idPart}_${datePart}_${DateTime.now().millisecondsSinceEpoch}.$ext';
-      final targetPath = '$imageDir/$uniqueName';
-      final result = await FlutterImageCompress.compressAndGetFile(
-          originalFile.path, targetPath,
-          quality: 80, minWidth: 1024, minHeight: 1024);
-      return result?.path;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  /// Вспомогательная функция для создания безопасного имени файла.
   String _sanitizeForFilename(String? input,
       {String defaultVal = 'NA', int maxLength = 15}) {
     if (input == null || input.isEmpty) return defaultVal;
@@ -431,6 +463,43 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
       sanitized = sanitized.substring(0, maxLength);
     }
     return sanitized.isEmpty ? defaultVal : sanitized;
+  }
+
+  Future<String?> _compressAndSaveDeficiencyImage(
+      XFile originalFile,
+      String? contextShipName,
+      String? contextPort,
+      DateTime? contextDate,
+      String contextIdentifier) async {
+    try {
+      final appDir = await getApplicationDocumentsDirectory();
+      final imageDir = '${appDir.path}/deficiency_photos';
+      await Directory(imageDir).create(recursive: true);
+
+      final fileExtension = originalFile.path.split('.').last.toLowerCase();
+      final shipPart =
+          _sanitizeForFilename(contextShipName, defaultVal: 'ShipU');
+      final portPart = _sanitizeForFilename(contextPort, defaultVal: 'PortU');
+      final idPart = _sanitizeForFilename(contextIdentifier,
+          defaultVal: 'ID_U', maxLength: 25);
+      final datePart = contextDate != null
+          ? "${contextDate.year}${contextDate.month.toString().padLeft(2, '0')}${contextDate.day.toString().padLeft(2, '0')}"
+          : "DateU";
+      final uniqueName =
+          'DEF_${shipPart}_${portPart}_${idPart}_${datePart}_${DateTime.now().millisecondsSinceEpoch}.$fileExtension';
+      final targetPath = '$imageDir/$uniqueName';
+
+      final result = await FlutterImageCompress.compressAndGetFile(
+        originalFile.path,
+        targetPath,
+        quality: 80,
+        minWidth: 1024,
+        minHeight: 1024,
+      );
+      return result?.path;
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
@@ -456,7 +525,6 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
     );
   }
 
-  /// Строит виджет формы для ввода данных несоответствия.
   Widget _buildForm() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
@@ -488,7 +556,7 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
                 style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             DropdownButtonFormField<DeficiencyStatus>(
-              value: _selectedStatus,
+              initialValue: _selectedStatus,
               items: DeficiencyStatus.values.map((status) {
                 return DropdownMenuItem<DeficiencyStatus>(
                     value: status, child: Text(status.name));

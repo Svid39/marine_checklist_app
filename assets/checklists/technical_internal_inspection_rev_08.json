@@ -724,7 +724,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.13 Has reversal/renewal of falls/crane wires been recorded?",
+      "text": "Has reversal/renewal of falls/crane wires been recorded?",
       "details": null,
       "order": 91,
       "responseType": "okNotOkNA",
@@ -732,7 +732,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.14 Are life buoys (including reflective tape, correct ship's name/home port and lights and smoke signals with non-outdated batteries) available in sufficient amount and in good condition?",
+      "text": "Are life buoys (including reflective tape, correct ship's name/home port and lights and smoke signals with non-outdated batteries) available in sufficient amount and in good condition?",
       "details": null,
       "order": 92,
       "responseType": "okNotOkNA",
@@ -740,7 +740,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.15 Is a \"heavy\" life buoy (4.5kg) attached to the smoke/light-buoy at bridge wings in a free-fall arrangement?",
+      "text": "Is a \"heavy\" life buoy (4.5kg) attached to the smoke/light-buoy at bridge wings in a free-fall arrangement?",
       "details": null,
       "order": 93,
       "responseType": "okNotOkNA",
@@ -748,7 +748,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.16 Are lifejackets (including whistles plus lights and non-outdated batteries) available in sufficient amount and good condition?",
+      "text": "Are lifejackets (including whistles plus lights and non-outdated batteries) available in sufficient amount and good condition?",
       "details": null,
       "order": 94,
       "responseType": "okNotOkNA",
@@ -756,7 +756,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.17 Are line throwing appliances complete with valid expiration dates of the pyrotechnic units?",
+      "text": "Are line throwing appliances complete with valid expiration dates of the pyrotechnic units?",
       "details": null,
       "order": 95,
       "responseType": "okNotOkNA",
@@ -764,7 +764,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.18 Are parachute distress signals available in sufficient amount and in good condition with valid expiration dates placed on the bridge in an appropriate containment which is marked?",
+      "text": "Are parachute distress signals available in sufficient amount and in good condition with valid expiration dates placed on the bridge in an appropriate containment which is marked?",
       "details": null,
       "order": 96,
       "responseType": "okNotOkNA",
@@ -772,7 +772,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.19 Are immersion suits (including lights and special attachments) available in required amount and stored in good condition.",
+      "text": "Are immersion suits (including lights and special attachments) available in required amount and stored in good condition.",
       "details": null,
       "order": 97,
       "responseType": "okNotOkNA",
@@ -780,7 +780,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.20 Are additional suits available at remote working stations as required ?",
+      "text": "Are additional suits available at remote working stations as required ?",
       "details": null,
       "order": 98,
       "responseType": "okNotOkNA",
@@ -788,7 +788,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.21 Has the annual thorough examination of the launching appliances and on-load release gir been carried out by shore service in time ?",
+      "text": "Has the annual thorough examination of the launching appliances and on-load release gir been carried out by shore service in time ?",
       "details": null,
       "order": 99,
       "responseType": "okNotOkNA",
@@ -796,7 +796,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "5.22 Is the emergency illumination at all survival craft stations sufficiently working with illuminating the ship's side and the instructions posted?",
+      "text": "Is the emergency illumination at all survival craft stations sufficiently working with illuminating the ship's side and the instructions posted?",
       "details": null,
       "order": 100,
       "responseType": "okNotOkNA",
@@ -804,7 +804,7 @@
       "section": "Lifesaving Appliances"
     },
     {
-      "text": "6.1 Are fire main piping and all hydrants in good condition without signs of corrosion or wastage and without soft patches?",
+      "text": "Are fire main piping and all hydrants in good condition without signs of corrosion or wastage and without soft patches?",
       "details": null,
       "order": 101,
       "responseType": "okNotOkNA",
@@ -812,7 +812,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.2 Are couplings and valves free of leakages?",
+      "text": "Are couplings and valves free of leakages?",
       "details": null,
       "order": 102,
       "responseType": "okNotOkNA",
@@ -820,7 +820,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.3 Are fire pumps including prime mover in engine room in proper working condition and with sufficient delivery of water pressure?",
+      "text": "Are fire pumps including prime mover in engine room in proper working condition and with sufficient delivery of water pressure?",
       "details": null,
       "order": 103,
       "responseType": "okNotOkNA",
@@ -828,7 +828,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.4 Is emergency fire pump including prime mover in proper working condition with sufficient suction and water pressure to be delivered? Ref CC 12.7",
+      "text": "Is emergency fire pump including prime mover in proper working condition with sufficient suction and water pressure to be delivered? Ref CC 12.7",
       "details": null,
       "order": 104,
       "responseType": "okNotOkNA",
@@ -836,7 +836,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.5 Is the crew in charge aware of starting procedures?",
+      "text": "Is the crew in charge aware of starting procedures?",
       "details": null,
       "order": 105,
       "responseType": "okNotOkNA",
@@ -844,7 +844,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.6 Are all fire stations with required equipment of hoses, nozzles, spanners in good condition?",
+      "text": "Are all fire stations with required equipment of hoses, nozzles, spanners in good condition?",
       "details": null,
       "order": 106,
       "responseType": "okNotOkNA",
@@ -852,7 +852,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.7 Are nozzle spray adjustments workable and hoses without deterioration?",
+      "text": "Are nozzle spray adjustments workable and hoses without deterioration?",
       "details": null,
       "order": 107,
       "responseType": "okNotOkNA",
@@ -860,7 +860,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.8 Are portable fire extinguishers available in sufficient amount and in good condition?",
+      "text": "Are portable fire extinguishers available in sufficient amount and in good condition?",
       "details": null,
       "order": 108,
       "responseType": "okNotOkNA",
@@ -868,7 +868,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.9 Are due dates for required servicing recorded and not outdated?",
+      "text": "Are due dates for required servicing recorded and not outdated?",
       "details": null,
       "order": 109,
       "responseType": "okNotOkNA",
@@ -876,7 +876,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.10 Are fireman's outfits available in sufficient and complete amount, good condition and ready for use, including breathing apparatus with air bottles properly filled?",
+      "text": "Are fireman's outfits available in sufficient and complete amount, good condition and ready for use, including breathing apparatus with air bottles properly filled?",
       "details": null,
       "order": 110,
       "responseType": "okNotOkNA",
@@ -884,7 +884,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.11 Are fixed fire fighting systems for engine room and cargo spaces in proper working condition?",
+      "text": "Are fixed fire fighting systems for engine room and cargo spaces in proper working condition?",
       "details": null,
       "order": 111,
       "responseType": "okNotOkNA",
@@ -892,7 +892,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.12 Is the CO2 room properly closable and a spare key available?",
+      "text": "Is the CO2 room properly closable and a spare key available?",
       "details": null,
       "order": 112,
       "responseType": "okNotOkNA",
@@ -900,7 +900,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.13 Is the CO2 extinguishing system, where fitted, in good order and clear operations posted? Is the interior dry with CO2?",
+      "text": "Is the CO2 extinguishing system, where fitted, in good order and clear operations posted? Is the interior dry with CO2?",
       "details": null,
       "order": 113,
       "responseType": "okNotOkNA",
@@ -908,7 +908,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.14 Are the last test records of the systems available?",
+      "text": "Are the last test records of the systems available?",
       "details": null,
       "order": 114,
       "responseType": "okNotOkNA",
@@ -916,7 +916,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.15 Are the fire detection arrangements properly working at all detection points? Ref CC 12.17",
+      "text": "Are the fire detection arrangements properly working at all detection points? Ref CC 12.17",
       "details": null,
       "order": 115,
       "responseType": "okNotOkNA",
@@ -924,7 +924,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.16 Is the fire extinguishing arrangement in paint locker as required in place and in good working condition?",
+      "text": "Is the fire extinguishing arrangement in paint locker as required in place and in good working condition?",
       "details": null,
       "order": 116,
       "responseType": "okNotOkNA",
@@ -932,7 +932,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.17 Are all fire dampers and ventilation closing appliances including gaskets, handles, screws and other mechanical mechanisms in proper working condition? Ref CC 12.11",
+      "text": "Are all fire dampers and ventilation closing appliances including gaskets, handles, screws and other mechanical mechanisms in proper working condition? Ref CC 12.11",
       "details": null,
       "order": 117,
       "responseType": "okNotOkNA",
@@ -940,7 +940,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.18 Are all fire doors closing properly by their autom. closing devices?",
+      "text": "Are all fire doors closing properly by their autom. closing devices?",
       "details": null,
       "order": 118,
       "responseType": "okNotOkNA",
@@ -948,7 +948,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.19 Are all quick-closing devices for tank shut-off and emergency stop of pumps and fans in proper working condition? Ref CC 12.10",
+      "text": "Are all quick-closing devices for tank shut-off and emergency stop of pumps and fans in proper working condition? Ref CC 12.10",
       "details": null,
       "order": 119,
       "responseType": "okNotOkNA",
@@ -956,7 +956,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.20 Are Emergency Breathing Devices (EEBDs) available in required amount (plus addit. training unit) and distributed as per fire plan within superstructure and engine room?",
+      "text": "Are Emergency Breathing Devices (EEBDs) available in required amount (plus addit. training unit) and distributed as per fire plan within superstructure and engine room?",
       "details": null,
       "order": 120,
       "responseType": "okNotOkNA",
@@ -964,7 +964,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.21 Is the international shore connection including reducer piece with appropriate bolts and nuts as per safety plan available?",
+      "text": "Is the international shore connection including reducer piece with appropriate bolts and nuts as per safety plan available?",
       "details": null,
       "order": 121,
       "responseType": "okNotOkNA",
@@ -972,7 +972,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "6.22 Are Water mist alarm system in working condition and tested regularly?",
+      "text": "Are Water mist alarm system in working condition and tested regularly?",
       "details": null,
       "order": 122,
       "responseType": "okNotOkNA",
@@ -980,7 +980,7 @@
       "section": "Fire Fighting Arrangements"
     },
     {
-      "text": "7.1 As far as visible, are the ship's side shell plates without damage and excessive wastage?",
+      "text": "As far as visible, are the ship's side shell plates without damage and excessive wastage?",
       "details": null,
       "order": 123,
       "responseType": "okNotOkNA",
@@ -988,7 +988,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.2 Is the structure of cargo holds with regard to bulkheads, frames, brackets, tank tops etc. without damages and excessive wastage?",
+      "text": "Is the structure of cargo holds with regard to bulkheads, frames, brackets, tank tops etc. without damages and excessive wastage?",
       "details": null,
       "order": 124,
       "responseType": "okNotOkNA",
@@ -996,7 +996,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.3 Are electric cable arrangements properly installed and insulated, no loose wiring?",
+      "text": "Are electric cable arrangements properly installed and insulated, no loose wiring?",
       "details": null,
       "order": 125,
       "responseType": "okNotOkNA",
@@ -1004,7 +1004,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.4 Are light covers properly fixed on all lamps?",
+      "text": "Are light covers properly fixed on all lamps?",
       "details": null,
       "order": 126,
       "responseType": "okNotOkNA",
@@ -1012,7 +1012,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.5 Are the forward and aft masts in good order without any damages and heavy corrosions?",
+      "text": "Are the forward and aft masts in good order without any damages and heavy corrosions?",
       "details": null,
       "order": 127,
       "responseType": "okNotOkNA",
@@ -1020,7 +1020,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.6 Does the main switchboard have insulation mats around it?",
+      "text": "Does the main switchboard have insulation mats around it?",
       "details": null,
       "order": 128,
       "responseType": "okNotOkNA",
@@ -1028,7 +1028,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.7 Is the engine room with regard to work and fire safety in a generally clean condition?",
+      "text": "Is the engine room with regard to work and fire safety in a generally clean condition?",
       "details": null,
       "order": 129,
       "responseType": "okNotOkNA",
@@ -1036,7 +1036,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.8 Are the main propulsion system ( Main Engine, Gear and CPP system ) in proper working condition?",
+      "text": "Are the main propulsion system ( Main Engine, Gear and CPP system ) in proper working condition?",
       "details": null,
       "order": 130,
       "responseType": "okNotOkNA",
@@ -1044,7 +1044,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.9 Is the Auxiliary Engine and power system including 100% power redundancy in proper working condition?",
+      "text": "Is the Auxiliary Engine and power system including 100% power redundancy in proper working condition?",
       "details": null,
       "order": 131,
       "responseType": "okNotOkNA",
@@ -1052,7 +1052,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.10 Is Emergency Generator arrangement for immediate supply of electrical power in proper working condition? Last check of black out test?  Ref CC 12.6 and 12.15",
+      "text": "Is Emergency Generator arrangement for immediate supply of electrical power in proper working condition? Last check of black out test?  Ref CC 12.6 and 12.15",
       "details": null,
       "order": 132,
       "responseType": "okNotOkNA",
@@ -1060,7 +1060,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.11 Is the jacketed piping system on high pressure fuel lines properly installed and alarms working?",
+      "text": "Is the jacketed piping system on high pressure fuel lines properly installed and alarms working?",
       "details": null,
       "order": 133,
       "responseType": "okNotOkNA",
@@ -1068,7 +1068,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.12 Are the piping systems on deck and gantry crane free of leakages?",
+      "text": "Are the piping systems on deck and gantry crane free of leakages?",
       "details": null,
       "order": 134,
       "responseType": "okNotOkNA",
@@ -1076,7 +1076,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.13 Are the Anchoring devices in good condition without damages ?  Ref CC 12.9 ",
+      "text": "Are the Anchoring devices in good condition without damages ?  Ref CC 12.9 ",
       "details": null,
       "order": 135,
       "responseType": "okNotOkNA",
@@ -1084,7 +1084,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.14 Are the Mooring ropes in good working condition? Condition of windlass and mooring winches?",
+      "text": "Are the Mooring ropes in good working condition? Condition of windlass and mooring winches?",
       "details": null,
       "order": 136,
       "responseType": "okNotOkNA",
@@ -1092,7 +1092,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.15 Are the Dip trays for bunker station forward and lub/bunker station stb side clean and in good condition? Ref CC 12.15",
+      "text": "Are the Dip trays for bunker station forward and lub/bunker station stb side clean and in good condition? Ref CC 12.15",
       "details": null,
       "order": 137,
       "responseType": "okNotOkNA",
@@ -1100,7 +1100,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.16 Is the Steering gear in good order? Communication with bridge? Gyro repeater synchronized with main gyro compass?",
+      "text": "Is the Steering gear in good order? Communication with bridge? Gyro repeater synchronized with main gyro compass?",
       "details": null,
       "order": 138,
       "responseType": "okNotOkNA",
@@ -1108,7 +1108,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.17 Is the Maintenance System up to date and maintenance in according to Entries?",
+      "text": "Is the Maintenance System up to date and maintenance in according to Entries?",
       "details": null,
       "order": 139,
       "responseType": "okNotOkNA",
@@ -1116,7 +1116,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "7.17 Is the Battery pack in good order and no alarms?",
+      "text": "Is the Battery pack in good order and no alarms?",
       "details": null,
       "order": 139,
       "responseType": "okNotOkNA",
@@ -1124,7 +1124,7 @@
       "section": "Hull and Machinery Condition"
     },
     {
-      "text": "8.1 Are bulwarks, handrails, cat walks, without signs of damage and excessive wastage?",
+      "text": "Are bulwarks, handrails, cat walks, without signs of damage and excessive wastage?",
       "details": null,
       "order": 140,
       "responseType": "okNotOkNA",
@@ -1132,7 +1132,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.2 Are hatch cover arrangements including gaskets and all closing appliances weather tight and in good condition without signs of wastage?",
+      "text": "Are hatch cover arrangements including gaskets and all closing appliances weather tight and in good condition without signs of wastage?",
       "details": null,
       "order": 141,
       "responseType": "okNotOkNA",
@@ -1140,7 +1140,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.3 Are the closing devices of all sounding pipes properly working? ",
+      "text": "Are the closing devices of all sounding pipes properly working? ",
       "details": null,
       "order": 142,
       "responseType": "okNotOkNA",
@@ -1148,7 +1148,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.4 Are weather tight doors including keyhole closing devices and small access hatches in good condition to be closed weather tight?",
+      "text": "Are weather tight doors including keyhole closing devices and small access hatches in good condition to be closed weather tight?",
       "details": null,
       "order": 143,
       "responseType": "okNotOkNA",
@@ -1156,7 +1156,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.5 Are draft marks and Plimsoll marks painted in contrasting colour?",
+      "text": "Are draft marks and Plimsoll marks painted in contrasting colour?",
       "details": null,
       "order": 144,
       "responseType": "okNotOkNA",
@@ -1164,7 +1164,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.6 Are Plimsoll marks permanently marked and in accordance with the Load Line Certificate?",
+      "text": "Are Plimsoll marks permanently marked and in accordance with the Load Line Certificate?",
       "details": null,
       "order": 145,
       "responseType": "okNotOkNA",
@@ -1172,7 +1172,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.7 Are stability information available, approved by GL and written in a language understood by the ship's command?",
+      "text": "Are stability information available, approved by GL and written in a language understood by the ship's command?",
       "details": null,
       "order": 146,
       "responseType": "okNotOkNA",
@@ -1180,7 +1180,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.8 Are Loading Computer in working condition and tested as appropriate in accordance with instructions?",
+      "text": "Are Loading Computer in working condition and tested as appropriate in accordance with instructions?",
       "details": null,
       "order": 147,
       "responseType": "okNotOkNA",
@@ -1188,7 +1188,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "8.8 Are Loading Computer in working condition and tested as appropriate in accordance with instructions?",
+      "text": "Are Loading Computer in working condition and tested as appropriate in accordance with instructions?",
       "details": null,
       "order": 147,
       "responseType": "okNotOkNA",
@@ -1196,7 +1196,7 @@
       "section": "Requirements regarding Load Line"
     },
     {
-      "text": "9.1 Is the oily water separation system including all piping and solenoid valve arrangements as required in proper working condition and without any illegal by-pass piping?",
+      "text": "Is the oily water separation system including all piping and solenoid valve arrangements as required in proper working condition and without any illegal by-pass piping?",
       "details": null,
       "order": 148,
       "responseType": "okNotOkNA",
@@ -1204,7 +1204,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.2 Is the testing arrangement in proper working condition? Is the crew in charge familiar with the system and its use?",
+      "text": "Is the testing arrangement in proper working condition? Is the crew in charge familiar with the system and its use?",
       "details": null,
       "order": 149,
       "responseType": "okNotOkNA",
@@ -1212,7 +1212,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.3 Is 15 ppm alarm and stopping arrangements (if installed) in proper working condition?",
+      "text": "Is 15 ppm alarm and stopping arrangements (if installed) in proper working condition?",
       "details": null,
       "order": 150,
       "responseType": "okNotOkNA",
@@ -1220,7 +1220,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.4 Are all piping arrangements in proper condition without any signs of damage or corrosion",
+      "text": "Are all piping arrangements in proper condition without any signs of damage or corrosion",
       "details": null,
       "order": 151,
       "responseType": "okNotOkNA",
@@ -1228,7 +1228,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.5 Is the Oil Record Book kept up-to-date, are the required entries about disposal of oily residues correct and the book periodically signed by the Master? Are correct codes used for all entries ?",
+      "text": "Is the Oil Record Book kept up-to-date, are the required entries about disposal of oily residues correct and the book periodically signed by the Master? Are correct codes used for all entries ?",
       "details": null,
       "order": 152,
       "responseType": "okNotOkNA",
@@ -1236,7 +1236,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.6 Do the sludge and bilge tanks designated in Form B of the IOPP Certificate and those listed in the engine room oil record book?",
+      "text": "Do the sludge and bilge tanks designated in Form B of the IOPP Certificate and those listed in the engine room oil record book?",
       "details": null,
       "order": 153,
       "responseType": "okNotOkNA",
@@ -1244,7 +1244,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.7 Review of receipts (bunker delivery notes). Does ORB records corresponds to BDNs?",
+      "text": "Review of receipts (bunker delivery notes). Does ORB records corresponds to BDNs?",
       "details": null,
       "order": 154,
       "responseType": "okNotOkNA",
@@ -1252,7 +1252,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.8 Are detailed bunker transfer instructions available?",
+      "text": "Are detailed bunker transfer instructions available?",
       "details": null,
       "order": 155,
       "responseType": "okNotOkNA",
@@ -1260,7 +1260,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.9 Is thw Ballast Water Record book kept up-to-date and all entries are correct?",
+      "text": "Is thw Ballast Water Record book kept up-to-date and all entries are correct?",
       "details": null,
       "order": 156,
       "responseType": "okNotOkNA",
@@ -1268,7 +1268,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.10 Are Ballast Water Treatment system in good working condition and logs are available?",
+      "text": "Are Ballast Water Treatment system in good working condition and logs are available?",
       "details": null,
       "order": 157,
       "responseType": "okNotOkNA",
@@ -1276,7 +1276,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "9.11 Are engine room bilges and other machinery areas free of excessive oil matters?",
+      "text": "Are engine room bilges and other machinery areas free of excessive oil matters?",
       "details": null,
       "order": 158,
       "responseType": "okNotOkNA",
@@ -1284,7 +1284,7 @@
       "section": "MARPOL Requirements"
     },
     {
-      "text": "10.1 Are the sanitary facilities in crew accommodation clean and in proper condition?",
+      "text": "Are the sanitary facilities in crew accommodation clean and in proper condition?",
       "details": null,
       "order": 159,
       "responseType": "okNotOkNA",
@@ -1292,7 +1292,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.2 All emergency lighting fixture properly marked?",
+      "text": "All emergency lighting fixture properly marked?",
       "details": null,
       "order": 160,
       "responseType": "okNotOkNA",
@@ -1300,7 +1300,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.3 Are alleways free of obstructions and exits clearly marked?",
+      "text": "Are alleways free of obstructions and exits clearly marked?",
       "details": null,
       "order": 161,
       "responseType": "okNotOkNA",
@@ -1308,7 +1308,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.4 Are accomodation and ventilation fan emergency stops in good order and clearly marked to indicate the space they serve?",
+      "text": "Are accomodation and ventilation fan emergency stops in good order and clearly marked to indicate the space they serve?",
       "details": null,
       "order": 162,
       "responseType": "okNotOkNA",
@@ -1316,7 +1316,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.5 Are laundries free of accumulations of clothingds or clothing that could constitude a fire hazard?",
+      "text": "Are laundries free of accumulations of clothingds or clothing that could constitude a fire hazard?",
       "details": null,
       "order": 163,
       "responseType": "okNotOkNA",
@@ -1324,7 +1324,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.6 Are all smoke/heat detectors and call points in working order abd tested regulary?",
+      "text": "Are all smoke/heat detectors and call points in working order abd tested regulary?",
       "details": null,
       "order": 164,
       "responseType": "okNotOkNA",
@@ -1332,7 +1332,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.7 Are all fire doors closing properly by their self-clothing devices and without illegal hold-back?",
+      "text": "Are all fire doors closing properly by their self-clothing devices and without illegal hold-back?",
       "details": null,
       "order": 165,
       "responseType": "okNotOkNA",
@@ -1340,7 +1340,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.8 Are sick bay and medical locker complete and in condition as required?",
+      "text": "Are sick bay and medical locker complete and in condition as required?",
       "details": null,
       "order": 166,
       "responseType": "okNotOkNA",
@@ -1348,7 +1348,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.9 Are the ventilation and air conditioning arrangement in proper working condition?",
+      "text": "Are the ventilation and air conditioning arrangement in proper working condition?",
       "details": null,
       "order": 167,
       "responseType": "okNotOkNA",
@@ -1356,7 +1356,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.10 Are the galley and provision rooms clean and without possible signs of vermin? Is the Galley exhaust fan clean? ",
+      "text": "Are the galley and provision rooms clean and without possible signs of vermin? Is the Galley exhaust fan clean? ",
       "details": null,
       "order": 168,
       "responseType": "okNotOkNA",
@@ -1364,7 +1364,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.11 Are regular temperature reading for all refrigerators, freezers recorded?",
+      "text": "Are regular temperature reading for all refrigerators, freezers recorded?",
       "details": null,
       "order": 169,
       "responseType": "okNotOkNA",
@@ -1372,7 +1372,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.12 Is all garbage collected, separated and disposed of in accordance with Garbage Management Regulations?",
+      "text": "Is all garbage collected, separated and disposed of in accordance with Garbage Management Regulations?",
       "details": null,
       "order": 170,
       "responseType": "okNotOkNA",
@@ -1380,7 +1380,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.13 Is the accommodation ladder incl. hoisting arrangements and safety net in good condition?",
+      "text": "Is the accommodation ladder incl. hoisting arrangements and safety net in good condition?",
       "details": null,
       "order": 171,
       "responseType": "okNotOkNA",
@@ -1388,7 +1388,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "10.14 Are store rooms are clean and in proper condition?",
+      "text": "Are store rooms are clean and in proper condition?",
       "details": null,
       "order": 172,
       "responseType": "okNotOkNA",
@@ -1396,7 +1396,7 @@
       "section": "Accommodation and Living Conditions"
     },
     {
-      "text": "11.1 Is the dead man alarm system, where fitted, in good order and used as required?",
+      "text": "Is the dead man alarm system, where fitted, in good order and used as required?",
       "details": null,
       "order": 173,
       "responseType": "okNotOkNA",
@@ -1404,7 +1404,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.2 Is the Engine Log Book adequately manned?",
+      "text": "Is the Engine Log Book adequately manned?",
       "details": null,
       "order": 174,
       "responseType": "okNotOkNA",
@@ -1412,7 +1412,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.3 Is Chief Engineer aware of correct procedures for restarting critical equipment?",
+      "text": "Is Chief Engineer aware of correct procedures for restarting critical equipment?",
       "details": null,
       "order": 175,
       "responseType": "okNotOkNA",
@@ -1420,7 +1420,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.4 Are the lubrication oil testing programme being utilised and records are available?",
+      "text": "Are the lubrication oil testing programme being utilised and records are available?",
       "details": null,
       "order": 176,
       "responseType": "okNotOkNA",
@@ -1428,7 +1428,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.5 Are procedures posted for blackout recovery? Is Chief Engineer aware of these procedures and practised in performing?",
+      "text": "Are procedures posted for blackout recovery? Is Chief Engineer aware of these procedures and practised in performing?",
       "details": null,
       "order": 177,
       "responseType": "okNotOkNA",
@@ -1436,7 +1436,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.6 Is a comprehensive and up to date inventory of spare parts being maintained?",
+      "text": "Is a comprehensive and up to date inventory of spare parts being maintained?",
       "details": null,
       "order": 178,
       "responseType": "okNotOkNA",
@@ -1444,7 +1444,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.7 Is Chief Engineer call alarm in good order and tested regularly and the results recorded?",
+      "text": "Is Chief Engineer call alarm in good order and tested regularly and the results recorded?",
       "details": null,
       "order": 179,
       "responseType": "okNotOkNA",
@@ -1452,7 +1452,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.8 Is Chief Engineer familiar with operation of the steering gear in the emergency mode?",
+      "text": "Is Chief Engineer familiar with operation of the steering gear in the emergency mode?",
       "details": null,
       "order": 180,
       "responseType": "okNotOkNA",
@@ -1460,7 +1460,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.9 Has the steering gear alarms and protections been tested and recorded?",
+      "text": "Has the steering gear alarms and protections been tested and recorded?",
       "details": null,
       "order": 181,
       "responseType": "okNotOkNA",
@@ -1468,7 +1468,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.10 Is electric welding equipment in good order?",
+      "text": "Is electric welding equipment in good order?",
       "details": null,
       "order": 182,
       "responseType": "okNotOkNA",
@@ -1476,7 +1476,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.11 Are the fixed fire extinguishing system, where fitted, in good order and are clear operating instructions posted?",
+      "text": "Are the fixed fire extinguishing system, where fitted, in good order and are clear operating instructions posted?",
       "details": null,
       "order": 183,
       "responseType": "okNotOkNA",
@@ -1484,7 +1484,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.12 Are emergency escape routes clearly marked, unobstructed and adequately lit?",
+      "text": "Are emergency escape routes clearly marked, unobstructed and adequately lit?",
       "details": null,
       "order": 184,
       "responseType": "okNotOkNA",
@@ -1492,7 +1492,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.13 Self-closing doors is closing properly and not obstructed. Emergency lighting is provided and in good working condition",
+      "text": "Self-closing doors is closing properly and not obstructed. Emergency lighting is provided and in good working condition",
       "details": null,
       "order": 185,
       "responseType": "okNotOkNA",
@@ -1500,7 +1500,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.14 Are engine room emergency stops and shut offs clearly marked and do records indicate that they have been regularly tested?",
+      "text": "Are engine room emergency stops and shut offs clearly marked and do records indicate that they have been regularly tested?",
       "details": null,
       "order": 186,
       "responseType": "okNotOkNA",
@@ -1508,7 +1508,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.15 Are hot surfaces, particularly diesel engines, free of any evidence of fuel, diesel and lubricating oil?",
+      "text": "Are hot surfaces, particularly diesel engines, free of any evidence of fuel, diesel and lubricating oil?",
       "details": null,
       "order": 187,
       "responseType": "okNotOkNA",
@@ -1516,7 +1516,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.16 Do engine room machine tools have adequate eye protection available, and are emergency foot stops fitted and functioning?",
+      "text": "Do engine room machine tools have adequate eye protection available, and are emergency foot stops fitted and functioning?",
       "details": null,
       "order": 188,
       "responseType": "okNotOkNA",
@@ -1524,7 +1524,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.17 Is all loose gear in the machinery spaces, stores and steering compartment properly secured?",
+      "text": "Is all loose gear in the machinery spaces, stores and steering compartment properly secured?",
       "details": null,
       "order": 189,
       "responseType": "okNotOkNA",
@@ -1532,7 +1532,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.18 Are chemicals properly stowed and are Material Safety Data Sheets available?",
+      "text": "Are chemicals properly stowed and are Material Safety Data Sheets available?",
       "details": null,
       "order": 190,
       "responseType": "okNotOkNA",
@@ -1540,7 +1540,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.19 Are machinery spaces and steering compartments clean and free from obvious leaks and is the overall standard of housekeeping and fabric maintenance satisfactory?",
+      "text": "Are machinery spaces and steering compartments clean and free from obvious leaks and is the overall standard of housekeeping and fabric maintenance satisfactory?",
       "details": null,
       "order": 191,
       "responseType": "okNotOkNA",
@@ -1548,7 +1548,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.20 Is the bilge high level alarm system regularly tested and are records maintained?",
+      "text": "Is the bilge high level alarm system regularly tested and are records maintained?",
       "details": null,
       "order": 192,
       "responseType": "okNotOkNA",
@@ -1556,7 +1556,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.21 Are seawater pumps, sea chests and associated pipework in a satisfactory condition and free of hard rust and temporary repairs, particularly outboard of the ship-side valves?",
+      "text": "Are seawater pumps, sea chests and associated pipework in a satisfactory condition and free of hard rust and temporary repairs, particularly outboard of the ship-side valves?",
       "details": null,
       "order": 193,
       "responseType": "okNotOkNA",
@@ -1564,7 +1564,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.22 Are the following, where applicable, all in good order and do they appear to be well maintained?",
+      "text": "Are the following, where applicable, all in good order and do they appear to be well maintained?",
       "details": null,
       "order": 194,
       "responseType": "okNotOkNA",
@@ -1572,7 +1572,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.23 The main engine including the main gear, shafting and CPP system",
+      "text": "The main engine including the main gear, shafting and CPP system",
       "details": null,
       "order": 195,
       "responseType": "okNotOkNA",
@@ -1580,7 +1580,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.24 Auxiliary engines and generators, including shaft and emergency generators",
+      "text": "Auxiliary engines and generators, including shaft and emergency generators",
       "details": null,
       "order": 196,
       "responseType": "okNotOkNA",
@@ -1588,7 +1588,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.25 Boilers, including waste heat and domestic boilers",
+      "text": "Boilers, including waste heat and domestic boilers",
       "details": null,
       "order": 197,
       "responseType": "okNotOkNA",
@@ -1596,7 +1596,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.26 Check of engines cooling and boiler water treatments, perform tests onboard",
+      "text": "Check of engines cooling and boiler water treatments, perform tests onboard",
       "details": null,
       "order": 198,
       "responseType": "okNotOkNA",
@@ -1604,7 +1604,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.27 Compressors including main, instrument and emergency air compressors",
+      "text": "Compressors including main, instrument and emergency air compressors",
       "details": null,
       "order": 199,
       "responseType": "okNotOkNA",
@@ -1612,7 +1612,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.28 Sewage plant including treatment plant, if fitted",
+      "text": "Sewage plant including treatment plant, if fitted",
       "details": null,
       "order": 200,
       "responseType": "okNotOkNA",
@@ -1620,7 +1620,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.29 Bilge pumping arrangements and the oily water separator",
+      "text": "Bilge pumping arrangements and the oily water separator",
       "details": null,
       "order": 201,
       "responseType": "okNotOkNA",
@@ -1628,7 +1628,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.30 Pipework, including steam, fuel, lubricating oil, seawater, sewage, drain and air pipes, etc.",
+      "text": "Pipework, including steam, fuel, lubricating oil, seawater, sewage, drain and air pipes, etc.",
       "details": null,
       "order": 202,
       "responseType": "okNotOkNA",
@@ -1636,7 +1636,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.31 Ventilation fans and trunking including fire dampers and fire doors",
+      "text": "Ventilation fans and trunking including fire dampers and fire doors",
       "details": null,
       "order": 203,
       "responseType": "okNotOkNA",
@@ -1644,7 +1644,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.32 Fresh water tanks and associated pipework",
+      "text": "Fresh water tanks and associated pipework",
       "details": null,
       "order": 204,
       "responseType": "okNotOkNA",
@@ -1652,7 +1652,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.33 Fuel and Lube oil tanks and associated pipework, including bunker and lube oil transfer arrangements",
+      "text": "Fuel and Lube oil tanks and associated pipework, including bunker and lube oil transfer arrangements",
       "details": null,
       "order": 205,
       "responseType": "okNotOkNA",
@@ -1660,7 +1660,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.34 Main Switchboard and associated electrical equipment, including emergency switchboard, emergency generator and emergency lighting system",
+      "text": "Main Switchboard and associated electrical equipment, including emergency switchboard, emergency generator and emergency lighting system",
       "details": null,
       "order": 206,
       "responseType": "okNotOkNA",
@@ -1668,7 +1668,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.35 Are emergency bilge pumping arrangements ready for immediate use; is the emergency bilge suction clearly identified and, where fitted, is the emergency overboard discharge valve provided with a notice warning against accidental opening?",
+      "text": "Are emergency bilge pumping arrangements ready for immediate use; is the emergency bilge suction clearly identified and, where fitted, is the emergency overboard discharge valve provided with a notice warning against accidental opening?",
       "details": null,
       "order": 207,
       "responseType": "okNotOkNA",
@@ -1676,7 +1676,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.36 Are dedicated sludge pumps free from any connection to a direct overboard discharge?",
+      "text": "Are dedicated sludge pumps free from any connection to a direct overboard discharge?",
       "details": null,
       "order": 208,
       "responseType": "okNotOkNA",
@@ -1684,7 +1684,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.37 Floor boards in ER to be properly fixed by apropriate screws.",
+      "text": "Floor boards in ER to be properly fixed by apropriate screws.",
       "details": null,
       "order": 209,
       "responseType": "okNotOkNA",
@@ -1692,7 +1692,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "11.38 Are specific warning notices posted to safeguard against the accidental opening of the overboard discharge valve from the oily water separator?",
+      "text": "Are specific warning notices posted to safeguard against the accidental opening of the overboard discharge valve from the oily water separator?",
       "details": null,
       "order": 210,
       "responseType": "okNotOkNA",
@@ -1700,7 +1700,7 @@
       "section": "Engine Room"
     },
     {
-      "text": "12.1 Is the actual crew composition in accordance with the requirements as per Safe Manning Certificate?",
+      "text": "Is the actual crew composition in accordance with the requirements as per Safe Manning Certificate?",
       "details": null,
       "order": 211,
       "responseType": "okNotOkNA",
@@ -1708,7 +1708,7 @@
       "section": "STCW Requirements"
     },
     {
-      "text": "12.2 Are the Master, deck officers, engineer officers and ratings in possession of a respective certificate of competence?",
+      "text": "Are the Master, deck officers, engineer officers and ratings in possession of a respective certificate of competence?",
       "details": null,
       "order": 212,
       "responseType": "okNotOkNA",
@@ -1716,7 +1716,7 @@
       "section": "STCW Requirements"
     },
     {
-      "text": "12.3 Do certificates of the crew have endorsements by flag as appropriate?",
+      "text": "Do certificates of the crew have endorsements by flag as appropriate?",
       "details": null,
       "order": 213,
       "responseType": "okNotOkNA",
@@ -1724,7 +1724,7 @@
       "section": "STCW Requirements"
     },
     {
-      "text": "12.4 Are crewmembers in possession of valid medical examination certificates as appropriate?",
+      "text": "Are crewmembers in possession of valid medical examination certificates as appropriate?",
       "details": null,
       "order": 214,
       "responseType": "okNotOkNA",
@@ -1732,7 +1732,7 @@
       "section": "STCW Requirements"
     },
     {
-      "text": "12.5 Have new crew members been made familiarised with their duties and the safety equipment onboard?",
+      "text": "Have new crew members been made familiarised with their duties and the safety equipment onboard?",
       "details": null,
       "order": 215,
       "responseType": "okNotOkNA",
@@ -1740,7 +1740,7 @@
       "section": "STCW Requirements"
     },
     {
-      "text": "13.1 Stand-by Lub Oil Pump ME",
+      "text": "Stand-by Lub Oil Pump ME",
       "details": null,
       "order": 216,
       "responseType": "okNotOkNA",
@@ -1748,7 +1748,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.2 Stand-by Cooling Water Pumps ME",
+      "text": "Stand-by Cooling Water Pumps ME",
       "details": null,
       "order": 217,
       "responseType": "okNotOkNA",
@@ -1756,7 +1756,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.3 Emergency Pump for Steering gear",
+      "text": "Emergency Pump for Steering gear",
       "details": null,
       "order": 218,
       "responseType": "okNotOkNA",
@@ -1764,7 +1764,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.4 Communication Bridge - Engine Room",
+      "text": "Communication Bridge - Engine Room",
       "details": null,
       "order": 219,
       "responseType": "okNotOkNA",
@@ -1772,7 +1772,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.5 Emergency Steering in Engine Room",
+      "text": "Emergency Steering in Engine Room",
       "details": null,
       "order": 220,
       "responseType": "okNotOkNA",
@@ -1780,7 +1780,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.6 Emergency Generator - Starting Test",
+      "text": "Emergency Generator - Starting Test",
       "details": null,
       "order": 221,
       "responseType": "okNotOkNA",
@@ -1788,7 +1788,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.7 Emergency Fire Pump",
+      "text": "Emergency Fire Pump",
       "details": null,
       "order": 222,
       "responseType": "okNotOkNA",
@@ -1796,7 +1796,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.8 Anchoring System",
+      "text": "Anchoring System",
       "details": null,
       "order": 223,
       "responseType": "okNotOkNA",
@@ -1804,7 +1804,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.9 Quick Closing Valves",
+      "text": "Quick Closing Valves",
       "details": null,
       "order": 224,
       "responseType": "okNotOkNA",
@@ -1812,7 +1812,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.10 Fire Dampers and Ventilator Flaps",
+      "text": "Fire Dampers and Ventilator Flaps",
       "details": null,
       "order": 225,
       "responseType": "okNotOkNA",
@@ -1820,7 +1820,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.11 Safety Equipment",
+      "text": "Safety Equipment",
       "details": null,
       "order": 226,
       "responseType": "okNotOkNA",
@@ -1828,7 +1828,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.12 Radio, Emergency and Starting Batteries - Check Density, if applicable",
+      "text": "Radio, Emergency and Starting Batteries - Check Density, if applicable",
       "details": null,
       "order": 227,
       "responseType": "okNotOkNA",
@@ -1836,7 +1836,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.13 Fire Detectors - Fire Alarm - Check",
+      "text": "Fire Detectors - Fire Alarm - Check",
       "details": null,
       "order": 228,
       "responseType": "okNotOkNA",
@@ -1844,7 +1844,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.14 Engine Alarm Instalation - Check Functionlity",
+      "text": "Engine Alarm Instalation - Check Functionlity",
       "details": null,
       "order": 229,
       "responseType": "okNotOkNA",
@@ -1852,7 +1852,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.15 Ventilation Emergency Stop",
+      "text": "Ventilation Emergency Stop",
       "details": null,
       "order": 230,
       "responseType": "okNotOkNA",
@@ -1860,7 +1860,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.16 Bilge Alarm ER and Bowthruster - Check Functionality",
+      "text": "Bilge Alarm ER and Bowthruster - Check Functionality",
       "details": null,
       "order": 231,
       "responseType": "okNotOkNA",
@@ -1868,7 +1868,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.17 MOB Outboard Engine - Test Start",
+      "text": "MOB Outboard Engine - Test Start",
       "details": null,
       "order": 232,
       "responseType": "okNotOkNA",
@@ -1876,7 +1876,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "13.18 Spare Magnetic Compass - Check",
+      "text": "Spare Magnetic Compass - Check",
       "details": null,
       "order": 233,
       "responseType": "okNotOkNA",
@@ -1884,7 +1884,7 @@
       "section": "Critical Components"
     },
     {
-      "text": "14.1 Is the crew familiar with the company's safety and environmental protection policy?",
+      "text": "Is the crew familiar with the company's safety and environmental protection policy?",
       "details": null,
       "order": 234,
       "responseType": "okNotOkNA",
@@ -1892,7 +1892,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.2 Is the ISM manual readily available onboard?",
+      "text": "Is the ISM manual readily available onboard?",
       "details": null,
       "order": 235,
       "responseType": "okNotOkNA",
@@ -1900,7 +1900,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.3 Is the documentation written in a language understood by the crew?",
+      "text": "Is the documentation written in a language understood by the crew?",
       "details": null,
       "order": 236,
       "responseType": "okNotOkNA",
@@ -1908,7 +1908,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.4 Can senior ship officers identify the responsible company?",
+      "text": "Can senior ship officers identify the responsible company?",
       "details": null,
       "order": 237,
       "responseType": "okNotOkNA",
@@ -1916,7 +1916,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.5 Can senior officers identify the 'Designated person'?",
+      "text": "Can senior officers identify the 'Designated person'?",
       "details": null,
       "order": 238,
       "responseType": "okNotOkNA",
@@ -1924,7 +1924,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.6 Are procedures and data available and updated to establish contact with shore management?",
+      "text": "Are procedures and data available and updated to establish contact with shore management?",
       "details": null,
       "order": 239,
       "responseType": "okNotOkNA",
@@ -1932,7 +1932,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.7 Are programs for drills and training available and are such actions  recorded?",
+      "text": "Are programs for drills and training available and are such actions  recorded?",
       "details": null,
       "order": 240,
       "responseType": "okNotOkNA",
@@ -1940,7 +1940,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.8 Are records available about familiarisation of new crew members?",
+      "text": "Are records available about familiarisation of new crew members?",
       "details": null,
       "order": 241,
       "responseType": "okNotOkNA",
@@ -1948,7 +1948,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.9 Can the Master show proof of his overriding authority",
+      "text": "Can the Master show proof of his overriding authority",
       "details": null,
       "order": 242,
       "responseType": "okNotOkNA",
@@ -1956,7 +1956,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.10 Have Non-conformities been reported to the company and corrective action been taken by the company?",
+      "text": "Have Non-conformities been reported to the company and corrective action been taken by the company?",
       "details": null,
       "order": 243,
       "responseType": "okNotOkNA",
@@ -1964,7 +1964,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.11 Are a maintenance routine and records for it available?",
+      "text": "Are a maintenance routine and records for it available?",
       "details": null,
       "order": 244,
       "responseType": "okNotOkNA",
@@ -1972,7 +1972,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.12 Is a copy of the DOC with the endorsement for the latest office audit available onboard?",
+      "text": "Is a copy of the DOC with the endorsement for the latest office audit available onboard?",
       "details": null,
       "order": 245,
       "responseType": "okNotOkNA",
@@ -1980,7 +1980,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "14.13 Sailing schedule from berth to berth?",
+      "text": "Sailing schedule from berth to berth?",
       "details": null,
       "order": 246,
       "responseType": "okNotOkNA",
@@ -1988,7 +1988,7 @@
       "section": "ISM Requirements"
     },
     {
-      "text": "15.1 All seafarers are provided with a copy of the on-board compliant procedures.",
+      "text": "All seafarers are provided with a copy of the on-board compliant procedures.",
       "details": null,
       "order": 247,
       "responseType": "okNotOkNA",
@@ -1996,7 +1996,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.2 Crew under 20 years old (as per SMS of Company)",
+      "text": "Crew under 20 years old (as per SMS of Company)",
       "details": null,
       "order": 248,
       "responseType": "okNotOkNA",
@@ -2004,7 +2004,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.3 Medical certificate valid for all crew",
+      "text": "Medical certificate valid for all crew",
       "details": null,
       "order": 249,
       "responseType": "okNotOkNA",
@@ -2012,7 +2012,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.4 Seafarers Employment Agreement and Collective Bargaining Agreement on board.",
+      "text": "Seafarers Employment Agreement and Collective Bargaining Agreement on board.",
       "details": null,
       "order": 250,
       "responseType": "okNotOkNA",
@@ -2020,7 +2020,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.5 Working and rest hour are recorded and signed by Master and Seafarers on monthly basis",
+      "text": "Working and rest hour are recorded and signed by Master and Seafarers on monthly basis",
       "details": null,
       "order": 251,
       "responseType": "okNotOkNA",
@@ -2028,7 +2028,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.6 Sanitary facilities are clean.",
+      "text": "Sanitary facilities are clean.",
       "details": null,
       "order": 252,
       "responseType": "okNotOkNA",
@@ -2036,7 +2036,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.7 Laundry facilities are in good woring order",
+      "text": "Laundry facilities are in good woring order",
       "details": null,
       "order": 253,
       "responseType": "okNotOkNA",
@@ -2044,7 +2044,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.8 Adequate natural or artificial light available.",
+      "text": "Adequate natural or artificial light available.",
       "details": null,
       "order": 254,
       "responseType": "okNotOkNA",
@@ -2052,7 +2052,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.9 Mess rooms are properly furnished and equipped(including ongoing facilities for refreshment), taking account of the number of seafarers likely to use them at an one time.",
+      "text": "Mess rooms are properly furnished and equipped(including ongoing facilities for refreshment), taking account of the number of seafarers likely to use them at an one time.",
       "details": null,
       "order": 255,
       "responseType": "okNotOkNA",
@@ -2060,7 +2060,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.10 The organization and equipment of the catering department permits the provision of adequate, varied and nutritious meals prepared and served in higienic conditions.",
+      "text": "The organization and equipment of the catering department permits the provision of adequate, varied and nutritious meals prepared and served in higienic conditions.",
       "details": null,
       "order": 256,
       "responseType": "okNotOkNA",
@@ -2068,7 +2068,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.11 Food and drinking water is of appropriate quality, nutritional value, quantity and variety, taking in to account the requirements of the ship and the differing culturaland reliqious backgrounds of seafarers on ship.",
+      "text": "Food and drinking water is of appropriate quality, nutritional value, quantity and variety, taking in to account the requirements of the ship and the differing culturaland reliqious backgrounds of seafarers on ship.",
       "details": null,
       "order": 257,
       "responseType": "okNotOkNA",
@@ -2076,7 +2076,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.12 Ship's Cook is properly trained and instructed",
+      "text": "Ship's Cook is properly trained and instructed",
       "details": null,
       "order": 258,
       "responseType": "okNotOkNA",
@@ -2084,7 +2084,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.13 Seafafarers are covered by adequate measures for the protection of their health and have free access to promt and adequate medical care, including essential dental care, whlst working on board.",
+      "text": "Seafafarers are covered by adequate measures for the protection of their health and have free access to promt and adequate medical care, including essential dental care, whlst working on board.",
       "details": null,
       "order": 259,
       "responseType": "okNotOkNA",
@@ -2092,7 +2092,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.14 Ship's medical chest and medical equipment are available and maintained. A Medical Guide is available.",
+      "text": "Ship's medical chest and medical equipment are available and maintained. A Medical Guide is available.",
       "details": null,
       "order": 260,
       "responseType": "okNotOkNA",
@@ -2100,7 +2100,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.15 One seafarer is in charge of medical care and administering medicine or if the ship can reach qualified medical care and medical facilities within 8 hours one seafarer is competent to provide medical first aid. ",
+      "text": "One seafarer is in charge of medical care and administering medicine or if the ship can reach qualified medical care and medical facilities within 8 hours one seafarer is competent to provide medical first aid. ",
       "details": null,
       "order": 261,
       "responseType": "okNotOkNA",
@@ -2108,7 +2108,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.16 The latest analysis of fresh water",
+      "text": "The latest analysis of fresh water",
       "details": null,
       "order": 262,
       "responseType": "okNotOkNA",
@@ -2116,7 +2116,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.17 Risk assessments carried out and documented.",
+      "text": "Risk assessments carried out and documented.",
       "details": null,
       "order": 263,
       "responseType": "okNotOkNA",
@@ -2124,7 +2124,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.18 Health and safety inspections are carried out regularly and documented.",
+      "text": "Health and safety inspections are carried out regularly and documented.",
       "details": null,
       "order": 264,
       "responseType": "okNotOkNA",
@@ -2132,7 +2132,7 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.19 Safe working practice are implemented.",
+      "text": "Safe working practice are implemented.",
       "details": null,
       "order": 265,
       "responseType": "okNotOkNA",
@@ -2140,20 +2140,12 @@
       "section": "MLC 2006 Requirements"
     },
     {
-      "text": "15.20 Personal protective equipment is available for suitable task.",
+      "text": "Personal protective equipment is available for suitable task.",
       "details": null,
       "order": 266,
       "responseType": "okNotOkNA",
       "regulationRef": null,
       "section": "MLC 2006 Requirements"
-    },
-    {
-      "text": "15.21 Health and safety inspections are carried out regularly and documented.",
-      "details": null,
-      "order": 267,
-      "responseType": "okNotOkNA",
-      "regulationRef": null,
-      "section": "MLC 2006 Requirements"
-    }
+    } 
   ]
 }

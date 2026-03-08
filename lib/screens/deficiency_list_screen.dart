@@ -28,12 +28,37 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
   /// Текущий выбранный статус для фильтрации списка. `null` означает "Все".
   DeficiencyStatus? _selectedFilterStatus;
 
+  /// Показывает не закрываемый диалог загрузки.
+  void _showLoadingDialog(String message) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => Dialog(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 20),
+              Expanded(child: Text(message)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Скрывает диалог загрузки, если он открыт.
+  void _hideLoadingDialog() {
+    if (mounted) Navigator.pop(context);
+  }
+
   /// Показывает диалог с подтверждением перед удалением несоответствия.
   Future<void> _showDeleteConfirmationDialog(
     dynamic deficiencyKey,
     String? deficiencyDescription,
   ) async {
-    // Этот метод теперь использует context класса, а не переданный.
     final confirmController = TextEditingController();
     final deleteEnabled = ValueNotifier<bool>(false);
 
@@ -116,10 +141,27 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
     }
   }
 
-  /// Удаляет указанное несоответствие из базы данных Hive.
+  /// Удаляет указанное несоответствие из базы данных Hive и связанное фото.
   Future<void> _deleteDeficiency(dynamic deficiencyKey) async {
     try {
       final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
+
+      // --- УМНАЯ ОЧИСТКА: Удаляем фото перед удалением записи ---
+      final deficiency = deficienciesBox.get(deficiencyKey);
+      if (deficiency != null &&
+          deficiency.photoPath != null &&
+          deficiency.photoPath!.isNotEmpty) {
+        try {
+          final file = File(deficiency.photoPath!);
+          if (await file.exists()) {
+            await file.delete();
+          }
+        } catch (e) {
+          // Ошибка удаления файла не критична
+        }
+      }
+      // -----------------------------------------------------------
+
       await deficienciesBox.delete(deficiencyKey);
 
       if (!mounted) return;
@@ -140,12 +182,10 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
     }
   }
 
-  /// Генерирует и предлагает поделиться PDF-отчетом по всем несоответствиям
-  /// для судна, указанного в профиле пользователя.
+  /// Генерирует и предлагает поделиться PDF-отчетом по всем несоответствиям.
   Future<void> _generateAndShareDeficiencyReport() async {
     if (!mounted) return;
 
-    // TODO: Здесь рекомендуется использовать улучшенный индикатор загрузки.
     final profileBox = Hive.box<UserProfile>(userProfileBoxName);
     final userProfile = profileBox.get(1);
     final String? targetShipName = userProfile?.shipName;
@@ -159,11 +199,9 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content:
-              Text(S.of(context).generatingPdfReportForVessel(targetShipName))),
-    );
+    // Показываем индикатор загрузки
+    _showLoadingDialog(
+        S.of(context).generatingPdfReportForVessel(targetShipName));
 
     try {
       final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
@@ -180,8 +218,9 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       }).toList();
 
       if (deficienciesForShip.isEmpty) {
+        _hideLoadingDialog();
         if (!mounted) return;
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
@@ -206,8 +245,6 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
         allTemplatesMap,
       );
 
-      if (!mounted) return;
-
       final tempDir = await getTemporaryDirectory();
       final safeShipName = targetShipName
           .replaceAll(RegExp(r'[^\w\s]+'), '')
@@ -217,8 +254,9 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       final file = File(filePath);
       await file.writeAsBytes(pdfBytes);
 
+      _hideLoadingDialog();
+
       if (!mounted) return;
-      ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
       final shareParams = ShareParams(
         text: S.of(context).deficiencyReportForVessel(targetShipName),
@@ -226,11 +264,13 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       );
       await SharePlus.instance.share(shareParams);
     } catch (e) {
+      _hideLoadingDialog();
       if (!mounted) return;
-      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(S.of(context).pdfError), backgroundColor: Colors.red),
+            content: Text(S.of(context).pdfError),
+            backgroundColor: Colors.red),
       );
     }
   }
@@ -354,8 +394,6 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
       leading: Icon(statusStyle['icon'], color: statusStyle['color'], size: 28),
       title: Text(deficiency.description,
           maxLines: 2, overflow: TextOverflow.ellipsis),
-
-      // Наш новый subtitle с Column и именем судна
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -376,9 +414,8 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
               style: DefaultTextStyle.of(context).style.copyWith(fontSize: 12),
               children: <TextSpan>[
                 TextSpan(
-                  text: S
-                      .of(context)
-                      .statusLabel(_getDeficiencyStatusName(deficiency.status)),
+                  text: S.of(context).statusLabel(
+                      _getDeficiencyStatusName(deficiency.status)),
                   style: TextStyle(
                       color: statusStyle['color'],
                       fontWeight: statusStyle['fontWeight']),
@@ -399,8 +436,6 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
           ),
         ],
       ),
-
-      // <-- ВОССТАНОВЛЕННЫЙ trailing С КНОПКОЙ УДАЛЕНИЯ
       trailing: IconButton(
         icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(196)),
         tooltip: S.of(context).deleteDeficiency,
@@ -409,8 +444,6 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
           deficiency.description,
         ),
       ),
-
-      // <-- ВОССТАНОВЛЕННЫЙ onTap ДЛЯ ПЕРЕХОДА К РЕДАКТИРОВАНИЮ
       onTap: () {
         Navigator.push(
           context,
@@ -423,7 +456,7 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
     );
   }
 
-  /// Возвращает Map со стилями (иконка, цвет, шрифт) в зависимости от статуса несоответствия.
+  /// Возвращает Map со стилями (иконка, цвет, шрифт) в зависимости от статуса.
   Map<String, dynamic> _getStatusStyle(
       DeficiencyStatus status, DateTime? dueDate) {
     final now = DateTime.now();
@@ -459,7 +492,6 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
         'isOverdue': false
       };
     }
-    // if (status == DeficiencyStatus.inProgress)
     return {
       'color': Colors.blueAccent,
       'icon': Icons.hourglass_empty_rounded,

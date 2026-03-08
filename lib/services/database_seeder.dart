@@ -1,14 +1,16 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive/hive.dart';
 
 import '../main.dart';
 import '../models/checklist_template.dart';
 
-import 'package:flutter/foundation.dart';
-
 /// Утилитарный класс для первоначального заполнения базы данных из JSON-файлов.
+///
+/// Отвечает за считывание предустановленных чек-листов из ассетов приложения
+/// и сохранение их в локальную базу данных Hive при первом запуске.
 class DatabaseSeeder {
   /// Проверяет, пуст ли ящик с шаблонами, и если да, то заполняет его
   /// данными из всех .json файлов, найденных в `assets/checklists/`.
@@ -34,15 +36,15 @@ class DatabaseSeeder {
           final jsonString = await rootBundle.loadString(path);
           final Map<String, dynamic> jsonMap = json.decode(jsonString);
 
-          // 4. Используем наш новый конструктор .fromJson для создания Dart-объекта.
+          // 4. Используем наш конструктор .fromJson для создания Dart-объекта.
           final template = ChecklistTemplate.fromJson(jsonMap);
 
-          // 5. Сохраняем готовый объект в Hive.
+          // 5. Сохраняем готовый объект в Hive с уникальным ключом.
           await templatesBox.put(keyCounter++, template);
         }
       }
     } catch (e) {
-      // В случае ошибки выводим ее в консоль.
+      // В случае ошибки выводим ее в консоль только в режиме отладки.
       if (kDebugMode) {
         print('Ошибка при заполнении базы данных из JSON-файлов: $e');
       }
