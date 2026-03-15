@@ -1,380 +1,62 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // Добавляем Riverpod
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
-import 'package:marine_checklist_app/generated/l10n.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
-import '../main.dart';
-import '../models/checklist_instance.dart';
-import '../models/checklist_template.dart';
+import '../main.dart'; // для deficienciesBoxName (пока нужен для ValueListenableBuilder)
 import '../models/deficiency.dart';
 import '../models/enums.dart';
-import '../models/user_profile.dart';
-import '../services/pdf_generator_service.dart';
-import 'deficiency_detail_screen.dart';
+import '../generated/l10n.dart';
+import '../repositories/deficiency_repository.dart'; // Подключаем репозиторий
+import '../screens/deficiency_detail_screen.dart';
 
-/// Экран для отображения, фильтрации и управления списком всех несоответствий.
-class DeficiencyListScreen extends StatefulWidget {
+// Меняем StatefulWidget на ConsumerStatefulWidget
+class DeficiencyListScreen extends ConsumerStatefulWidget {
   const DeficiencyListScreen({super.key});
 
   @override
-  State<DeficiencyListScreen> createState() => _DeficiencyListScreenState();
+  ConsumerState<DeficiencyListScreen> createState() => _DeficiencyListScreenState();
 }
 
-class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
-  /// Текущий выбранный статус для фильтрации списка. `null` означает "Все".
-  DeficiencyStatus? _selectedFilterStatus;
-
-  /// Показывает не закрываемый диалог загрузки.
-  void _showLoadingDialog(String message) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => Dialog(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(width: 20),
-              Expanded(child: Text(message)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Скрывает диалог загрузки, если он открыт.
-  void _hideLoadingDialog() {
-    if (mounted) Navigator.pop(context);
-  }
-
-  /// Показывает диалог с подтверждением перед удалением несоответствия.
-  Future<void> _showDeleteConfirmationDialog(
-    dynamic deficiencyKey,
-    String? deficiencyDescription,
-  ) async {
-    final confirmController = TextEditingController();
-    final deleteEnabled = ValueNotifier<bool>(false);
-
-    void confirmationListener() {
-      deleteEnabled.value =
-          confirmController.text.trim() == S.of(context).deleteWord;
-    }
-
-    confirmController.addListener(confirmationListener);
-
-    final bool? confirmed = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(S.of(context).confirmDeletion),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(S.of(context).deleteDeficiencyConfirmation(
-                  deficiencyDescription ?? S.of(context).noDescription)),
-              const SizedBox(height: 15),
-              Text(
-                S.of(context).enterDeleteToConfirm,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const SizedBox(height: 5),
-              ValueListenableBuilder<bool>(
-                valueListenable: deleteEnabled,
-                builder: (context, isEnabled, child) {
-                  return TextField(
-                    controller: confirmController,
-                    autofocus: true,
-                    decoration: InputDecoration(
-                      hintText: S.of(context).deleteWord,
-                      isDense: true,
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                      ),
-                    ),
-                    onChanged: (_) => confirmationListener(),
-                  );
-                },
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(S.of(context).cancel),
-              onPressed: () => Navigator.pop(dialogContext, false),
-            ),
-            ValueListenableBuilder<bool>(
-              valueListenable: deleteEnabled,
-              builder: (context, isEnabled, child) {
-                return TextButton(
-                  onPressed: isEnabled
-                      ? () => Navigator.pop(dialogContext, true)
-                      : null,
-                  style: TextButton.styleFrom(
-                    foregroundColor: isEnabled ? Colors.red : Colors.grey,
-                  ),
-                  child: Text(S.of(context).deleteButton),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      confirmController.removeListener(confirmationListener);
-      confirmController.dispose();
-      deleteEnabled.dispose();
-    });
-
-    if (confirmed == true && mounted) {
-      await _deleteDeficiency(deficiencyKey);
-    }
-  }
-
-  /// Удаляет указанное несоответствие из базы данных Hive и связанное фото.
-  Future<void> _deleteDeficiency(dynamic deficiencyKey) async {
-    try {
-      final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
-
-      // --- УМНАЯ ОЧИСТКА: Удаляем фото перед удалением записи ---
-      final deficiency = deficienciesBox.get(deficiencyKey);
-      if (deficiency != null &&
-          deficiency.photoPath != null &&
-          deficiency.photoPath!.isNotEmpty) {
-        try {
-          final file = File(deficiency.photoPath!);
-          if (await file.exists()) {
-            await file.delete();
-          }
-        } catch (e) {
-          // Ошибка удаления файла не критична
-        }
-      }
-      // -----------------------------------------------------------
-
-      await deficienciesBox.delete(deficiencyKey);
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).deficiencyDeleted),
-          backgroundColor: Colors.orange,
-        ),
-      );
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).errorDeletingDeficiency),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
-  /// Генерирует и предлагает поделиться PDF-отчетом по всем несоответствиям.
-  Future<void> _generateAndShareDeficiencyReport() async {
-    if (!mounted) return;
-
-    final profileBox = Hive.box<UserProfile>(userProfileBoxName);
-    final userProfile = profileBox.get(1);
-    final String? targetShipName = userProfile?.shipName;
-
-    if (targetShipName == null || targetShipName.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(S.of(context).vesselNameNotInProfile),
-            backgroundColor: Colors.orange),
-      );
-      return;
-    }
-
-    // Показываем индикатор загрузки
-    _showLoadingDialog(
-        S.of(context).generatingPdfReportForVessel(targetShipName));
-
-    try {
-      final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
-      final templatesBox = Hive.box<ChecklistTemplate>(templatesBoxName);
-      final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
-
-      final allInstancesMap = instancesBox.toMap();
-      final allTemplatesMap = templatesBox.toMap();
-
-      final deficienciesForShip = deficienciesBox.values.where((deficiency) {
-        if (deficiency.instanceId == null) return false;
-        final instance = allInstancesMap[deficiency.instanceId];
-        return instance != null && instance.shipName == targetShipName;
-      }).toList();
-
-      if (deficienciesForShip.isEmpty) {
-        _hideLoadingDialog();
-        if (!mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  S.of(context).noDeficienciesFoundForVessel(targetShipName)),
-              backgroundColor: Colors.orange),
-        );
-        return;
-      }
-
-      deficienciesForShip.sort((a, b) {
-        int statusCompare = a.status.index.compareTo(b.status.index);
-        if (statusCompare != 0) return statusCompare;
-        return (a.dueDate ?? DateTime(0)).compareTo(b.dueDate ?? DateTime(0));
-      });
-
-      final pdfBytes =
-          await PdfGeneratorService().generateShipDeficiencyReportPdf(
-        targetShipName,
-        deficienciesForShip,
-        userProfile,
-        allInstancesMap,
-        allTemplatesMap,
-      );
-
-      final tempDir = await getTemporaryDirectory();
-      final safeShipName = targetShipName
-          .replaceAll(RegExp(r'[^\w\s]+'), '')
-          .replaceAll(' ', '_');
-      final filePath =
-          '${tempDir.path}/deficiency_report_${safeShipName}_${DateTime.now().toIso8601String().split('T').first}.pdf';
-      final file = File(filePath);
-      await file.writeAsBytes(pdfBytes);
-
-      _hideLoadingDialog();
-
-      if (!mounted) return;
-
-      final shareParams = ShareParams(
-        text: S.of(context).deficiencyReportForVessel(targetShipName),
-        files: [XFile(filePath)],
-      );
-      await SharePlus.instance.share(shareParams);
-    } catch (e) {
-      _hideLoadingDialog();
-      if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(S.of(context).pdfError),
-            backgroundColor: Colors.red),
-      );
-    }
-  }
-
-  /// Преобразует статус [DeficiencyStatus] в локализованную строку.
-  String _getDeficiencyStatusName(DeficiencyStatus status) {
-    switch (status) {
-      case DeficiencyStatus.open:
-        return S.of(context).statusOpen;
-      case DeficiencyStatus.inProgress:
-        return S.of(context).statusInProgress;
-      case DeficiencyStatus.closed:
-        return S.of(context).statusClosed;
-    }
-  }
+class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
+  // Фильтр оставляем в UI, так как это состояние экрана
+  DeficiencyStatus? _selectedFilter;
 
   @override
   Widget build(BuildContext context) {
+    // В идеале позже мы заменим и ValueListenableBuilder на Riverpod stream/provider,
+    // но пока оставим прослушивание коробки для реактивного обновления списка
     final deficienciesBox = Hive.box<Deficiency>(deficienciesBoxName);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).deficiencyList),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.picture_as_pdf_outlined),
-            tooltip: S.of(context).pdfReportForDeficienciesTooltip,
-            onPressed: _generateAndShareDeficiencyReport,
-          ),
+          _buildFilterDropdown(),
         ],
       ),
-      body: Column(
-        children: [
-          _buildFilter(),
-          const Divider(height: 1),
-          _buildContent(deficienciesBox),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const DeficiencyDetailScreen(),
-            ),
-          );
-        },
-        tooltip: S.of(context).addDeficiency,
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  /// Строит виджет [SegmentedButton] для фильтрации списка.
-  Widget _buildFilter() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SegmentedButton<DeficiencyStatus?>(
-        segments: <ButtonSegment<DeficiencyStatus?>>[
-          ButtonSegment<DeficiencyStatus?>(
-            value: null,
-            label: Text(S.of(context).filterAll),
-            icon: const Icon(Icons.list_alt_rounded),
-          ),
-          ...DeficiencyStatus.values.map(
-            (status) => ButtonSegment<DeficiencyStatus?>(
-              value: status,
-              label: Text(_getDeficiencyStatusName(status)),
-            ),
-          ),
-        ],
-        selected: <DeficiencyStatus?>{_selectedFilterStatus},
-        onSelectionChanged: (Set<DeficiencyStatus?> newSelection) {
-          setState(() {
-            _selectedFilterStatus = newSelection.first;
-          });
-        },
-      ),
-    );
-  }
-
-  /// Строит основное содержимое экрана: список несоответствий.
-  Widget _buildContent(Box<Deficiency> deficienciesBox) {
-    return Expanded(
-      child: ValueListenableBuilder(
+      body: ValueListenableBuilder(
         valueListenable: deficienciesBox.listenable(),
         builder: (context, Box<Deficiency> box, _) {
-          final deficienciesList = box.values
-              .where((def) =>
-                  _selectedFilterStatus == null ||
-                  def.status == _selectedFilterStatus)
-              .toList();
+          // Читаем данные через репозиторий, а не напрямую из box
+          final repository = ref.read(deficiencyRepositoryProvider);
+          var deficiencies = repository.getAll();
 
-          if (deficienciesList.isEmpty) {
-            return Center(
-              child: Text(S.of(context).noDeficienciesRegistered),
-            );
+          // Применяем фильтр
+          if (_selectedFilter != null) {
+            deficiencies = deficiencies
+                .where((d) => d.status == _selectedFilter)
+                .toList();
+          }
+
+          if (deficiencies.isEmpty) {
+            return Center(child: Text(S.of(context).noDeficienciesRegistered));
           }
 
           return ListView.builder(
-            itemCount: deficienciesList.length,
+            itemCount: deficiencies.length,
             itemBuilder: (context, index) {
-              final deficiency = deficienciesList[index];
-              return _buildDeficiencyListItem(deficiency);
+              final deficiency = deficiencies[index];
+              return _buildDeficiencyCard(deficiency);
             },
           );
         },
@@ -382,121 +64,79 @@ class _DeficiencyListScreenState extends State<DeficiencyListScreen> {
     );
   }
 
-  /// Строит одну плитку [ListTile] для отображения несоответствия.
-  Widget _buildDeficiencyListItem(Deficiency deficiency) {
-    final statusStyle = _getStatusStyle(deficiency.status, deficiency.dueDate);
-    String formatDate(DateTime dt) {
-      return DateFormat.yMd(Localizations.localeOf(context).languageCode)
-          .format(dt);
-    }
-
-    return ListTile(
-      leading: Icon(statusStyle['icon'], color: statusStyle['color'], size: 28),
-      title: Text(deficiency.description,
-          maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (deficiency.shipName != null && deficiency.shipName!.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0, bottom: 2.0),
-              child: Text(
-                deficiency.shipName!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Theme.of(context).textTheme.bodySmall?.color,
-                ),
-              ),
-            ),
-          RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style.copyWith(fontSize: 12),
-              children: <TextSpan>[
-                TextSpan(
-                  text: S.of(context).statusLabel(
-                      _getDeficiencyStatusName(deficiency.status)),
-                  style: TextStyle(
-                      color: statusStyle['color'],
-                      fontWeight: statusStyle['fontWeight']),
-                ),
-                if (deficiency.dueDate != null)
-                  TextSpan(
-                    text: S
-                        .of(context)
-                        .dueDateLabel(formatDate(deficiency.dueDate!)),
-                    style: TextStyle(
-                        color: statusStyle['isOverdue'] ? Colors.red : null,
-                        fontWeight: statusStyle['isOverdue']
-                            ? FontWeight.bold
-                            : FontWeight.normal),
-                  ),
-              ],
-            ),
+  Widget _buildFilterDropdown() {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<DeficiencyStatus?>(
+        value: _selectedFilter,
+        icon: const Icon(Icons.filter_list, color: Colors.white),
+        dropdownColor: Theme.of(context).appBarTheme.backgroundColor,
+        style: const TextStyle(color: Colors.white),
+        items: [
+          DropdownMenuItem(
+            value: null,
+            child: Text(S.of(context).filterAll, style: const TextStyle(color: Colors.black)),
           ),
+          ...DeficiencyStatus.values.map((status) {
+            return DropdownMenuItem(
+              value: status,
+              child: Text(status.name, style: const TextStyle(color: Colors.black)), 
+            );
+          }),
         ],
+        onChanged: (value) {
+          setState(() {
+            _selectedFilter = value;
+          });
+        },
       ),
-      trailing: IconButton(
-        icon: Icon(Icons.delete_outline, color: Colors.red.withAlpha(196)),
-        tooltip: S.of(context).deleteDeficiency,
-        onPressed: () => _showDeleteConfirmationDialog(
-          deficiency.key,
-          deficiency.description,
-        ),
-      ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                DeficiencyDetailScreen(deficiencyKey: deficiency.key),
-          ),
-        );
-      },
     );
   }
 
-  /// Возвращает Map со стилями (иконка, цвет, шрифт) в зависимости от статуса.
-  Map<String, dynamic> _getStatusStyle(
-      DeficiencyStatus status, DateTime? dueDate) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    bool isOverdue = false;
-    if (dueDate != null && status != DeficiencyStatus.closed) {
-      final normalizedDueDate =
-          DateTime(dueDate.year, dueDate.month, dueDate.day);
-      isOverdue = normalizedDueDate.isBefore(today);
-    }
+  Widget _buildDeficiencyCard(Deficiency deficiency) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      child: ListTile(
+        title: Text(deficiency.description),
+        subtitle: Text('Status: ${deficiency.status.name}'),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete, color: Colors.red),
+          onPressed: () => _confirmDelete(deficiency),
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DeficiencyDetailScreen(deficiencyKey: deficiency),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
-    if (status == DeficiencyStatus.closed) {
-      return {
-        'color': Colors.green,
-        'icon': Icons.check_circle_outline,
-        'fontWeight': FontWeight.normal,
-        'isOverdue': false
-      };
+  Future<void> _confirmDelete(Deficiency deficiency) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(S.of(context).deleteDeficiency),
+        content: Text(S.of(context).deleteDeficiencyConfirmation(deficiency.description)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(S.of(context).cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(S.of(context).delete),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && deficiency.key != null) {
+      // ВОТ ОНА — ЧИСТАЯ АРХИТЕКТУРА!
+      // Экран просто отдает команду, а Репозиторий сам удаляет и данные, и фотографии.
+      await ref.read(deficiencyRepositoryProvider).delete(deficiency.key);
     }
-    if (isOverdue) {
-      return {
-        'color': Colors.red,
-        'icon': Icons.error_outline,
-        'fontWeight': FontWeight.bold,
-        'isOverdue': true
-      };
-    }
-    if (status == DeficiencyStatus.open) {
-      return {
-        'color': Colors.orangeAccent,
-        'icon': Icons.warning_amber_rounded,
-        'fontWeight': FontWeight.normal,
-        'isOverdue': false
-      };
-    }
-    return {
-      'color': Colors.blueAccent,
-      'icon': Icons.hourglass_empty_rounded,
-      'fontWeight': FontWeight.normal,
-      'isOverdue': false
-    };
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 import '../main.dart';
@@ -20,14 +20,12 @@ class DatabaseSeeder {
 
       // Заполняем базу только если она абсолютно пуста.
       if (templatesBox.isEmpty) {
-        // 1. Загружаем специальный файл-манифест, который содержит список всех ассетов в приложении.
-        final manifestContent =
-            await rootBundle.loadString('AssetManifest.json');
-        final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+        // 1. Используем современный и безопасный метод загрузки манифеста (работает и в Debug, и в Release)
+        final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
-        // 2. Находим в этом списке все пути к файлам, которые лежат в нашей папке с чек-листами.
-        final checklistPaths = manifestMap.keys
-            .where((String key) => key.contains('assets/checklists/'))
+        // 2. Получаем список всех путей и фильтруем только нужные JSON-файлы
+        final checklistPaths = manifest.listAssets()
+            .where((String key) => key.startsWith('assets/checklists/') && key.endsWith('.json'))
             .toList();
 
         int keyCounter = 0;
