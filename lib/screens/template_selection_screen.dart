@@ -72,103 +72,18 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
   Future<Map<String, String>?> _showContextDataDialog(
     String templateName,
   ) async {
-    final formKey = GlobalKey<FormState>();
-    // Создаем контроллеры локально, так как они нужны только для этого диалога
-    final shipNameController =
-        TextEditingController(text: _userProfile?.shipName ?? '');
-    final portController = TextEditingController();
-    final captainNameController =
-        TextEditingController(text: _userProfile?.captainName ?? '');
-
-    final result = await showDialog<Map<String, String>>(
+    return await showDialog<Map<String, String>>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(S.of(context).checkDetailsFor(templateName)),
-          content: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  TextFormField(
-                    controller: shipNameController,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).vesselName,
-                      hintText: S.of(context).enterOrConfirmVesselName,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return S.of(context).vesselNameCannotBeEmpty;
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: portController,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).portOfCheck,
-                      hintText: S.of(context).enterPort,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return S.of(context).portCannotBeEmpty;
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: captainNameController,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).captainNameForCheck,
-                      hintText: S.of(context).enterOrConfirmCaptainName,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return S.of(context).captainNameCannotBeEmpty;
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(S.of(context).cancel),
-              onPressed: () => Navigator.pop(dialogContext, null),
-            ),
-            ElevatedButton(
-              child: Text(S.of(context).startCheck),
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  Navigator.pop(dialogContext, {
-                    'shipName': shipNameController.text.trim(),
-                    'port': portController.text.trim(),
-                    'captainNameOnCheck': captainNameController.text.trim(),
-                  });
-                }
-              },
-            ),
-          ],
+        return _ContextDataDialog(
+          templateName: templateName,
+          userProfile: _userProfile,
         );
       },
     );
-
-    // Освобождаем ресурсы контроллеров после закрытия диалога
-    shipNameController.dispose();
-    portController.dispose();
-    captainNameController.dispose();
-
-    return result;
   }
+
 
   /// Запускает процесс создания новой проверки на основе выбранного шаблона.
   Future<void> _startChecklist(
@@ -249,6 +164,123 @@ class _TemplateSelectionScreenState extends State<TemplateSelectionScreen> {
                     );
                   },
                 ),
+    );
+  }
+}
+
+class _ContextDataDialog extends StatefulWidget {
+  final String templateName;
+  final UserProfile? userProfile;
+
+  const _ContextDataDialog({
+    required this.templateName,
+    this.userProfile,
+  });
+
+  @override
+  State<_ContextDataDialog> createState() => _ContextDataDialogState();
+}
+
+class _ContextDataDialogState extends State<_ContextDataDialog> {
+  final formKey = GlobalKey<FormState>();
+  late final TextEditingController shipNameController;
+  late final TextEditingController portController;
+  late final TextEditingController captainNameController;
+
+  @override
+  void initState() {
+    super.initState();
+    shipNameController =
+        TextEditingController(text: widget.userProfile?.shipName ?? '');
+    portController = TextEditingController();
+    captainNameController =
+        TextEditingController(text: widget.userProfile?.captainName ?? '');
+  }
+
+  @override
+  void dispose() {
+    shipNameController.dispose();
+    portController.dispose();
+    captainNameController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(S.of(context).checkDetailsFor(widget.templateName)),
+      content: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextFormField(
+                controller: shipNameController,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: S.of(context).vesselName,
+                  hintText: S.of(context).enterOrConfirmVesselName,
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return S.of(context).vesselNameCannotBeEmpty;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: portController,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: S.of(context).portOfCheck,
+                  hintText: S.of(context).enterPort,
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return S.of(context).portCannotBeEmpty;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: captainNameController,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: S.of(context).captainNameForCheck,
+                  hintText: S.of(context).enterOrConfirmCaptainName,
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return S.of(context).captainNameCannotBeEmpty;
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: Text(S.of(context).cancel),
+          onPressed: () => Navigator.pop(context, null),
+        ),
+        ElevatedButton(
+          child: Text(S.of(context).startCheck),
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              Navigator.pop(context, {
+                'shipName': shipNameController.text.trim(),
+                'port': portController.text.trim(),
+                'captainNameOnCheck': captainNameController.text.trim(),
+              });
+            }
+          },
+        ),
+      ],
     );
   }
 }

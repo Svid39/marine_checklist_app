@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:marine_checklist_app/generated/l10n.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../main.dart';
@@ -14,6 +13,7 @@ import '../models/deficiency.dart';
 import '../models/enums.dart';
 import '../models/user_profile.dart';
 import '../services/pdf_generator_service.dart';
+import '../services/storage_manager.dart';
 import 'app_settings_screen.dart';
 import 'checklist_execution_screen.dart';
 import 'deficiency_list_screen.dart';
@@ -167,21 +167,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     try {
       final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
       
-      // Очистка файлов (v1.3.0 фича)
-      final instance = instancesBox.get(instanceKey);
-      if (instance != null) {
-        for (var response in instance.responses) {
-          if (response.photoPath != null && response.photoPath!.isNotEmpty) {
-            try {
-              final file = File(response.photoPath!);
-              if (await file.exists()) {
-                await file.delete();
-              }
-            } catch (e) {
-              // Игнорируем
-            }
-          }
-        }
+      // Очистка файлов с помощью Garbage Collector (атомарное удаление папки целиком)
+      try {
+        await StorageManager.instance.deleteChecklistDirectory(instanceKey as int);
+      } catch (e) {
+        // Игнорируем ошибки ФС
       }
 
       await instancesBox.delete(instanceKey);
@@ -251,20 +241,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _userProfile,
       );
 
-      final tempDir = await getTemporaryDirectory();
+      final checklistDir = await StorageManager.instance.getChecklistDirectory(instanceKey as int);
       final safeName = checklistName
               ?.replaceAll(RegExp(r'[^\w\s]+'), '')
               .replaceAll(' ', '_') ??
           'report';
-      final filePath = '${tempDir.path}/${safeName}_$instanceKey.pdf';
+      final filePath = '$checklistDir/${safeName}_$instanceKey.pdf';
       final file = File(filePath);
       await file.writeAsBytes(pdfBytes);
 
       List<String> photoPathsForInstance = [];
       for (var response in instance.responses) {
         if (response.photoPath != null && response.photoPath!.isNotEmpty) {
-          if (await File(response.photoPath!).exists()) {
-            photoPathsForInstance.add(response.photoPath!);
+          final absolutePath = await StorageManager.instance.getAbsolutePhotoPath(instanceKey as int, response.photoPath);
+          if (absolutePath != null && await File(absolutePath).exists()) {
+            photoPathsForInstance.add(absolutePath);
           }
         }
       }

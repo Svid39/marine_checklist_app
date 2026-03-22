@@ -15,23 +15,25 @@ The application is designed to systematize checks before crucial audits such as 
 
 ## 🗺 Roadmap
 
-Below is a step-by-step plan for the architectural refactoring and evolution of the app.
+The application has successfully completed its core stabilization phase, including dynamic visually-appealing themes, Riverpod state management, and a robust offline database. Below is the development backlog for the next iterations of the project:
 
-### Step 1: Visuals & State Management (Themes + Riverpod)
-Implementing a theme switcher (Light, Standard, Dark) is the perfect opportunity to introduce **Riverpod**. Theme switching is an excellent, straightforward task to test-drive a new state manager.
-* Create beautiful marine-inspired color palettes.
-* Develop a settings provider that fetches the theme preference from the `userProfileBox` and instantly updates the UI without workarounds.
+### Block 1: Ideal File System & Garbage Collector (Completed ✅)
+* **StorageManager:** Centralized architecture preventing hardcoded paths.
+* **Database Migration:** Isolated local databases moved specifically into internal `database/` directors to prevent accidental cache clears.
+* **Smart Media Handling:** Compressing and copying photos via `image_picker` directly into local `reports/checklist_ID/photos/` folders using relative paths.
+* **Garbage Collector:** Replaced O(N) database item deletions with an O(1) unlinked directory swipe, mitigating storage leaks seamlessly in 1 click.
 
-### Step 2: Clean Architecture (Repository Layer)
-Currently, screens (e.g., `DashboardScreen` or `DeficiencyListScreen`) interact directly with `Hive.box` to add or delete records. This logic needs to be decoupled from the UI.
-* Create `ChecklistRepository` and `DeficiencyRepository` classes.
-* Screens will become "dumb": they will simply send commands (e.g., "delete deficiency number 5"), and the repository will handle the database operations along with the deletion of attached photos. This will significantly simplify the screen code.
+### Block 2: Dashboard (Main Screen) & Navigation (In Progress)
+* **Search Checklists:** Add a search bar to filter by vessel name, port, captain name, or IMO number as the number of inspections grows over 50-100 items.
+* **Sorting & Filters:** Filter lists by status (In Progress / Completed) and creation date.
+* **Safe Navigation Architecture:** Audit codebase to replace arbitrary `Navigator.push` post-async executions with secure context capturers minimizing layout crashes.
 
-### Step 3: Memory Optimization & UX (Garbage Collector & Search)
-The app actively generates PDF documents and saves photos, making device file system management crucial.
-* Write a service (Garbage Collector) that quietly cleans up the temporary PDF report folder (cache) upon app startup to prevent the app from bloating.
-* Add a search bar to the Dashboard to quickly find the necessary check by vessel name or port.
+### Block 3: Memory Optimization (Media & PDF)
+* **On-the-fly Image Compression:** Expanding the `flutter_image_compress` utility to scale down large 5-10MB camera captures down to 500KB - 1MB before saving, preventing PDF generator bottlenecks.
+* **PDF Generator Security:** Protect against Out-Of-Memory exceptions during the generation of reports containing large amounts of non-conformities and photography.
+* **Asynchronous Loading Spinners:** Implement beautiful loading screens (spinners) during heavy operations seamlessly demonstrating background task activity.
 
-### Step 4 (Long-term): Backend & Synchronization
-This step will be implemented when the app goes into production and there is a need to set up a server.
-* Add an API layer to our Repositories (from Step 2). The UI won't need to change at all since all logic will be securely encapsulated by then.
+### Block 4: UI/UX Improvements
+* **Permissions Handling:** Utilize `permission_handler` for elegant camera/storage access prompts on first app launch.
+* **Checklist Exit Protection:** Prompt warning dialogue models upon trying to exit a checklist while unsaved data relies on the current state.
+* **Backend & Synchronization (Long-term):** Add an API layer to the repository structures for cloud cross-crew synchronization.

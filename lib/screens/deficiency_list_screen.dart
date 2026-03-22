@@ -106,7 +106,7 @@ class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DeficiencyDetailScreen(deficiencyKey: deficiency),
+              builder: (context) => DeficiencyDetailScreen(deficiencyKey: deficiency.key),
             ),
           );
         },

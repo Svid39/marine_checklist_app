@@ -395,6 +395,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
+  flutter_skill:
+    dependency: "direct main"
+    description:
+      name: flutter_skill
+      sha256: "8f33bd1d6ec1e7f5ef756075cd2d89101308193294cebdc8cfa1ab1c291830c7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.26"
   flutter_test:
     dependency: "direct dev"
     description: flutter

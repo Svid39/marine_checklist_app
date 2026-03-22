@@ -1,0 +1,7 @@
+{
+  "java.import.gradle.enabled": false,
+  "java.project.resourceFilters": [
+    "android",
+    "ios"
+  ]
+}

@@ -21,6 +21,7 @@ import 'providers/theme_provider.dart';
 import 'screens/app_settings_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'services/database_seeder.dart';
+import 'services/storage_manager.dart';
 import 'theme/app_themes.dart';
 
 // --- Константы для имен "ящиков" Hive ---
@@ -67,7 +68,9 @@ Future<void> main() async {
 
 /// Выполняет полную инициализацию Hive: регистрацию адаптеров и открытие ящиков.
 Future<void> _initializeHive() async {
-  await Hive.initFlutter();
+  await StorageManager.instance.init();
+  final dbPath = await StorageManager.instance.getDatabaseDirectory();
+  Hive.init(dbPath);
   _registerHiveAdapters();
   await _openHiveBoxes();
 }

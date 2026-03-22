@@ -5,7 +5,6 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marine_checklist_app/generated/l10n.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../main.dart';
@@ -13,6 +12,7 @@ import '../models/checklist_instance.dart';
 import '../models/checklist_item.dart';
 import '../models/checklist_item_response.dart';
 import '../models/checklist_template.dart';
+import '../services/storage_manager.dart';
 import '../models/enums.dart';
 import 'deficiency_detail_screen.dart';
 
@@ -337,7 +337,9 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
         currentResponse.photoPath!.isNotEmpty;
 
     return Padding(
-      key: ValueKey(item.order), // Для оптимизации обновлений
+      // Используем ObjectKey(item), чтобы гарантировать абсолютную уникальность ключа в памяти,
+      // что предотвратит зависания (Duplicate GlobalKey/LocalKey) при отрисовке списка.
+      key: ObjectKey(item),
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: Card(
         elevation: 1,
@@ -515,16 +517,19 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
       ChecklistItem item, ChecklistItemResponse currentResponse) async {
     if (!mounted) return;
     String? action;
-    String? existingPhotoPath = currentResponse.photoPath;
+    String? existingPhotoName = currentResponse.photoPath;
 
-    if (existingPhotoPath != null && existingPhotoPath.isNotEmpty) {
+    if (existingPhotoName != null && existingPhotoName.isNotEmpty) {
+      final absolutePath = await StorageManager.instance.getAbsolutePhotoPath(widget.instanceKey as int, existingPhotoName);
+      if (absolutePath == null) return;
+      
       action =
-          await _showViewOrManageChecklistItemPhotoDialog(existingPhotoPath);
+          await _showViewOrManageChecklistItemPhotoDialog(absolutePath);
       if (!mounted || action == null) return;
 
       if (action == 'delete') {
         try {
-          final oldFile = File(existingPhotoPath);
+          final oldFile = File(absolutePath);
           if (await oldFile.exists()) await oldFile.delete();
         } catch (e) {/*...*/}
         await _updateItemPhotoPath(item, null);
@@ -584,23 +589,26 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
     _showLoadingDialog(S.of(context).processingPhoto);
 
     try {
-      final newPath = await _getCompressedImage(pickedFile, item,
+      final newFileName = await _getCompressedImage(pickedFile, item,
           _instance?.shipName, _instance?.port, _instance?.date);
       
       _hideLoadingDialog(); // Скрываем индикатор
       if (!mounted) return;
 
-      if (newPath != null) {
-        final oldPath = currentResponse.photoPath;
-        await _updateItemPhotoPath(item, newPath);
+      if (newFileName != null) {
+        final oldFileName = currentResponse.photoPath;
+        await _updateItemPhotoPath(item, newFileName);
         if (!mounted) return;
 
-        if (oldPath != null &&
-            oldPath.isNotEmpty &&
-            oldPath != newPath) {
+        if (oldFileName != null &&
+            oldFileName.isNotEmpty &&
+            oldFileName != newFileName) {
           try {
-            final oldFile = File(oldPath);
-            if (await oldFile.exists()) await oldFile.delete();
+            final oldAbsolutePath = await StorageManager.instance.getAbsolutePhotoPath(widget.instanceKey as int, oldFileName);
+            if (oldAbsolutePath != null) {
+              final oldFile = File(oldAbsolutePath);
+              if (await oldFile.exists()) await oldFile.delete();
+            }
           } catch (e) {/*...*/}
         }
         if (!mounted) return;
@@ -657,9 +665,7 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
   Future<String?> _getCompressedImage(XFile originalFile, ChecklistItem item,
       String? instanceShipName, String? instancePort, DateTime? instanceDate) async {
     try {
-      final appDir = await getApplicationDocumentsDirectory();
-      final imageDir = '${appDir.path}/checklist_images';
-      await Directory(imageDir).create(recursive: true);
+      final targetDir = await StorageManager.instance.getChecklistPhotosDirectory(widget.instanceKey as int);
       final ext = originalFile.path.split('.').last.toLowerCase();
       final shipPart =
           _sanitizeForFilename(instanceShipName, defaultVal: 'ShipUnknown');
@@ -671,7 +677,7 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
           : "DateUnknown";
       final uniqueName =
           '${shipPart}_${portPart}_ITEM_${itemPart}_${datePart}_${DateTime.now().millisecondsSinceEpoch}.$ext';
-      final targetPath = '$imageDir/$uniqueName';
+      final targetPath = '$targetDir/$uniqueName';
       final result = await FlutterImageCompress.compressAndGetFile(
         originalFile.path,
         targetPath,
@@ -679,7 +685,8 @@ class _ChecklistExecutionScreenState extends State<ChecklistExecutionScreen> {
         minWidth: 1024,
         minHeight: 1024,
       );
-      return result?.path;
+      if (result != null) return uniqueName;
+      return null;
     } catch (e) {
       return null;
     }

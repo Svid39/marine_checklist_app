@@ -131,12 +131,16 @@ class _DeficiencyDetailScreenState extends State<DeficiencyDetailScreen> {
       } catch (e) {
         if (mounted) {
           setState(() => _isLoading = false);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text(S.of(context).errorLoadingDeficiency),
-                backgroundColor: Colors.red),
-          );
-          Navigator.pop(context);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text(S.of(context).errorLoadingDeficiency),
+                    backgroundColor: Colors.red),
+              );
+              Navigator.pop(context);
+            }
+          });
         }
       }
     }

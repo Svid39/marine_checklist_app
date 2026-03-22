@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../main.dart';
@@ -47,7 +48,7 @@ class DeficiencyRepository {
         }
       } catch (e) {
         // Ошибка удаления файла не должна крашить приложение
-        print('Ошибка при удалении фото несоответствия: $e');
+        debugPrint('Ошибка при удалении фото несоответствия: $e');
       }
     }
 
