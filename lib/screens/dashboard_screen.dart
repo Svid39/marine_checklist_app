@@ -169,7 +169,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       
       // Очистка файлов с помощью Garbage Collector (атомарное удаление папки целиком)
       try {
-        await StorageManager.instance.deleteChecklistDirectory(instanceKey as int);
+        await StorageManager.instance.deleteChecklistDirectory(instanceKey);
       } catch (e) {
         // Игнорируем ошибки ФС
       }
@@ -241,7 +241,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _userProfile,
       );
 
-      final checklistDir = await StorageManager.instance.getChecklistDirectory(instanceKey as int);
+      final checklistDir = await StorageManager.instance.getChecklistDirectory(instanceKey);
       final safeName = checklistName
               ?.replaceAll(RegExp(r'[^\w\s]+'), '')
               .replaceAll(' ', '_') ??
@@ -253,7 +253,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       List<String> photoPathsForInstance = [];
       for (var response in instance.responses) {
         if (response.photoPath != null && response.photoPath!.isNotEmpty) {
-          final absolutePath = await StorageManager.instance.getAbsolutePhotoPath(instanceKey as int, response.photoPath);
+          final absolutePath = await StorageManager.instance.getAbsolutePhotoPath(instanceKey, response.photoPath);
           if (absolutePath != null && await File(absolutePath).exists()) {
             photoPathsForInstance.add(absolutePath);
           }
