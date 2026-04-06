@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Добавляем Riverpod
 import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../main.dart'; // для deficienciesBoxName (пока нужен для ValueListenableBuilder)
 import '../models/checklist_instance.dart';
 import '../models/deficiency.dart';
+import '../models/checklist_template.dart';
+import '../models/user_profile.dart';
 import '../models/enums.dart';
 import '../generated/l10n.dart';
 import 'package:intl/intl.dart';
 import '../repositories/deficiency_repository.dart'; // Подключаем репозиторий
 import '../screens/deficiency_detail_screen.dart';
+import '../services/pdf_generator_service.dart';
 
 // Меняем StatefulWidget на ConsumerStatefulWidget
 class DeficiencyListScreen extends ConsumerStatefulWidget {
@@ -22,6 +28,7 @@ class DeficiencyListScreen extends ConsumerStatefulWidget {
 class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
   // Фильтр оставляем в UI, так как это состояние экрана
   DeficiencyStatus? _selectedFilter;
+  bool _isGeneratingPdf = false;
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +145,17 @@ class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
             if (instance.captainNameOnCheck?.isNotEmpty == true) Text(S.of(context).captain(instance.captainNameOnCheck!), style: const TextStyle(fontSize: 12, color: Colors.grey)),
           ],
         ),
-        trailing: _buildCountBadge(openCount, defs.length),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildCountBadge(openCount, defs.length),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.picture_as_pdf, color: Colors.blue),
+              onPressed: () => _generateAndShareReport(shipName, defs),
+            ),
+          ],
+        ),
         children: defs.map((d) => _buildDeficiencyCard(d)).toList(),
       ),
     );
@@ -153,7 +170,17 @@ class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
         leading: const Icon(Icons.build_circle_outlined),
         title: Text(shipName, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(S.of(context).deficiencyList, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-        trailing: _buildCountBadge(openCount, defs.length),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildCountBadge(openCount, defs.length),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.picture_as_pdf, color: Colors.blue),
+              onPressed: () => _generateAndShareReport(shipName, defs),
+            ),
+          ],
+        ),
         children: defs.map((d) => _buildDeficiencyCard(d)).toList(),
       ),
     );
@@ -200,6 +227,82 @@ class _DeficiencyListScreenState extends ConsumerState<DeficiencyListScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _generateAndShareReport(String shipName, List<Deficiency> defs) async {
+    if (_isGeneratingPdf) return;
+
+    setState(() {
+      _isGeneratingPdf = true;
+    });
+
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
+
+      final userProfileBox = Hive.box<UserProfile>(userProfileBoxName);
+      final userProfile = userProfileBox.isNotEmpty ? userProfileBox.get(1) : null;
+
+      final instancesBox = Hive.box<ChecklistInstance>(instancesBoxName);
+      final templatesBox = Hive.box<ChecklistTemplate>(templatesBoxName);
+
+      final Map<dynamic, ChecklistInstance> instancesMap = {};
+      final Map<dynamic, ChecklistTemplate> templatesMap = {};
+
+      for (var def in defs) {
+        if (def.instanceId != null) {
+          final instance = instancesBox.get(def.instanceId);
+          if (instance != null) {
+            instancesMap[def.instanceId] = instance;
+            final template = templatesBox.get(instance.templateId);
+            if (template != null) {
+              templatesMap[instance.templateId] = template;
+            }
+          }
+        }
+      }
+
+      final generator = PdfGeneratorService();
+      final pdfBytes = await generator.generateShipDeficiencyReportPdf(
+        shipName,
+        defs,
+        userProfile,
+        instancesMap,
+        templatesMap,
+      );
+
+      final appDir = await getTemporaryDirectory();
+      final safeName = shipName.replaceAll(RegExp(r'[^\w\s]+'), '').replaceAll(' ', '_');
+      final fileName = 'Deficiencies_$safeName.pdf';
+      final file = File('${appDir.path}/$fileName');
+      await file.writeAsBytes(pdfBytes);
+
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        final box = context.findRenderObject() as RenderBox?;
+        await Share.shareXFiles(
+          [XFile(file.path)],
+          subject: 'Deficiency Report - $shipName',
+          sharePositionOrigin: box != null ? box.localToGlobal(Offset.zero) & box.size : null,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error generating PDF: $e'), backgroundColor: Colors.red),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isGeneratingPdf = false;
+        });
+      }
+    }
   }
 
   Future<void> _confirmDelete(Deficiency deficiency) async {
